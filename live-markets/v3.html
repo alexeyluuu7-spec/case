@@ -1,0 +1,456 @@
+<title>ABX Markets Airy</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bai+Jamjuree:wght@400;500;600&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap">
+<style>
+/* Layout: airy light bands under the dark ABX hero. Translucent cards on soft colour fields, centred headings with a grey second line, pill tabs, soft area charts, faded edges. Same live feed for all four variants. */
+:root {
+  color-scheme: light;
+  --ink: #08090b; --d-line: #262a31; --d-text: #f2f2f0; --d-muted: #8d929b;
+  --bg: #fbfbfa; --glass: rgba(244,244,242,.72); --glass-line: rgba(255,255,255,.9); --line: #ebebe8;
+  --text: #121315; --muted: #6e737a; --faint: #a4a8ae;
+  --or: #ff7a1a; --or-soft: #fff1e6;
+  --up: #11a14f; --down: #e5393f;
+  --f-display: "Bai Jamjuree", "Arial Narrow", Arial, sans-serif;
+  --f-body: "Manrope", "Segoe UI", system-ui, sans-serif;
+  --f-data: "JetBrains Mono", ui-monospace, Menlo, monospace;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--f-body); font-size: 15px; line-height: 1.5; }
+button, input { font: inherit; color: inherit; }
+button { cursor: pointer; }
+:focus-visible { outline: 2px solid var(--or); outline-offset: 2px; }
+.num { font-family: var(--f-body); font-variant-numeric: tabular-nums; }
+.in { max-width: 1240px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.band { padding-block: 88px; position: relative; overflow: hidden; }
+.band + .band { border-top: 1px solid var(--line); }
+h1, h2, h3 { font-family: var(--f-display); font-weight: 500; letter-spacing: -.03em; margin: 0; text-wrap: balance; }
+.head { text-align: center; display: grid; gap: 14px; justify-items: center; margin-bottom: 34px; }
+.head h2 { font-size: clamp(34px, 5vw, 60px); line-height: 1; }
+.head h2 span { display: block; color: #a9acb1; }
+.head p { margin: 0; color: var(--muted); max-width: 40ch; font-size: 14px; }
+.vlabel { font-family: var(--f-data); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+.vlabel b { color: var(--or); font-weight: 500; }
+.why { max-width: 760px; margin: 28px auto 0; text-align: center; font-size: 13px; color: var(--muted); }
+.why b { color: var(--text); }
+.disc { text-align: center; color: var(--muted); font-size: 13px; margin: 26px auto 0; max-width: 52ch; }
+.disc b { color: var(--text); font-weight: 600; }
+.cta-row { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin-top: 22px; }
+.btn { display: inline-flex; align-items: center; gap: 12px; border: 0; border-radius: 999px; padding: 14px 22px; font-weight: 600; font-size: 14px; text-decoration: none; color: inherit; }
+.btn.or { background: var(--or); color: #fff; box-shadow: 0 10px 30px -10px rgba(255,122,26,.7); }
+.btn.or:hover { background: #ff8a33; }
+.btn.ghost { background: #fff; box-shadow: inset 0 0 0 1px var(--line); }
+
+/* Soft colour fields behind glass */
+.field { position: absolute; border-radius: 50%; filter: blur(80px); opacity: .55; pointer-events: none; }
+
+/* Pill tabs */
+.tabs { display: flex; gap: 6px; flex-wrap: wrap; justify-content: center; }
+@media (max-width: 640px) { .tabs { flex-wrap: nowrap; overflow-x: auto; justify-content: flex-start; max-width: 100%; scrollbar-width: none; padding-inline: 2px; } }
+.tabs button { border: 0; background: #f0f0ee; padding: 8px 15px; border-radius: 999px; font-size: 14px; font-weight: 600; white-space: nowrap; transition: background .2s, color .2s; }
+.tabs button:hover { background: #e7e7e4; }
+.tabs button[aria-pressed="true"] { background: var(--ink); color: #fff; }
+.tabs button .ex { color: var(--or); margin-left: 4px; font-size: 11px; }
+
+/* Glass card */
+.g { background: var(--glass); border: 1px solid var(--glass-line); border-radius: 26px; backdrop-filter: blur(18px) saturate(1.2); -webkit-backdrop-filter: blur(18px) saturate(1.2); }
+.ic { display: flex; align-items: center; gap: 12px; min-width: 0; }
+.ic b { display: block; font-weight: 700; font-size: 15px; }
+.ic small { display: block; color: var(--muted); font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.logo { width: 38px; height: 38px; flex: none; position: relative; }
+.logo span { position: absolute; width: 27px; height: 27px; border-radius: 50%; display: grid; place-items: center; font-family: var(--f-data); font-size: 9px; font-weight: 600; color: #fff; box-shadow: 0 0 0 2px #fff; }
+.logo span:first-child { left: 0; top: 0; } .logo span:last-child { right: 0; bottom: 0; }
+.logo.solo span { position: static; width: 38px; height: 38px; font-size: 10px; box-shadow: 0 2px 8px -2px rgba(0,0,0,.2); }
+.pr { font-family: var(--f-body); font-variant-numeric: tabular-nums; font-weight: 600; font-size: 14px; background: #fff; border: 1px solid var(--line); border-radius: 999px; padding: 6px 14px; white-space: nowrap; }
+.pc { font-variant-numeric: tabular-nums; font-weight: 700; font-size: 13px; color: #fff; background: var(--up); border-radius: 999px; padding: 7px 12px; min-width: 66px; text-align: center; white-space: nowrap; transition: background .4s; }
+.pc.down { background: var(--down); }
+.trade { margin-left: auto; background: #fff; border: 1px solid var(--line); border-radius: 999px; padding: 7px 16px; font-weight: 600; font-size: 14px; text-decoration: none; color: inherit; white-space: nowrap; transition: border-color .15s, color .15s; }
+.trade:hover { border-color: var(--or); color: var(--or); }
+.foot { display: flex; align-items: center; gap: 8px; }
+canvas.area { width: 100%; display: block; }
+.ex-tag { font-family: var(--f-data); font-size: 10px; letter-spacing: .08em; text-transform: uppercase; color: var(--or); background: var(--or-soft); border-radius: 999px; padding: 3px 8px; white-space: nowrap; }
+
+/* ===== 1 · Floating rows ===== */
+.rows { position: relative; mask-image: linear-gradient(90deg, transparent, #000 14%, #000 86%, transparent); -webkit-mask-image: linear-gradient(90deg, transparent, #000 14%, #000 86%, transparent); }
+.row { overflow: hidden; padding-block: 6px; }
+.track { display: flex; gap: 12px; width: max-content; animation: slide 90s linear infinite; }
+.row.rev .track { animation-direction: reverse; animation-duration: 110s; }
+.rows:hover .track { animation-play-state: paused; }
+@keyframes slide { to { transform: translateX(-50%); } }
+.card1 { width: 310px; padding: 18px; display: grid; gap: 14px; }
+.card1 canvas { height: 76px; }
+
+/* ===== 2 · Airy explorer ===== */
+.facts { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; margin: 4px 0 22px; }
+.facts span { background: #f0f0ee; border-radius: 999px; padding: 6px 14px; font-size: 13px; color: var(--muted); }
+.facts b { color: var(--text); margin-left: 4px; }
+.grid2 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+@media (max-width: 900px) { .grid2 { grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: 82%; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 8px; scrollbar-width: none; } .grid2 > * { scroll-snap-align: center; } }
+.card2 { padding: 18px; display: grid; gap: 12px; }
+.card2 canvas { height: 64px; }
+.card2 .meta { display: flex; justify-content: space-between; color: var(--muted); font-size: 12px; }
+.ipo-box { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+.ipo-box div { background: rgba(255,255,255,.7); border-radius: 14px; padding: 10px 12px; }
+.ipo-box span { display: block; font-size: 11px; color: var(--muted); }
+.ipo-box b { font-size: 15px; }
+.wbar { display: flex; height: 8px; gap: 2px; border-radius: 4px; overflow: hidden; }
+.wbar i { display: block; height: 100%; }
+.chips { display: flex; flex-wrap: wrap; gap: 4px; }
+.chips span { font-size: 12px; font-weight: 600; background: rgba(255,255,255,.8); border-radius: 999px; padding: 3px 9px; }
+
+/* ===== 3 · Featured ===== */
+.feat { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 12px; }
+@media (max-width: 900px) { .feat { grid-template-columns: 1fr; } }
+.big { padding: 26px; display: grid; gap: 16px; align-content: start; }
+.big-top { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; align-items: start; }
+.big-px { font-family: var(--f-display); font-size: clamp(36px, 5vw, 54px); line-height: 1; letter-spacing: -.03em; font-weight: 500; font-variant-numeric: tabular-nums; }
+.big canvas { height: 220px; }
+.big .sides { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.big .sides a { border-radius: 18px; padding: 12px 16px; text-decoration: none; display: grid; gap: 2px; font-weight: 600; }
+.big .sides small { font-size: 12px; font-weight: 600; opacity: .8; }
+.big .sides .s { background: #fdeaea; color: var(--down); }
+.big .sides .b { background: #e3f5ea; color: var(--up); text-align: right; }
+.big .sides .num { font-size: 18px; }
+.mini { display: grid; gap: 12px; grid-template-columns: 1fr 1fr; }
+@media (max-width: 520px) { .mini { grid-template-columns: 1fr 1fr; gap: 8px; } }
+.mcard { padding: 16px; display: grid; gap: 10px; border: 1px solid var(--glass-line); text-align: left; transition: box-shadow .2s, transform .2s; }
+.mcard:hover { transform: translateY(-2px); }
+.mcard[aria-pressed="true"] { box-shadow: 0 0 0 2px var(--or); }
+.mcard canvas { height: 46px; }
+.mcard .row2 { display: flex; justify-content: space-between; align-items: center; gap: 6px; flex-wrap: wrap; }
+.mcard .pc { min-width: 0; padding: 4px 9px; font-size: 12px; }
+@media (max-width: 520px) { .mcard .ic small { display: none; } .mcard .logo { display: none; } }
+
+/* ===== 4 · Exclusives glass ===== */
+.exc-band { background: #f6f3ef; }
+.exc { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; position: relative; }
+@media (max-width: 900px) { .exc { grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: 84%; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 8px; scrollbar-width: none; } .exc > * { scroll-snap-align: center; } }
+.ecard { padding: 22px; display: grid; gap: 16px; align-content: start; background: rgba(255,255,255,.55); }
+.ecard .top { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+.ecard h3 { font-size: 24px; }
+.ecard .co { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 10px; align-items: center; }
+.ecard .mono { width: 42px; height: 42px; border-radius: 14px; background: var(--ink); color: #fff; display: grid; place-items: center; font-family: var(--f-display); font-weight: 600; font-size: 18px; }
+.ecard canvas { height: 70px; }
+.st { font-size: 12px; font-weight: 700; border-radius: 999px; padding: 4px 10px; background: var(--ink); color: #fff; }
+.st.w { background: rgba(255,255,255,.8); color: var(--muted); }
+.seg2 { display: inline-flex; background: rgba(255,255,255,.6); border-radius: 999px; padding: 3px; margin-bottom: 18px; }
+.seg2 button { border: 0; background: none; padding: 8px 16px; border-radius: 999px; font-weight: 600; font-size: 14px; color: var(--muted); }
+.seg2 button[aria-pressed="true"] { background: #fff; color: var(--text); box-shadow: 0 2px 8px -3px rgba(0,0,0,.2); }
+
+/* Hero (compact, from the landing) */
+.hero { background: var(--ink); color: var(--d-text); position: relative; overflow: hidden; }
+.hero::before { content: ""; position: absolute; inset: 0; background: radial-gradient(55% 70% at 80% 65%, rgba(255,122,26,.26), transparent 60%), repeating-linear-gradient(176deg, transparent 0 22px, rgba(255,140,60,.07) 22px 23px); mask-image: linear-gradient(90deg, transparent, #000 45%); }
+.nav { position: relative; display: flex; justify-content: space-between; align-items: center; padding-block: 18px; gap: 16px; }
+.nav .lg { font-family: var(--f-display); font-weight: 600; font-size: 26px; font-style: italic; letter-spacing: -.04em; }
+.hero-b { position: relative; padding-block: 40px 56px; display: grid; gap: 14px; }
+.hero h1 { font-size: clamp(38px, 6.5vw, 76px); line-height: .95; }
+.hero h1 span { display: block; color: #9aa0a7; }
+.hero h1 i { color: var(--or); letter-spacing: -.12em; margin-left: .1em; }
+.hero p { margin: 0; color: #b9bdc4; max-width: 52ch; }
+.round { display: flex; gap: 8px; flex-wrap: wrap; }
+.round a { font-size: 13px; color: #c9ccd1; text-decoration: none; border: 1px solid var(--d-line); border-radius: 999px; padding: 6px 12px; }
+.round a:hover { border-color: var(--or); color: #fff; }
+
+footer { padding-block: 28px; font-size: 12px; color: var(--muted); border-top: 1px solid var(--line); }
+@media (prefers-reduced-motion: reduce) { .track { animation: none; } html { scroll-behavior: auto; } }
+</style>
+
+<header class="hero">
+  <div class="in nav"><span class="lg">ABX</span><a class="btn or" href="#v1" style="padding:10px 16px;border-radius:8px">Open an Account</a></div>
+  <div class="in hero-b">
+    <h1><span>Markets move fast</span>ABX moves faster<i>///</i></h1>
+    <p>Round 3: the markets block in an airy, translucent style. Four takes, from a pure showcase to an explorer with exclusives.</p>
+    <div class="round"><a href="#v1">1 · Floating rows</a><a href="#v2">2 · Airy explorer</a><a href="#v3">3 · Featured + picks</a><a href="#v4">4 · Exclusives</a></div>
+  </div>
+</header>
+
+<!-- 1 -->
+<section class="band" id="v1">
+  <div class="field" style="width:520px;height:320px;left:-120px;top:240px;background:#ffd9bd"></div>
+  <div class="field" style="width:460px;height:300px;right:-100px;top:340px;background:#d7e9ff"></div>
+  <div class="in head">
+    <span class="vlabel"><b>1</b> · Floating rows</span>
+    <h2>All the top markets,<span>just a tap away</span></h2>
+    <p>Track live prices and trade top instruments from every market, including pre-IPO and custom baskets.</p>
+    <div class="tabs" id="t1"></div>
+  </div>
+  <div class="rows"><div class="row"><div class="track" id="r1a"></div></div><div class="row rev"><div class="track" id="r1b"></div></div></div>
+  <div class="in">
+    <p class="disc">Prices shown are indicative and may be delayed. Check the <b>ABX platform</b> for live prices before placing a trade.</p>
+    <div class="cta-row"><a class="btn or" href="#v2">Browse All Markets <span>→</span></a></div>
+    <p class="why"><b>Closest to the reference.</b> Pure showcase with strong motion. Tabs swap both rows to one market, Exclusive adds Pre-IPO and Custom markets. On mobile the rows keep drifting and stay readable.</p>
+  </div>
+</section>
+
+<!-- 2 -->
+<section class="band" id="v2">
+  <div class="field" style="width:600px;height:360px;left:50%;margin-left:-300px;top:380px;background:#ffe2cc"></div>
+  <div class="in">
+    <div class="head">
+      <span class="vlabel"><b>2</b> · Airy explorer</span>
+      <h2>Everything you can trade<span>in one account</span></h2>
+      <div class="tabs" id="t2"></div>
+    </div>
+    <div class="facts" id="f2"></div>
+    <div class="grid2" id="g2"></div>
+    <p class="disc">Prices are indicative. Leverage shown for retail clients.</p>
+    <div class="cta-row"><a class="btn or" id="all2" href="#v2">See all</a><a class="btn ghost" href="#v2">Open an Account</a></div>
+    <p class="why"><b>Variant A from round 2 in the airy style.</b> Tabs instead of the side rail, so it works on mobile: cards become a swipe row. Market facts sit as pills under the tabs. Pre-IPO and Custom markets switch to their own card layouts.</p>
+  </div>
+</section>
+
+<!-- 3 -->
+<section class="band" id="v3">
+  <div class="field" style="width:520px;height:340px;right:-80px;top:200px;background:#ffd9bd"></div>
+  <div class="field" style="width:420px;height:300px;left:-120px;bottom:40px;background:#e4ecf5"></div>
+  <div class="in">
+    <div class="head">
+      <span class="vlabel"><b>3</b> · Featured + picks</span>
+      <h2>Pick a market.<span>See it move.</span></h2>
+      <div class="tabs" id="t3"></div>
+    </div>
+    <div class="feat">
+      <div class="g big">
+        <div class="big-top"><div id="b3i"></div><span class="pc" id="b3c"></span></div>
+        <div class="big-px" id="b3p">—</div>
+        <canvas class="area" id="b3cv"></canvas>
+        <div class="sides"><a class="s" href="#v3"><small>Sell</small><span class="num" id="b3s">—</span></a><a class="b" href="#v3"><small>Buy</small><span class="num" id="b3b">—</span></a></div>
+      </div>
+      <div class="mini" id="m3"></div>
+    </div>
+    <div class="cta-row"><a class="btn or" href="#v2">Browse All Markets <span>→</span></a></div>
+    <p class="why"><b>Light version of the terminal.</b> One big card with chart and sell/buy, four picks next to it, tabs for the market. No side list, so on mobile it stacks into a clean column of cards.</p>
+  </div>
+</section>
+
+<!-- 4 -->
+<section class="band exc-band" id="v4">
+  <div class="field" style="width:700px;height:420px;left:50%;margin-left:-350px;top:300px;background:#ffb984;opacity:.6"></div>
+  <div class="field" style="width:360px;height:260px;left:-80px;top:120px;background:#ffd5b5"></div>
+  <div class="in">
+    <div class="head">
+      <span class="vlabel"><b>4</b> · Only at ABX</span>
+      <h2>Exclusive markets<span>you won't find elsewhere</span></h2>
+      <p>Pre-IPO access to private companies and custom baskets built by the ABX desk.</p>
+      <div class="seg2" id="s4"><button data-k="preipo" aria-pressed="true">Pre-IPO</button><button data-k="custom" aria-pressed="false">Custom markets</button></div>
+    </div>
+    <div class="exc" id="e4"></div>
+    <div class="cta-row"><a class="btn or" href="#v4">Explore exclusives <span>→</span></a><a class="btn ghost" href="#v4">How pre-IPO works</a></div>
+    <p class="why"><b>Glass cards over a warm orange field</b>, the most "translucent" of the four. Works as its own section right after 1 or 2.</p>
+  </div>
+</section>
+
+<footer><div class="in">Prices, valuations and basket compositions are simulated sample data for design review, not market data or an offer. CFDs are complex instruments and come with a high risk of losing money rapidly due to leverage.</div></footer>
+
+<script>
+(() => {
+  const M = {
+    forex:    { name: 'Forex', desc: 'Major, minor and exotic currency pairs. Follow central bank decisions and macro data that move FX.', count: '60+', hours: '24/5', lev: '1:30', from: '0.0 pips', color: '#2f5bd8' },
+    stocks:   { name: 'Stocks', desc: 'Share CFDs on the biggest US and European companies. Go long or short, with or without leverage.', count: '900+', hours: 'Exchange hours', lev: '1:5', from: '0.02%', color: '#7a3fd0' },
+    indices:  { name: 'Indices', desc: 'Trade the whole market in one position: US 500, US Tech 100, Germany 40, UK 100 and more.', count: '20+', hours: '23/5', lev: '1:20', from: '0.4 pts', color: '#5b5f68' },
+    crypto:   { name: 'Crypto', desc: 'Bitcoin, Ethereum and leading altcoins as CFDs. Markets open seven days a week.', count: '30+', hours: '24/7', lev: '1:2', from: '0.5%', color: '#e8730c' },
+    metals:   { name: 'Metals', desc: 'Gold, silver, platinum and palladium. Classic safe havens in uncertain markets.', count: '6', hours: '23/5', lev: '1:20', from: '0.1', color: '#c8901a' },
+    energies: { name: 'Energies', desc: 'Crude oil and natural gas. Markets that react fast to supply news and global events.', count: '5', hours: '23/5', lev: '1:10', from: '0.03', color: '#3b3f47' },
+    etfs:     { name: 'ETFs', desc: 'Index, sector and commodity ETFs. Diversified exposure in a single trade.', count: '150+', hours: 'Exchange hours', lev: '1:5', from: '0.03%', color: '#0f7a64' },
+    preipo:   { name: 'Pre-IPO', desc: 'Positions on private companies before they go public, priced from funding rounds and secondary deals.', count: '12', hours: 'Weekdays', lev: 'No leverage', from: '1%', color: '#ff7a1a', ex: true },
+    custom:   { name: 'Custom markets', desc: 'Themed baskets built by the ABX desk. One position, a whole theme, priced live from its components.', count: '8', hours: 'Exchange hours', lev: '1:5', from: '0.1%', color: '#ff7a1a', ex: true },
+  };
+  const ORDER = ['forex', 'stocks', 'indices', 'crypto', 'metals', 'energies', 'etfs', 'preipo', 'custom'];
+  // [sym, name, market, price, decimals, pipSize, spread(pips), vol/tick]
+  const RAW = [
+    ['EURUSD','Euro vs US Dollar','forex',1.15820,5,0.0001,0.6,0.00003],['GBPUSD','British Pound vs US Dollar','forex',1.31240,5,0.0001,0.9,0.00004],
+    ['USDJPY','US Dollar vs Japanese Yen','forex',152.410,3,0.01,0.8,0.005],['AUDUSD','Australian Dollar vs US Dollar','forex',0.65610,5,0.0001,0.8,0.00002],
+    ['USDCAD','US Dollar vs Canadian Dollar','forex',1.39580,5,0.0001,1.1,0.00003],['USDCHF','US Dollar vs Swiss Franc','forex',0.80120,5,0.0001,1.0,0.00002],
+    ['EURGBP','Euro vs British Pound','forex',0.88250,5,0.0001,1.0,0.00002],['USDPLN','US Dollar vs Polish Zloty','forex',3.66300,5,0.0001,18,0.00012],
+    ['NVDA','NVIDIA','stocks',205.18,2,0.01,8,0.1],['AAPL','Apple','stocks',268.42,2,0.01,8,0.08],['TSLA','Tesla','stocks',455.30,2,0.01,12,0.25],
+    ['MSFT','Microsoft','stocks',521.66,2,0.01,8,0.12],['AMZN','Amazon','stocks',245.07,2,0.01,8,0.09],['META','Meta Platforms','stocks',748.90,2,0.01,10,0.2],
+    ['US500','US 500','indices',6821.4,1,0.1,0.5,0.8],['NAS100','US Tech 100','indices',25310.5,1,1,1.2,4],['US30','Wall Street 30','indices',47850.0,1,1,1.8,6],
+    ['GER40','Germany 40','indices',24105.2,1,1,1.2,3],['UK100','UK 100','indices',9752.8,1,1,1.0,1.5],['JPN225','Japan 225','indices',50120,0,1,7,12],
+    ['BTCUSD','Bitcoin','crypto',108540,1,1,15,40],['ETHUSD','Ethereum','crypto',3852.40,2,0.1,12,2],['SOLUSD','Solana','crypto',185.62,2,0.01,8,0.15],
+    ['XRPUSD','Ripple','crypto',2.4512,4,0.0001,6,0.002],['ADAUSD','Cardano','crypto',0.7231,4,0.0001,6,0.0007],['DOGEUSD','Dogecoin','crypto',0.2104,4,0.0001,6,0.0002],
+    ['XAUUSD','Gold','metals',4010.50,2,0.1,2.5,0.6],['XAGUSD','Silver','metals',48.605,3,0.01,2.5,0.02],['XPTUSD','Platinum','metals',1584.20,2,0.1,4,0.4],['XPDUSD','Palladium','metals',1402.60,2,0.1,6,0.5],
+    ['USOIL','US Crude Oil','energies',61.24,2,0.01,3,0.02],['UKOIL','Brent Crude Oil','energies',64.92,2,0.01,3,0.02],['NGAS','Natural Gas','energies',3.452,3,0.001,4,0.003],
+    ['SPY','SPDR S&P 500 ETF','etfs',681.30,2,0.01,3,0.08],['QQQ','Invesco QQQ','etfs',612.45,2,0.01,3,0.1],['GLD','SPDR Gold Shares','etfs',368.20,2,0.01,3,0.05],
+    ['ARKK','ARK Innovation ETF','etfs',82.14,2,0.01,4,0.03],['VWO','Vanguard Emerging Markets','etfs',51.88,2,0.01,4,0.01],
+    ['SPACEX','SpaceX','preipo',212.00,2,0.01,50,0.04],['STRIPE','Stripe','preipo',38.40,2,0.01,50,0.008],['DATABRICKS','Databricks','preipo',96.50,2,0.01,50,0.02],
+    ['REVOLUT','Revolut','preipo',1420.00,2,0.01,50,0.25],['CANVA','Canva','preipo',58.10,2,0.01,50,0.01],['DISCORD','Discord','preipo',27.30,2,0.01,50,0.006],
+    ['AILEAD','AI Leaders','custom',1284.60,2,0.01,10,0.35],['MAG7','Magnificent 7','custom',2046.10,2,0.01,10,0.45],['GOLDBTC','Gold vs Bitcoin','custom',100.00,2,0.01,10,0.03],
+    ['EVMAKE','EV Makers','custom',742.30,2,0.01,10,0.25],['USBANK','US Banks','custom',512.80,2,0.01,10,0.1],['CLEAN','Clean Energy','custom',318.40,2,0.01,10,0.1],
+  ];
+  // Pre-IPO: last round valuation, round, status (sample figures)
+  const IPO = {
+    SPACEX: ['$400B', 'Secondary 2025', 'Open', 'Aerospace'], STRIPE: ['$107B', 'Tender 2025', 'Open', 'Payments'],
+    DATABRICKS: ['$100B', 'Series K 2025', 'Open', 'Data & AI'], REVOLUT: ['$75B', 'Secondary 2025', 'Open', 'Fintech'],
+    CANVA: ['$42B', 'Secondary 2025', 'Waitlist', 'Design software'], DISCORD: ['$15B', 'Series H 2021', 'Waitlist', 'Social'],
+  };
+  // Custom markets: components with weights (sample)
+  const BASKET = {
+    AILEAD: [['NVDA', 30], ['MSFT', 20], ['GOOGL', 15], ['AMD', 12], ['AVGO', 12], ['TSM', 11]],
+    MAG7: [['AAPL', 15], ['MSFT', 15], ['NVDA', 15], ['AMZN', 14], ['GOOGL', 14], ['META', 14], ['TSLA', 13]],
+    GOLDBTC: [['XAUUSD', 50], ['BTCUSD', 50]],
+    EVMAKE: [['TSLA', 35], ['BYD', 25], ['RIVN', 15], ['NIO', 13], ['LCID', 12]],
+    USBANK: [['JPM', 30], ['BAC', 22], ['WFC', 18], ['C', 15], ['GS', 15]],
+    CLEAN: [['ENPH', 22], ['FSLR', 22], ['NEE', 20], ['VWS', 18], ['PLUG', 18]],
+  };
+  const CCY = { EUR: '#2f5bd8', USD: '#1f3b73', GBP: '#c0283a', JPY: '#d94a4a', AUD: '#0f7a64', CAD: '#d6262f', CHF: '#e0453a', PLN: '#b8323f' };
+
+  function gauss() { let u = 0, v = 0; while (!u) u = Math.random(); while (!v) v = Math.random(); return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v); }
+  const I = RAW.map(([sym, name, mk, price, dec, pip, spr, vol]) => {
+    const swing = { crypto: .05, forex: .008, preipo: .04, custom: .03 }[mk] || .035;
+    const open = price * (1 - (Math.random() - .5) * swing);
+    const sig = price * ({ crypto: .0011, forex: .00011 }[mk] || .00045);
+    const w = [0]; for (let k = 1; k < 140; k++) w.push(w[k - 1] + gauss() * sig);
+    const hist = w.map((x, k) => { const t = k / 139; return open + (price - open) * t + x - w[139] * t; });
+    const fx = mk === 'forex';
+    return { sym, name, mk, mid: price, open, dec, pip, spr, cur: spr, vol, hist, anchor: price,
+      label: fx ? sym.slice(0, 3) + sym.slice(3) : sym, a: fx ? sym.slice(0, 3) : null, b: fx ? sym.slice(3) : null };
+  });
+  const BY = Object.fromEntries(I.map(i => [i.sym, i]));
+  const inMk = k => I.filter(i => i.mk === k);
+  const chg = i => (i.mid - i.open) / i.open * 100;
+  const fmt = (i, v) => v.toLocaleString('en-US', { minimumFractionDigits: i.dec, maximumFractionDigits: i.dec });
+  const fmtChg = v => (v < 0 ? '-' : '') + Math.abs(v).toFixed(2) + '%';
+  const bid = i => i.mid - i.cur * i.pip / 2, ask = i => i.mid + i.cur * i.pip / 2;
+  const $ = id => document.getElementById(id);
+  const POP = ['EURUSD', 'XAUUSD', 'BTCUSD', 'NVDA', 'US500', 'SPACEX', 'GBPUSD', 'ETHUSD', 'TSLA', 'USOIL', 'NAS100', 'MAG7'];
+  const TABS = [['popular', 'Popular'], ['forex', 'Forex'], ['stocks', 'Stocks'], ['indices', 'Indices'], ['crypto', 'Crypto'], ['metals', 'Metals'], ['energies', 'Energies'], ['etfs', 'ETFs'], ['exclusive', 'Exclusive']];
+  const listFor = k => k === 'popular' ? POP.map(s => BY[s]) : k === 'exclusive' ? inMk('preipo').concat(inMk('custom')) : inMk(k);
+
+  // ---------- Feed (calm) ----------
+  setInterval(() => {
+    for (let k = 0; k < 4; k++) { const i = I[Math.floor(Math.random() * I.length)]; i.mid += gauss() * i.vol + (i.anchor - i.mid) * .02; i.cur = i.spr * (.85 + Math.random() * .3); i.dirty = true; }
+  }, 450);
+  setInterval(() => I.forEach(i => { i.hist.push(i.mid); i.hist.shift(); i.sd = true; }), 2000);
+
+  // ---------- Binding ----------
+  const bound = new Map();
+  function bind(root) { root.querySelectorAll('[data-s][data-f]').forEach(el => { if (!bound.has(el.dataset.s)) bound.set(el.dataset.s, new Set()); bound.get(el.dataset.s).add(el); }); I.forEach(i => { i.dirty = true; i.sd = true; }); }
+  function unbind(root) { root.querySelectorAll('[data-s][data-f]').forEach(el => bound.get(el.dataset.s)?.delete(el)); }
+  function write(el, i, sp) {
+    const f = el.dataset.f;
+    if (f === 'mid') el.textContent = fmt(i, i.mid);
+    else if (f === 'pc') { el.textContent = fmtChg(chg(i)); el.classList.toggle('down', chg(i) < 0); }
+    else if (f === 'area' && sp) area(el, i, +(el.dataset.n || 90));
+  }
+  function area(cv, i, n) {
+    const dpr = Math.min(2, devicePixelRatio || 1), W = cv.clientWidth, H = cv.clientHeight; if (!W) return;
+    if (cv.width !== W * dpr) { cv.width = W * dpr; cv.height = H * dpr; }
+    const ctx = cv.getContext('2d'); ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.clearRect(0, 0, W, H);
+    const pts = i.hist.slice(-n).concat(i.mid), lo = Math.min(...pts), hi = Math.max(...pts), sp = hi - lo || 1;
+    const up = chg(i) >= 0, rgb = up ? '17,161,79' : '229,57,63';
+    const x = k => k / (pts.length - 1) * (W - 2) + 1, y = v => 4 + (1 - (v - lo) / sp) * (H - 8);
+    // faint top grid line like the reference
+    ctx.strokeStyle = 'rgba(0,0,0,.06)'; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(0, 2.5); ctx.lineTo(W, 2.5); ctx.stroke();
+    ctx.beginPath(); pts.forEach((v, k) => k ? ctx.lineTo(x(k), y(v)) : ctx.moveTo(x(k), y(v)));
+    ctx.strokeStyle = `rgb(${rgb})`; ctx.lineWidth = 1.4; ctx.lineJoin = 'round'; ctx.stroke();
+    ctx.lineTo(x(pts.length - 1), H); ctx.lineTo(x(0), H); ctx.closePath();
+    const g = ctx.createLinearGradient(0, 0, 0, H); g.addColorStop(0, `rgba(${rgb},.22)`); g.addColorStop(1, `rgba(${rgb},0)`); ctx.fillStyle = g; ctx.fill();
+  }
+  let last = 0;
+  function frame(t) {
+    const sp = t - last > 2000; if (sp) last = t;
+    for (const [s, els] of bound) { const i = BY[s]; if (!i || !(i.dirty || (sp && i.sd))) continue; for (const el of els) write(el, i, sp && i.sd); i.dirty = false; }
+    if (sp) I.forEach(i => i.sd = false);
+    requestAnimationFrame(frame);
+  }
+
+  // ---------- Pieces ----------
+  function logo(i) {
+    if (i.a) return `<span class="logo" aria-hidden="true"><span style="background:${CCY[i.a]}">${i.a}</span><span style="background:${CCY[i.b]}">${i.b}</span></span>`;
+    return `<span class="logo solo" aria-hidden="true"><span style="background:${M[i.mk].color}">${i.sym.replace(/USD$/, '').slice(0, 3)}</span></span>`;
+  }
+  const sub = i => i.mk === 'preipo' ? 'Pre-IPO · ' + IPO[i.sym][3] : i.mk === 'custom' ? 'Custom market · ' + BASKET[i.sym].length + ' stocks' : i.name;
+  const title = i => i.mk === 'preipo' || i.mk === 'custom' ? i.name : i.label;
+  function tabs(el, keys, cur, on) {
+    const draw = () => el.innerHTML = keys.map(([k, n]) => `<button data-k="${k}" aria-pressed="${k === cur}">${n}${k === 'exclusive' ? '<span class="ex">●</span>' : ''}</button>`).join('');
+    el.addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; cur = b.dataset.k; draw(); on(cur); });
+    draw(); on(cur);
+  }
+  const foot = i => `<div class="foot"><span class="pr" data-s="${i.sym}" data-f="mid"></span><span class="pc" data-s="${i.sym}" data-f="pc"></span><a class="trade" href="#v2">Trade</a></div>`;
+
+  // ---------- 1 · Floating rows ----------
+  const card1 = i => `<div class="g card1"><div class="ic">${logo(i)}<div style="min-width:0"><b>${title(i)}</b><small>${sub(i)}</small></div></div><canvas class="area" data-s="${i.sym}" data-f="area"></canvas>${foot(i)}</div>`;
+  tabs($('t1'), TABS, 'popular', k => {
+    let list = listFor(k); while (list.length < 10) list = list.concat(list);
+    const half = Math.ceil(list.length / 2);
+    const fill = a => { let r = a; while (r.length < 7) r = r.concat(a); return r; };
+    const a = fill(list.slice(0, half)), b = fill(list.slice(half));
+    unbind($('r1a')); unbind($('r1b'));
+    $('r1a').innerHTML = (a.map(card1).join('')).repeat(2);
+    $('r1b').innerHTML = (b.map(card1).join('')).repeat(2);
+    bind($('r1a')); bind($('r1b'));
+  });
+
+  // ---------- 2 · Airy explorer ----------
+  const W_COL = ['#ff7a1a', '#ffa25c', '#ffc799', '#9aa0a7', '#6e737a', '#3b3f47', '#1f2226'];
+  function card2(i) {
+    if (i.mk === 'preipo') {
+      const [val, round, st] = IPO[i.sym];
+      return `<div class="g card2"><div class="ic">${logo(i)}<div style="min-width:0"><b>${i.name}</b><small>${IPO[i.sym][3]}</small></div><span class="ex-tag" style="margin-left:auto">${st}</span></div>
+        <div class="ipo-box"><div><span>Valuation</span><b>${val}</b></div><div><span>Last round</span><b style="font-size:13px">${round}</b></div></div>${foot(i)}</div>`;
+    }
+    if (i.mk === 'custom') {
+      const b = BASKET[i.sym];
+      return `<div class="g card2"><div class="ic">${logo(i)}<div style="min-width:0"><b>${i.name}</b><small>${b.length} components</small></div></div>
+        <div class="wbar">${b.map(([, w], k) => `<i style="width:${w}%;background:${W_COL[k % 7]}"></i>`).join('')}</div>
+        <div class="chips">${b.map(([s, w]) => `<span>${s} ${w}%</span>`).join('')}</div>${foot(i)}</div>`;
+    }
+    return `<div class="g card2"><div class="ic">${logo(i)}<div style="min-width:0"><b>${title(i)}</b><small>${i.name}</small></div></div><canvas class="area" data-s="${i.sym}" data-f="area"></canvas>${foot(i)}</div>`;
+  }
+  const T2 = TABS.filter(([k]) => k !== 'popular' && k !== 'exclusive').concat([['preipo', 'Pre-IPO'], ['custom', 'Custom markets']]);
+  tabs($('t2'), T2, 'forex', k => {
+    const m = M[k];
+    $('f2').innerHTML = [['Instruments', m.count], ['Hours', m.hours], ['Max leverage', m.lev], ['Spreads from', m.from]].map(([a, b]) => `<span>${a}<b>${b}</b></span>`).join('') + (m.ex ? '<span class="ex-tag" style="align-self:center">Only at ABX</span>' : '');
+    unbind($('g2')); $('g2').innerHTML = inMk(k).slice(0, 6).map(card2).join(''); bind($('g2'));
+    $('all2').innerHTML = `See all ${m.count} ${m.name.toLowerCase()} <span>→</span>`;
+  });
+  $('t2').querySelectorAll('button').forEach(b => { if (b.dataset.k === 'preipo' || b.dataset.k === 'custom') b.innerHTML += '<span class="ex">●</span>'; });
+
+  // ---------- 3 · Featured + picks ----------
+  let f3 = null;
+  function drawBig() {
+    const i = BY[f3];
+    $('b3i').innerHTML = `<div class="ic">${logo(i)}<div><b>${title(i)}</b><small>${sub(i)}</small></div></div>`;
+    unbind(document.querySelector('.big'));
+    $('b3cv').dataset.s = i.sym; $('b3p').dataset.s = i.sym; $('b3c').dataset.s = i.sym;
+    bind(document.querySelector('.big'));
+  }
+  setInterval(() => { if (!f3) return; const i = BY[f3]; $('b3s').textContent = fmt(i, bid(i)); $('b3b').textContent = fmt(i, ask(i)); }, 500);
+  $('b3cv').dataset.f = 'area'; $('b3cv').dataset.n = '140'; $('b3p').dataset.f = 'mid'; $('b3c').dataset.f = 'pc';
+  tabs($('t3'), TABS, 'popular', k => {
+    const list = listFor(k).slice(0, 5); f3 = list[0].sym;
+    unbind($('m3'));
+    $('m3').innerHTML = list.slice(0, 4).map((i, n) => `<button class="g mcard" data-k="${i.sym}" aria-pressed="${n === 0}"><div class="ic">${logo(i)}<div style="min-width:0"><b>${title(i)}</b><small>${i.name}</small></div></div><canvas class="area" data-s="${i.sym}" data-f="area" data-n="60"></canvas><div class="row2"><span class="num" style="font-weight:600" data-s="${i.sym}" data-f="mid"></span><span class="pc" data-s="${i.sym}" data-f="pc"></span></div></button>`).join('');
+    bind($('m3')); drawBig();
+  });
+  $('m3').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; f3 = b.dataset.k; $('m3').querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', String(x === b))); drawBig(); });
+
+  // ---------- 4 · Exclusives ----------
+  function drawExc(k) {
+    unbind($('e4'));
+    $('e4').innerHTML = inMk(k).slice(0, 6).map(i => {
+      if (k === 'preipo') {
+        const [val, round, st, sector] = IPO[i.sym];
+        return `<div class="g ecard"><div class="top"><span class="ex-tag">Pre-IPO</span><span class="st ${st === 'Open' ? '' : 'w'}">${st}</span></div>
+          <div class="co"><span class="mono">${i.name[0]}</span><div style="min-width:0"><h3>${i.name}</h3><small style="color:var(--muted)">${sector}</small></div></div>
+          <div class="ipo-box"><div><span>Valuation</span><b>${val}</b></div><div><span>Last round</span><b style="font-size:13px">${round}</b></div></div>
+          ${st === 'Open' ? `<canvas class="area" data-s="${i.sym}" data-f="area"></canvas>${foot(i)}` : `<div class="foot"><span style="color:var(--muted);font-size:13px">Opens to clients soon</span><a class="trade" href="#v4">Join waitlist</a></div>`}</div>`;
+      }
+      const b = BASKET[i.sym];
+      return `<div class="g ecard"><div class="top"><span class="ex-tag">Custom market</span><span class="st w">${b.length} stocks</span></div>
+        <h3>${i.name}</h3>
+        <div class="wbar">${b.map(([, w], n) => `<i style="width:${w}%;background:${W_COL[n % 7]}"></i>`).join('')}</div>
+        <div class="chips">${b.map(([s, w]) => `<span>${s} ${w}%</span>`).join('')}</div>
+        <canvas class="area" data-s="${i.sym}" data-f="area"></canvas>${foot(i)}</div>`;
+    }).join('');
+    bind($('e4'));
+  }
+  $('s4').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; $('s4').querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', String(x === b))); drawExc(b.dataset.k); });
+  drawExc('preipo');
+
+  requestAnimationFrame(frame);
+  addEventListener('resize', () => { last = 0; I.forEach(i => i.sd = true); });
+})();
+</script>

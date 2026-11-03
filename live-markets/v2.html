@@ -1,0 +1,604 @@
+<title>ABX Markets Explorer</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bai+Jamjuree:wght@400;500;600&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap">
+<style>
+/* Layout: ABX landing language. Each band is one way to answer "what can I trade here": concrete instruments per market, free choice of market, exclusives (Pre-IPO, Custom markets) set apart in orange. Calm live updates: numbers change in place, nothing flashes. */
+:root {
+  color-scheme: light;
+  --ink: #08090b; --ink-2: #111317; --ink-3: #191c21; --d-line: #262a31; --d-text: #f2f2f0; --d-muted: #8d929b;
+  --paper: #f3f3f1; --card: #ffffff; --line: #e3e3df; --text: #0c0d0f; --muted: #686d74; --soft: #f7f7f5;
+  --or: #ff7a1a; --or-2: #ffa25c; --or-soft: #fff1e6;
+  --up: #129a4f; --down: #df3f45; --up-d: #33d17f; --down-d: #ff6a6a;
+  --f-display: "Bai Jamjuree", "Arial Narrow", Arial, sans-serif;
+  --f-body: "Manrope", "Segoe UI", system-ui, sans-serif;
+  --f-data: "JetBrains Mono", ui-monospace, Menlo, monospace;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; background: var(--paper); color: var(--text); font-family: var(--f-body); font-size: 15px; line-height: 1.5; }
+button, input { font: inherit; color: inherit; }
+button { cursor: pointer; }
+:focus-visible { outline: 2px solid var(--or); outline-offset: 2px; }
+.num { font-family: var(--f-data); font-variant-numeric: tabular-nums; }
+.in { max-width: 1240px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.band { padding-block: 80px; }
+.band.dark { background: var(--ink); color: var(--d-text); }
+.band.white { background: var(--card); }
+.eyebrow { font-family: var(--f-data); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); display: inline-flex; align-items: center; gap: 8px; }
+.eyebrow::before { content: "›››"; color: var(--or); letter-spacing: -.1em; }
+.dark .eyebrow { color: var(--d-muted); }
+.vnum { font-family: var(--f-data); color: var(--or); font-size: 13px; }
+h1, h2, h3 { font-family: var(--f-display); font-weight: 500; letter-spacing: -.025em; margin: 0; text-wrap: balance; }
+h2 { font-size: clamp(30px, 4.2vw, 50px); line-height: 1.04; }
+.dim { color: #9da1a8; }
+.dark .dim { color: #6f747d; }
+.lead { color: var(--muted); max-width: 56ch; margin: 12px 0 0; }
+.dark .lead { color: var(--d-muted); }
+.btn { display: inline-flex; align-items: center; gap: 10px; border: 0; border-radius: 8px; padding: 12px 18px; font-weight: 600; font-size: 14px; text-decoration: none; color: inherit; }
+.btn.or { background: var(--or); color: #fff; }
+.btn.or:hover { background: #ff8a33; }
+.btn.ghost { box-shadow: inset 0 0 0 1px var(--line); }
+.dark .btn.ghost { box-shadow: inset 0 0 0 1px var(--d-line); }
+.ctas { display: flex; flex-wrap: wrap; gap: 10px; }
+.note { font-size: 12px; color: var(--muted); margin: 0; }
+.dark .note { color: var(--d-muted); }
+.up { color: var(--up); } .down { color: var(--down); }
+.dark .up { color: var(--up-d); } .dark .down { color: var(--down-d); }
+.vhead { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 380px); gap: 24px; align-items: end; margin-bottom: 36px; }
+@media (max-width: 760px) { .vhead { grid-template-columns: 1fr; } }
+.why { font-size: 13px; color: var(--muted); margin: 0; }
+.dark .why { color: var(--d-muted); }
+.tag-ex { font-family: var(--f-data); font-size: 10px; letter-spacing: .08em; text-transform: uppercase; color: var(--or); border: 1px solid currentColor; border-radius: 3px; padding: 1px 5px; white-space: nowrap; }
+/* calm live value: a short dot pulse next to the number, no background flashes */
+.live { position: relative; }
+.live.tick::after { content: ""; position: absolute; right: -9px; top: 50%; width: 5px; height: 5px; margin-top: -2.5px; border-radius: 50%; background: var(--or); animation: fade 1s forwards; }
+@keyframes fade { to { opacity: 0; } }
+
+/* Hero */
+.hero { background: var(--ink); color: var(--d-text); position: relative; overflow: hidden; }
+.hero::before { content: ""; position: absolute; inset: 0; background: radial-gradient(55% 70% at 80% 65%, rgba(255,122,26,.26), transparent 60%), repeating-linear-gradient(176deg, transparent 0 22px, rgba(255,140,60,.07) 22px 23px); mask-image: linear-gradient(90deg, transparent, #000 45%); }
+.nav { position: relative; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 18px; }
+.logo { font-family: var(--f-display); font-weight: 600; font-size: 26px; letter-spacing: -.04em; font-style: italic; }
+.nav ul { display: flex; gap: 28px; list-style: none; margin: 0; padding: 0; font-size: 13px; color: var(--d-muted); }
+.nav ul li:first-child { color: var(--d-text); box-shadow: 0 8px 0 -6px var(--or); }
+@media (max-width: 760px) { .nav ul { display: none; } }
+.hero-body { position: relative; padding-block: 56px 40px; display: grid; gap: 20px; }
+.hero h1 { font-size: clamp(42px, 7.5vw, 90px); line-height: .95; }
+.hero h1 .dim { display: block; color: #9aa0a7; }
+.hero h1 .sl { color: var(--or); font-style: italic; letter-spacing: -.12em; margin-left: .1em; }
+.hero p { color: #b9bdc4; max-width: 50ch; margin: 0; }
+.tape { background: var(--ink-2); border-top: 1px solid var(--d-line); overflow: hidden; color: var(--d-text); position: relative; }
+.tape-row { display: flex; width: max-content; animation: tape 70s linear infinite; }
+.tape:hover .tape-row { animation-play-state: paused; }
+@keyframes tape { to { transform: translateX(-50%); } }
+.tk { display: inline-flex; gap: 10px; padding: 12px 22px; border-right: 1px solid var(--d-line); font-size: 13px; white-space: nowrap; }
+.tk b { font-weight: 700; }
+
+/* Badge */
+.badge { position: relative; width: 36px; height: 36px; flex: none; }
+.badge span { position: absolute; width: 26px; height: 26px; border-radius: 50%; display: grid; place-items: center; font-family: var(--f-data); font-size: 8.5px; font-weight: 600; color: #fff; box-shadow: 0 0 0 2px var(--bb, #fff); }
+.badge span:first-child { left: 0; top: 0; } .badge span:last-child { right: 0; bottom: 0; }
+.badge.solo span { position: static; width: 36px; height: 36px; font-size: 10px; }
+.dark .badge { --bb: var(--ink-2); }
+
+/* Notes block */
+.picked { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+@media (max-width: 860px) { .picked { grid-template-columns: 1fr; } }
+.picked div { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 18px; display: grid; gap: 6px; align-content: start; }
+.picked b { font-family: var(--f-display); font-weight: 600; font-size: 17px; }
+.picked p { margin: 0; color: var(--muted); font-size: 14px; }
+
+/* ===== A · Market explorer ===== */
+.ex { display: grid; grid-template-columns: 260px minmax(0, 1fr); background: var(--card); border: 1px solid var(--line); border-radius: 20px; overflow: hidden; min-height: 560px; }
+@media (max-width: 900px) { .ex { grid-template-columns: 1fr; } }
+.rail { background: var(--soft); border-right: 1px solid var(--line); padding: 10px; display: grid; align-content: start; gap: 2px; }
+@media (max-width: 900px) { .rail { border-right: 0; border-bottom: 1px solid var(--line); display: flex; overflow-x: auto; gap: 6px; } }
+.rail button { display: flex; align-items: center; justify-content: space-between; gap: 10px; border: 0; background: none; padding: 11px 12px; border-radius: 10px; text-align: left; font-weight: 600; white-space: nowrap; }
+.rail button:hover { background: #ededea; }
+.rail button[aria-pressed="true"] { background: var(--ink); color: #fff; }
+.rail button .c { font-family: var(--f-data); font-size: 12px; color: var(--muted); font-weight: 500; }
+.rail button[aria-pressed="true"] .c { color: #a3a8b0; }
+.rail hr { border: 0; border-top: 1px dashed var(--line); margin: 8px 4px; width: auto; }
+@media (max-width: 900px) { .rail hr { display: none; } }
+.rail .rl { font-family: var(--f-data); font-size: 10px; letter-spacing: .1em; color: var(--muted); padding: 6px 12px 2px; text-transform: uppercase; }
+@media (max-width: 900px) { .rail .rl { display: none; } }
+.ex-main { padding: 26px; display: grid; gap: 20px; align-content: start; min-width: 0; }
+.ex-top { display: flex; justify-content: space-between; gap: 18px; flex-wrap: wrap; align-items: start; }
+.ex-top h3 { font-size: 32px; display: flex; align-items: center; gap: 10px; }
+.ex-top p { margin: 6px 0 0; color: var(--muted); max-width: 52ch; }
+.facts { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border: 1px solid var(--line); border-radius: 12px; }
+@media (max-width: 640px) { .facts { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.facts div { padding: 12px 14px; border-right: 1px solid var(--line); display: grid; gap: 2px; }
+.facts div:last-child { border-right: 0; }
+.facts span { font-family: var(--f-data); font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+.facts b { font-family: var(--f-display); font-size: 20px; font-weight: 600; }
+.ex-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+@media (max-width: 1100px) { .ex-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 560px) { .ex-grid { grid-template-columns: 1fr; } }
+.it { border: 1px solid var(--line); border-radius: 12px; padding: 14px; display: grid; gap: 10px; text-decoration: none; color: inherit; transition: border-color .15s; background: var(--card); }
+.it:hover { border-color: var(--or); }
+.it-top { display: flex; align-items: center; gap: 10px; min-width: 0; }
+.it-top b { display: block; font-weight: 700; }
+.it-top small { display: block; color: var(--muted); font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.it-bot { display: flex; justify-content: space-between; align-items: end; gap: 10px; }
+.it-bot .p { font-size: 16px; font-weight: 600; }
+.it-bot .c { font-family: var(--f-data); font-size: 12px; }
+.it canvas { width: 100%; height: 34px; display: block; }
+.ex-foot { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; border-top: 1px solid var(--line); padding-top: 16px; }
+.ipo { border: 1px solid var(--line); border-radius: 12px; padding: 16px; display: grid; gap: 12px; background: linear-gradient(180deg, var(--or-soft), var(--card) 60%); }
+.ipo-top { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+.status { font-family: var(--f-data); font-size: 11px; padding: 3px 8px; border-radius: 999px; background: var(--ink); color: #fff; }
+.status.wait { background: transparent; color: var(--muted); box-shadow: inset 0 0 0 1px var(--line); }
+.kv { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-size: 13px; }
+.kv span { display: block; font-family: var(--f-data); font-size: 10px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.kv b { font-weight: 700; }
+.constit { display: flex; flex-wrap: wrap; gap: 4px; }
+.constit span { font-family: var(--f-data); font-size: 11px; padding: 2px 6px; border-radius: 4px; background: var(--soft); border: 1px solid var(--line); }
+
+/* ===== B · Market cards (ABX style) ===== */
+.mc-scroll { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(300px, 340px); gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 12px; scrollbar-width: thin; }
+.mc { scroll-snap-align: start; background: var(--ink-2); border: 1px solid var(--d-line); border-radius: 18px; padding: 22px; display: grid; gap: 16px; grid-template-rows: auto auto 1fr auto; position: relative; overflow: hidden; }
+.mc::before { content: ""; position: absolute; left: 22px; top: 0; width: 32px; height: 2px; background: var(--or); }
+.mc.ex { border-color: #5a300f; background: radial-gradient(120% 60% at 100% 0%, rgba(255,122,26,.22), transparent 60%), var(--ink-2); min-height: 0; grid-template-columns: none; }
+.mc-head { display: flex; justify-content: space-between; align-items: start; gap: 10px; }
+.mc-head .idx { font-family: var(--f-data); font-size: 12px; color: var(--d-muted); }
+.mc h3 { font-size: 28px; }
+.mc p { margin: 0; color: var(--d-muted); font-size: 14px; }
+.mc ul { list-style: none; margin: 0; padding: 0; display: grid; }
+.mc li { display: grid; grid-template-columns: minmax(0, 1fr) auto 64px; gap: 10px; align-items: center; padding: 9px 0; border-top: 1px solid var(--d-line); font-size: 14px; }
+.mc li b { font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.mc li .num { font-size: 13px; text-align: right; }
+.mc-foot { display: flex; justify-content: space-between; align-items: center; font-size: 13px; color: var(--d-muted); gap: 10px; }
+.mc-foot a { color: var(--d-text); font-weight: 700; text-decoration: none; white-space: nowrap; }
+.mc-foot a:hover { color: var(--or); }
+.scroll-btns { display: flex; gap: 8px; }
+.scroll-btns button { width: 42px; height: 42px; border-radius: 50%; border: 1px solid var(--d-line); background: var(--ink-2); color: var(--d-text); font-size: 16px; }
+
+/* ===== C · Terminal with choice ===== */
+.term { display: grid; grid-template-columns: 340px minmax(0, 1fr); background: var(--ink-2); border: 1px solid var(--d-line); border-radius: 18px; overflow: hidden; }
+@media (max-width: 900px) { .term { grid-template-columns: 1fr; } }
+.term-side { border-right: 1px solid var(--d-line); display: grid; grid-template-rows: auto auto 1fr; min-height: 0; }
+@media (max-width: 900px) { .term-side { border-right: 0; border-bottom: 1px solid var(--d-line); } }
+.cats { display: flex; gap: 4px; overflow-x: auto; padding: 10px; border-bottom: 1px solid var(--d-line); scrollbar-width: none; }
+.cats button { border: 0; background: none; color: var(--d-muted); padding: 6px 10px; border-radius: 6px; font-size: 13px; font-weight: 600; white-space: nowrap; }
+.cats button[aria-pressed="true"] { background: var(--ink-3); color: var(--d-text); box-shadow: inset 0 -2px 0 var(--or); }
+.find { margin: 10px; display: flex; align-items: center; gap: 8px; background: var(--ink); border: 1px solid var(--d-line); border-radius: 8px; padding: 0 10px; color: var(--d-muted); }
+.find input { border: 0; background: none; outline: none; padding: 8px 0; width: 100%; color: var(--d-text); }
+.tlist { overflow-y: auto; max-height: 440px; }
+.trow { width: 100%; display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 10px; align-items: center; padding: 10px 14px; border: 0; background: none; border-top: 1px solid var(--d-line); text-align: left; color: var(--d-text); }
+.trow[aria-pressed="true"] { background: var(--ink-3); box-shadow: inset 3px 0 0 var(--or); }
+.trow b { display: block; font-size: 14px; } .trow small { display: block; color: var(--d-muted); font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.trow .r { text-align: right; font-family: var(--f-data); font-size: 13px; }
+.trow .r small { font-size: 11px; }
+.term-main { padding: 22px; display: grid; gap: 16px; align-content: start; min-width: 0; }
+.tm-top { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; align-items: start; }
+.tm-top .big { font-family: var(--f-display); font-size: 40px; line-height: 1; font-weight: 500; text-align: right; }
+.tm-facts { display: flex; gap: 22px; flex-wrap: wrap; font-size: 12px; color: var(--d-muted); }
+.tm-facts b { display: block; color: var(--d-text); font-family: var(--f-data); font-size: 14px; font-weight: 500; }
+canvas.chart { width: 100%; height: 240px; display: block; }
+.trade { display: grid; grid-template-columns: 1fr auto 1fr; gap: 10px; }
+.trade button { border: 0; border-radius: 10px; padding: 12px 16px; display: grid; gap: 2px; color: #fff; text-align: left; }
+.trade .s { background: var(--down); } .trade .b { background: var(--up); text-align: right; }
+.trade small { font-family: var(--f-data); font-size: 11px; letter-spacing: .08em; opacity: .85; }
+.trade .num { font-size: 18px; font-weight: 600; }
+.trade .spr { display: grid; place-items: center; align-content: center; font-family: var(--f-data); font-size: 11px; color: var(--d-muted); }
+.trade .spr b { color: var(--d-text); font-size: 15px; }
+
+/* ===== D · Exclusives ===== */
+.exc { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 16px; }
+@media (max-width: 900px) { .exc { grid-template-columns: 1fr; } }
+.exc-card { background: var(--ink-2); border: 1px solid var(--d-line); border-radius: 20px; padding: 26px; display: grid; gap: 18px; align-content: start; position: relative; overflow: hidden; }
+.exc-card.hot { border-color: #5a300f; background: radial-gradient(90% 60% at 100% 0%, rgba(255,122,26,.25), transparent 60%), var(--ink-2); }
+.exc-card h3 { font-size: 32px; }
+.co { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 12px; align-items: center; padding: 12px 0; border-top: 1px solid var(--d-line); }
+.co .logo2 { width: 40px; height: 40px; border-radius: 10px; display: grid; place-items: center; font-family: var(--f-display); font-weight: 600; background: var(--ink-3); border: 1px solid var(--d-line); }
+.co b { display: block; } .co small { display: block; color: var(--d-muted); font-size: 12px; }
+.co .r { text-align: right; display: grid; gap: 4px; justify-items: end; }
+.co .r .num { font-size: 14px; }
+.basket { border-top: 1px solid var(--d-line); padding: 14px 0; display: grid; gap: 10px; }
+.basket-top { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+.basket-top b { font-size: 16px; }
+.weights { display: flex; height: 8px; border-radius: 4px; overflow: hidden; gap: 2px; }
+.weights i { display: block; height: 100%; }
+.wl { display: flex; flex-wrap: wrap; gap: 4px 12px; font-family: var(--f-data); font-size: 11px; color: var(--d-muted); }
+.wl span { display: inline-flex; align-items: center; gap: 5px; }
+.wl i { width: 8px; height: 8px; border-radius: 2px; display: inline-block; }
+
+/* ===== E · Markets index ===== */
+.idx-top { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 16px; }
+.big-find { flex: 1 1 320px; max-width: 520px; display: flex; align-items: center; gap: 10px; background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 0 14px; }
+.big-find input { border: 0; outline: none; padding: 14px 0; width: 100%; background: none; font-size: 16px; }
+.cols { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; background: var(--card); border: 1px solid var(--line); border-radius: 18px; overflow: hidden; }
+@media (max-width: 1000px) { .cols { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 560px) { .cols { grid-template-columns: 1fr; } }
+.col { padding: 20px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); display: grid; gap: 10px; align-content: start; }
+.col h3 { font-size: 20px; display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
+.col h3 small { font-family: var(--f-data); font-size: 12px; color: var(--muted); font-weight: 400; }
+.col ul { list-style: none; margin: 0; padding: 0; display: grid; }
+.col li a { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px; padding: 6px 0; text-decoration: none; color: inherit; font-size: 14px; border-bottom: 1px dashed var(--line); }
+.col li a:hover b { color: var(--or); }
+.col li b { font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.col li .num { font-size: 12px; }
+.col .more { font-size: 13px; font-weight: 700; color: var(--text); text-decoration: none; }
+.col .more:hover { color: var(--or); }
+.col.hot { background: linear-gradient(180deg, var(--or-soft), var(--card) 45%); }
+.empty { padding: 20px; color: var(--muted); grid-column: 1 / -1; }
+
+footer { padding-block: 28px; font-size: 12px; color: var(--muted); border-top: 1px solid var(--line); }
+@media (prefers-reduced-motion: reduce) { .tape-row { animation: none; } .live.tick::after { animation: none; opacity: 0; } html { scroll-behavior: auto; } }
+</style>
+
+<header class="hero">
+  <div class="in nav"><span class="logo">ABX</span><ul><li>Markets</li><li>Platform</li><li>Company</li><li>Partners</li><li>Resources</li></ul><a class="btn or" href="#a">Open an Account</a></div>
+  <div class="in hero-body">
+    <h1><span class="dim">Markets move fast</span>ABX moves faster<span class="sl">///</span></h1>
+    <p>Global stocks, ETFs and crypto, plus pre-IPO access to companies like SpaceX and Stripe. All in one account.</p>
+    <div class="ctas"><a class="btn or" href="#a">Explore markets →</a><a class="btn ghost" href="#d" style="color:#fff">Exclusive markets</a></div>
+  </div>
+  <div class="tape" aria-label="Live prices"><div class="tape-row" id="tape"></div></div>
+</header>
+
+<section class="band" style="padding-block:56px">
+  <div class="in" style="display:grid;gap:22px">
+    <div><span class="eyebrow">Round 2 · what can I trade</span><h2 style="margin-top:8px">Five ways to show the whole offer<br><span class="dim">with real instruments, not just categories</span></h2></div>
+    <div class="picked">
+      <div><b>Free choice of market</b><p>Every variant lets the trader pick crypto, stocks, metals and so on, and see the actual instruments inside.</p></div>
+      <div><b>Exclusives set apart</b><p>Pre-IPO and Custom markets carry an orange Exclusive mark and their own layout: valuation and status for pre-IPO, basket weights for custom markets.</p></div>
+      <div><b>Calm live data</b><p>Prices update in place with a small orange dot. No flashing rows, no jumping layout. The ticker tape stays only in the hero.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- A · Explorer -->
+<section class="band white" id="a">
+  <div class="in">
+    <div class="vhead">
+      <div><span class="vnum">A</span> <span class="eyebrow">Market explorer</span><h2 style="margin-top:8px">Everything you can trade.<br><span class="dim">Pick a market, see what's inside.</span></h2></div>
+      <p class="why">Recommended main block. Combines the category overview with real instruments: market facts on top, live instruments below, one link to the full list. Exclusives open with their own cards.</p>
+    </div>
+    <div class="ex">
+      <nav class="rail" id="rail" aria-label="Markets"></nav>
+      <div class="ex-main">
+        <div class="ex-top"><div><h3 id="exName"></h3><p id="exDesc"></p></div></div>
+        <div class="facts" id="exFacts"></div>
+        <div class="ex-grid" id="exGrid"></div>
+        <div class="ex-foot"><a class="btn or" id="exAll" href="#e">See all</a><p class="note">Prices are indicative. Leverage shown for retail clients.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- B · Market cards -->
+<section class="band dark" id="b">
+  <div class="in">
+    <div class="vhead">
+      <div><span class="vnum">B</span> <span class="eyebrow">Market cards</span><h2 style="margin-top:8px">Nine markets.<br><span class="dim">One account.</span></h2></div>
+      <div style="display:grid;gap:14px;justify-items:start"><p class="why">Our own take on the card idea: one card per market instead of per instrument. Each lists its top four instruments live, so the trader sees what crypto or stocks actually means here. Swipe on mobile.</p><div class="scroll-btns"><button id="bPrev" aria-label="Scroll left">←</button><button id="bNext" aria-label="Scroll right">→</button></div></div>
+    </div>
+  </div>
+  <div class="in"><div class="mc-scroll" id="mc"></div></div>
+</section>
+
+<!-- C · Terminal -->
+<section class="band dark" id="c" style="background:#050607">
+  <div class="in">
+    <div class="vhead">
+      <div><span class="vnum">C</span> <span class="eyebrow">Market terminal</span><h2 style="margin-top:8px">Choose your market.<br><span class="dim">Watch it live.</span></h2></div>
+      <p class="why">The terminal from round 1, now with a market switcher and search, so you can jump to crypto or a single stock. Shows trading hours, leverage and spread for the chosen instrument. Good for a "Try demo" section.</p>
+    </div>
+    <div class="term">
+      <div class="term-side">
+        <div class="cats" id="tCats"></div>
+        <label class="find"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="tFind" type="search" placeholder="Search instrument" aria-label="Search instrument" autocomplete="off"></label>
+        <div class="tlist" id="tList"></div>
+      </div>
+      <div class="term-main">
+        <div class="tm-top"><div id="tmInst"></div><div><div class="big num" id="tmPx">—</div><div class="num" id="tmChg" style="text-align:right">—</div></div></div>
+        <div class="tm-facts" id="tmFacts"></div>
+        <canvas class="chart" id="tmChart"></canvas>
+        <div class="trade"><button class="s" onclick="location.hash='a'"><small>SELL</small><span class="num" id="tmBid">—</span></button><div class="spr"><span>SPREAD</span><b id="tmSpr">—</b></div><button class="b" onclick="location.hash='a'"><small>BUY</small><span class="num" id="tmAsk">—</span></button></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- D · Exclusives -->
+<section class="band dark" id="d">
+  <div class="in">
+    <div class="vhead">
+      <div><span class="vnum">D</span> <span class="eyebrow">Only at ABX</span><h2 style="margin-top:8px">Markets you won't find<br><span class="dim">at a regular broker</span></h2></div>
+      <p class="why">A dedicated block for the exclusives. Pre-IPO shows the company, latest valuation and whether trading is open. Custom markets show what's inside each basket. Works on its own or right after A.</p>
+    </div>
+    <div class="exc">
+      <div class="exc-card hot">
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:10px"><span class="tag-ex">Exclusive</span><span class="note">Indicative valuations</span></div>
+        <div><h3>Pre-IPO opportunities</h3><p class="lead" style="margin-top:6px">Take a position on private companies before they list. Prices track the latest funding rounds and secondary deals.</p></div>
+        <div id="ipoList"></div>
+        <div class="ctas"><a class="btn or" href="#a">Explore pre-IPO</a><a class="btn ghost" href="#a" style="color:#fff">How it works</a></div>
+      </div>
+      <div class="exc-card">
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:10px"><span class="tag-ex">Exclusive</span><span class="note">Rebalanced monthly</span></div>
+        <div><h3>Custom markets</h3><p class="lead" style="margin-top:6px">Trade a whole theme in one position. Baskets built by the ABX desk, priced live from their components.</p></div>
+        <div id="baskets"></div>
+        <div class="ctas"><a class="btn or" href="#a">Explore custom markets</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- E · Index -->
+<section class="band" id="e">
+  <div class="in">
+    <div class="vhead">
+      <div><span class="vnum">E</span> <span class="eyebrow">Markets index</span><h2 style="margin-top:8px">1,200+ instruments.<br><span class="dim">Find yours in seconds.</span></h2></div>
+      <p class="why">A calm catalogue: every market as a column of real instruments with today's change. Search filters all columns at once. Lightest UI of the five, closest to a mega menu.</p>
+    </div>
+    <div class="idx-top"><label class="big-find"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="iFind" type="search" placeholder="Search Bitcoin, Tesla, EUR/USD…" aria-label="Search instruments" autocomplete="off"></label><a class="btn or" href="#a">Open an Account</a></div>
+    <div class="cols" id="cols"></div>
+  </div>
+</section>
+
+<footer><div class="in">Prices, valuations and basket compositions on this page are simulated sample data for design review, not market data or an offer. CFDs are complex instruments and come with a high risk of losing money rapidly due to leverage.</div></footer>
+
+<script>
+(() => {
+  // ---------- Markets ----------
+  // facts: count, hours, max retail leverage, spreads from
+  const M = {
+    forex:    { name: 'Forex', desc: 'Major, minor and exotic currency pairs. Follow central bank decisions and macro data that move FX.', count: '60+', hours: '24/5', lev: '1:30', from: '0.0 pips', color: '#2f5bd8' },
+    stocks:   { name: 'Stocks', desc: 'Share CFDs on the biggest US and European companies. Go long or short, with or without leverage.', count: '900+', hours: 'Exchange hours', lev: '1:5', from: '0.02%', color: '#7a3fd0' },
+    indices:  { name: 'Indices', desc: 'Trade the whole market in one position: US 500, US Tech 100, Germany 40, UK 100 and more.', count: '20+', hours: '23/5', lev: '1:20', from: '0.4 pts', color: '#5b5f68' },
+    crypto:   { name: 'Crypto', desc: 'Bitcoin, Ethereum and leading altcoins as CFDs. Markets open seven days a week.', count: '30+', hours: '24/7', lev: '1:2', from: '0.5%', color: '#e8730c' },
+    metals:   { name: 'Metals', desc: 'Gold, silver, platinum and palladium. Classic safe havens in uncertain markets.', count: '6', hours: '23/5', lev: '1:20', from: '0.1', color: '#c8901a' },
+    energies: { name: 'Energies', desc: 'Crude oil and natural gas. Markets that react fast to supply news and global events.', count: '5', hours: '23/5', lev: '1:10', from: '0.03', color: '#3b3f47' },
+    etfs:     { name: 'ETFs', desc: 'Index, sector and commodity ETFs. Diversified exposure in a single trade.', count: '150+', hours: 'Exchange hours', lev: '1:5', from: '0.03%', color: '#0f7a64' },
+    preipo:   { name: 'Pre-IPO', desc: 'Positions on private companies before they go public, priced from funding rounds and secondary deals.', count: '12', hours: 'Weekdays', lev: 'No leverage', from: '1%', color: '#ff7a1a', ex: true },
+    custom:   { name: 'Custom markets', desc: 'Themed baskets built by the ABX desk. One position, a whole theme, priced live from its components.', count: '8', hours: 'Exchange hours', lev: '1:5', from: '0.1%', color: '#ff7a1a', ex: true },
+  };
+  const ORDER = ['forex', 'stocks', 'indices', 'crypto', 'metals', 'energies', 'etfs', 'preipo', 'custom'];
+  // [sym, name, market, price, decimals, pipSize, spread(pips), vol/tick]
+  const RAW = [
+    ['EURUSD','Euro vs US Dollar','forex',1.15820,5,0.0001,0.6,0.00003],['GBPUSD','British Pound vs US Dollar','forex',1.31240,5,0.0001,0.9,0.00004],
+    ['USDJPY','US Dollar vs Japanese Yen','forex',152.410,3,0.01,0.8,0.005],['AUDUSD','Australian Dollar vs US Dollar','forex',0.65610,5,0.0001,0.8,0.00002],
+    ['USDCAD','US Dollar vs Canadian Dollar','forex',1.39580,5,0.0001,1.1,0.00003],['USDCHF','US Dollar vs Swiss Franc','forex',0.80120,5,0.0001,1.0,0.00002],
+    ['EURGBP','Euro vs British Pound','forex',0.88250,5,0.0001,1.0,0.00002],['USDPLN','US Dollar vs Polish Zloty','forex',3.66300,5,0.0001,18,0.00012],
+    ['NVDA','NVIDIA','stocks',205.18,2,0.01,8,0.1],['AAPL','Apple','stocks',268.42,2,0.01,8,0.08],['TSLA','Tesla','stocks',455.30,2,0.01,12,0.25],
+    ['MSFT','Microsoft','stocks',521.66,2,0.01,8,0.12],['AMZN','Amazon','stocks',245.07,2,0.01,8,0.09],['META','Meta Platforms','stocks',748.90,2,0.01,10,0.2],
+    ['US500','US 500','indices',6821.4,1,0.1,0.5,0.8],['NAS100','US Tech 100','indices',25310.5,1,1,1.2,4],['US30','Wall Street 30','indices',47850.0,1,1,1.8,6],
+    ['GER40','Germany 40','indices',24105.2,1,1,1.2,3],['UK100','UK 100','indices',9752.8,1,1,1.0,1.5],['JPN225','Japan 225','indices',50120,0,1,7,12],
+    ['BTCUSD','Bitcoin','crypto',108540,1,1,15,40],['ETHUSD','Ethereum','crypto',3852.40,2,0.1,12,2],['SOLUSD','Solana','crypto',185.62,2,0.01,8,0.15],
+    ['XRPUSD','Ripple','crypto',2.4512,4,0.0001,6,0.002],['ADAUSD','Cardano','crypto',0.7231,4,0.0001,6,0.0007],['DOGEUSD','Dogecoin','crypto',0.2104,4,0.0001,6,0.0002],
+    ['XAUUSD','Gold','metals',4010.50,2,0.1,2.5,0.6],['XAGUSD','Silver','metals',48.605,3,0.01,2.5,0.02],['XPTUSD','Platinum','metals',1584.20,2,0.1,4,0.4],['XPDUSD','Palladium','metals',1402.60,2,0.1,6,0.5],
+    ['USOIL','US Crude Oil','energies',61.24,2,0.01,3,0.02],['UKOIL','Brent Crude Oil','energies',64.92,2,0.01,3,0.02],['NGAS','Natural Gas','energies',3.452,3,0.001,4,0.003],
+    ['SPY','SPDR S&P 500 ETF','etfs',681.30,2,0.01,3,0.08],['QQQ','Invesco QQQ','etfs',612.45,2,0.01,3,0.1],['GLD','SPDR Gold Shares','etfs',368.20,2,0.01,3,0.05],
+    ['ARKK','ARK Innovation ETF','etfs',82.14,2,0.01,4,0.03],['VWO','Vanguard Emerging Markets','etfs',51.88,2,0.01,4,0.01],
+    ['SPACEX','SpaceX','preipo',212.00,2,0.01,50,0.04],['STRIPE','Stripe','preipo',38.40,2,0.01,50,0.008],['DATABRICKS','Databricks','preipo',96.50,2,0.01,50,0.02],
+    ['REVOLUT','Revolut','preipo',1420.00,2,0.01,50,0.25],['CANVA','Canva','preipo',58.10,2,0.01,50,0.01],['DISCORD','Discord','preipo',27.30,2,0.01,50,0.006],
+    ['AILEAD','AI Leaders','custom',1284.60,2,0.01,10,0.35],['MAG7','Magnificent 7','custom',2046.10,2,0.01,10,0.45],['GOLDBTC','Gold vs Bitcoin','custom',100.00,2,0.01,10,0.03],
+    ['EVMAKE','EV Makers','custom',742.30,2,0.01,10,0.25],['USBANK','US Banks','custom',512.80,2,0.01,10,0.1],['CLEAN','Clean Energy','custom',318.40,2,0.01,10,0.1],
+  ];
+  // Pre-IPO: last round valuation, round, status (sample figures)
+  const IPO = {
+    SPACEX: ['$400B', 'Secondary 2025', 'Open', 'Aerospace'], STRIPE: ['$107B', 'Tender 2025', 'Open', 'Payments'],
+    DATABRICKS: ['$100B', 'Series K 2025', 'Open', 'Data & AI'], REVOLUT: ['$75B', 'Secondary 2025', 'Open', 'Fintech'],
+    CANVA: ['$42B', 'Secondary 2025', 'Waitlist', 'Design software'], DISCORD: ['$15B', 'Series H 2021', 'Waitlist', 'Social'],
+  };
+  // Custom markets: components with weights (sample)
+  const BASKET = {
+    AILEAD: [['NVDA', 30], ['MSFT', 20], ['GOOGL', 15], ['AMD', 12], ['AVGO', 12], ['TSM', 11]],
+    MAG7: [['AAPL', 15], ['MSFT', 15], ['NVDA', 15], ['AMZN', 14], ['GOOGL', 14], ['META', 14], ['TSLA', 13]],
+    GOLDBTC: [['XAUUSD', 50], ['BTCUSD', 50]],
+    EVMAKE: [['TSLA', 35], ['BYD', 25], ['RIVN', 15], ['NIO', 13], ['LCID', 12]],
+    USBANK: [['JPM', 30], ['BAC', 22], ['WFC', 18], ['C', 15], ['GS', 15]],
+    CLEAN: [['ENPH', 22], ['FSLR', 22], ['NEE', 20], ['VWS', 18], ['PLUG', 18]],
+  };
+  const W_COL = ['#ff7a1a', '#ffa25c', '#d9d4cc', '#8d929b', '#5b5f68', '#3b3f47', '#262a31'];
+  const CCY = { EUR: '#2f5bd8', USD: '#1f3b73', GBP: '#c0283a', JPY: '#d94a4a', AUD: '#0f7a64', CAD: '#d6262f', CHF: '#e0453a', PLN: '#b8323f' };
+  function gauss() { let u = 0, v = 0; while (!u) u = Math.random(); while (!v) v = Math.random(); return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v); }
+
+  const I = RAW.map(([sym, name, mk, price, dec, pip, spr, vol]) => {
+    const swing = { crypto: .05, forex: .008, preipo: .03, custom: .025 }[mk] || .03;
+    const open = price * (1 - (Math.random() - .5) * swing);
+    const sig = price * ({ crypto: .0012, forex: .00012 }[mk] || .0005);
+    const w = [0]; for (let k = 1; k < 160; k++) w.push(w[k - 1] + gauss() * sig);
+    const hist = w.map((x, k) => { const t = k / 159; return open + (price - open) * t + x - w[159] * t; });
+    const fx = mk === 'forex';
+    return { sym, name, mk, mid: price, open, dec, pip, spr, cur: spr, vol, hist, anchor: price,
+      label: fx ? sym.slice(0, 3) + '/' + sym.slice(3) : sym, a: fx ? sym.slice(0, 3) : null, b: fx ? sym.slice(3) : null };
+  });
+  const BY = Object.fromEntries(I.map(i => [i.sym, i]));
+  const inMk = k => I.filter(i => i.mk === k);
+  const chg = i => (i.mid - i.open) / i.open * 100;
+  const fmt = (i, v) => v.toLocaleString('en-US', { minimumFractionDigits: i.dec, maximumFractionDigits: i.dec });
+  const fmtChg = v => (v > 0 ? '+' : v < 0 ? '−' : '') + Math.abs(v).toFixed(2) + '%';
+  const bid = i => i.mid - i.cur * i.pip / 2, ask = i => i.mid + i.cur * i.pip / 2;
+  const $ = id => document.getElementById(id);
+
+  // ---------- Calm feed: few ticks per second ----------
+  setInterval(() => {
+    for (let k = 0; k < 4; k++) {
+      const i = I[Math.floor(Math.random() * I.length)];
+      i.mid += gauss() * i.vol + (i.anchor - i.mid) * 0.02;
+      i.cur = i.spr * (0.85 + Math.random() * 0.3); i.dirty = true;
+    }
+  }, 450);
+  setInterval(() => I.forEach(i => { i.hist.push(i.mid); i.hist.shift(); i.sd = true; }), 2000);
+
+  // ---------- Binding ----------
+  const bound = new Map();
+  function bind(root) {
+    root.querySelectorAll('[data-s][data-f]').forEach(el => { const s = el.dataset.s; if (!bound.has(s)) bound.set(s, new Set()); bound.get(s).add(el); });
+    I.forEach(i => { i.dirty = true; i.sd = true; });
+  }
+  function unbind(root) { root.querySelectorAll('[data-s][data-f]').forEach(el => bound.get(el.dataset.s)?.delete(el)); }
+  function write(el, i, sparkNow) {
+    const f = el.dataset.f;
+    if (f === 'mid') {
+      const t = fmt(i, i.mid);
+      if (el.textContent !== t) { el.textContent = t; if (el.classList.contains('live')) { el.classList.remove('tick'); void el.offsetWidth; el.classList.add('tick'); } }
+    } else if (f === 'chg') { const c = chg(i); el.textContent = fmtChg(c); el.classList.toggle('up', c >= 0); el.classList.toggle('down', c < 0); }
+    else if (f === 'spark' && sparkNow) spark(el, i);
+  }
+  function spark(cv, i) {
+    const dpr = Math.min(2, devicePixelRatio || 1), W = cv.clientWidth, H = cv.clientHeight; if (!W) return;
+    if (cv.width !== W * dpr) { cv.width = W * dpr; cv.height = H * dpr; }
+    const ctx = cv.getContext('2d'); ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.clearRect(0, 0, W, H);
+    const pts = i.hist.slice(-80).concat(i.mid), lo = Math.min(...pts), hi = Math.max(...pts), sp = hi - lo || 1;
+    const dark = cv.dataset.dark === '1', up = chg(i) >= 0;
+    const col = up ? (dark ? '#33d17f' : '#129a4f') : (dark ? '#ff6a6a' : '#df3f45');
+    const x = k => k / (pts.length - 1) * (W - 2) + 1, y = v => 2 + (1 - (v - lo) / sp) * (H - 4);
+    // open line
+    const oy = Math.max(1, Math.min(H - 1, y(i.open)));
+    ctx.setLineDash([2, 3]); ctx.strokeStyle = dark ? '#3a3f47' : '#d6d6d1'; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(0, oy); ctx.lineTo(W, oy); ctx.stroke(); ctx.setLineDash([]);
+    ctx.beginPath(); pts.forEach((v, k) => k ? ctx.lineTo(x(k), y(v)) : ctx.moveTo(x(k), y(v)));
+    ctx.strokeStyle = col; ctx.lineWidth = 1.5; ctx.lineJoin = 'round'; ctx.stroke();
+  }
+  let lastSpark = 0;
+  function frame(t) {
+    const sparkNow = t - lastSpark > 2000; if (sparkNow) lastSpark = t;
+    for (const [s, els] of bound) {
+      const i = BY[s]; if (!i || !(i.dirty || (sparkNow && i.sd))) continue;
+      for (const el of els) write(el, i, sparkNow && i.sd);
+      i.dirty = false;
+    }
+    if (sparkNow) I.forEach(i => i.sd = false);
+    requestAnimationFrame(frame);
+  }
+
+  // ---------- Shared bits ----------
+  function badge(i) {
+    if (i.a) return `<span class="badge" aria-hidden="true"><span style="background:${CCY[i.a]}">${i.a}</span><span style="background:${CCY[i.b]}">${i.b}</span></span>`;
+    const t = i.sym.replace(/USD$/, '').slice(0, 3);
+    return `<span class="badge solo" aria-hidden="true"><span style="background:${M[i.mk].color}">${t}</span></span>`;
+  }
+  const exTag = k => M[k].ex ? ' <span class="tag-ex">Exclusive</span>' : '';
+
+  // ---------- Ticker (hero only) ----------
+  const tapeList = ['EURUSD', 'XAUUSD', 'BTCUSD', 'US500', 'NVDA', 'GBPUSD', 'ETHUSD', 'NAS100', 'USOIL', 'TSLA', 'USDJPY', 'GER40', 'XAGUSD', 'AAPL'].map(s => BY[s]);
+  const tapeOne = tapeList.map(i => `<span class="tk"><b>${i.label}</b><span class="num" data-s="${i.sym}" data-f="mid"></span><span class="num" data-s="${i.sym}" data-f="chg"></span></span>`).join('');
+  $('tape').innerHTML = tapeOne + tapeOne;
+
+  // ---------- A · Explorer ----------
+  let exK = 'forex';
+  function railHTML() {
+    const btn = k => `<button data-k="${k}" aria-pressed="${k === exK}"><span>${M[k].name}${M[k].ex ? ' <span class="tag-ex" style="margin-left:4px">Ex</span>' : ''}</span><span class="c">${M[k].count}</span></button>`;
+    return ORDER.filter(k => !M[k].ex).map(btn).join('') + '<hr><div class="rl">Only at ABX</div>' + ORDER.filter(k => M[k].ex).map(btn).join('');
+  }
+  $('rail').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; exK = b.dataset.k; drawExplorer(); });
+  function tile(i) {
+    if (i.mk === 'preipo') {
+      const [val, round, st, sector] = IPO[i.sym];
+      return `<a class="ipo" href="#d"><div class="ipo-top"><div class="it-top">${badge(i)}<div><b>${i.name}</b><small>${sector}</small></div></div><span class="status ${st === 'Open' ? '' : 'wait'}">${st}</span></div>
+        <div class="kv"><div><span>Valuation</span><b class="num">${val}</b></div><div><span>Last round</span><b>${round}</b></div></div>
+        <div class="it-bot"><span class="p num live" data-s="${i.sym}" data-f="mid"></span><span class="c" data-s="${i.sym}" data-f="chg"></span></div></a>`;
+    }
+    if (i.mk === 'custom') {
+      return `<a class="it" href="#d"><div class="it-top">${badge(i)}<div style="min-width:0"><b>${i.name}</b><small>${BASKET[i.sym].length} components</small></div></div>
+        <div class="constit">${BASKET[i.sym].slice(0, 5).map(([s]) => `<span>${s}</span>`).join('')}</div>
+        <div class="it-bot"><span class="p num live" data-s="${i.sym}" data-f="mid"></span><span class="c" data-s="${i.sym}" data-f="chg"></span></div></a>`;
+    }
+    return `<a class="it" href="#c"><div class="it-top">${badge(i)}<div style="min-width:0"><b>${i.label}</b><small>${i.name}</small></div></div>
+      <canvas data-s="${i.sym}" data-f="spark"></canvas>
+      <div class="it-bot"><span class="p num live" data-s="${i.sym}" data-f="mid"></span><span class="c" data-s="${i.sym}" data-f="chg"></span></div></a>`;
+  }
+  function drawExplorer() {
+    const m = M[exK];
+    $('rail').innerHTML = railHTML();
+    $('exName').innerHTML = m.name + exTag(exK);
+    $('exDesc').textContent = m.desc;
+    $('exFacts').innerHTML = [['Instruments', m.count], ['Trading hours', m.hours], ['Max leverage', m.lev], ['Spreads from', m.from]].map(([a, b]) => `<div><span>${a}</span><b>${b}</b></div>`).join('');
+    unbind($('exGrid'));
+    $('exGrid').innerHTML = inMk(exK).slice(0, 6).map(tile).join('');
+    bind($('exGrid'));
+    $('exAll').textContent = `See all ${m.count} ${m.name.toLowerCase()} →`;
+  }
+
+  // ---------- B · Market cards ----------
+  $('mc').innerHTML = ORDER.map((k, n) => {
+    const m = M[k], list = inMk(k).slice(0, 4);
+    return `<article class="mc ${m.ex ? 'ex' : ''}">
+      <div class="mc-head"><span class="idx">[${String(n + 1).padStart(2, '0')}]</span>${m.ex ? '<span class="tag-ex">Exclusive</span>' : `<span class="num" style="font-size:12px;color:var(--d-muted)">${m.hours}</span>`}</div>
+      <div><h3>${m.name}</h3><p style="margin-top:6px">${m.desc}</p></div>
+      <ul>${list.map(i => `<li><b>${m.ex || i.mk === 'stocks' || i.mk === 'etfs' ? i.name : i.label}</b><span class="num live" data-s="${i.sym}" data-f="mid"></span><span class="num" data-s="${i.sym}" data-f="chg"></span></li>`).join('')}</ul>
+      <div class="mc-foot"><span>${m.count} instruments · ${m.lev}</span><a href="#a">Explore →</a></div>
+    </article>`;
+  }).join('');
+  const sc = $('mc');
+  $('bPrev').onclick = () => sc.scrollBy({ left: -360, behavior: 'smooth' });
+  $('bNext').onclick = () => sc.scrollBy({ left: 360, behavior: 'smooth' });
+
+  // ---------- C · Terminal ----------
+  let tK = 'crypto', tSym = 'BTCUSD', tQ = '';
+  $('tCats').innerHTML = ORDER.map(k => `<button data-k="${k}" aria-pressed="${k === tK}">${M[k].name}</button>`).join('');
+  $('tCats').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; tK = b.dataset.k; $('tCats').querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', String(x === b))); tQ = ''; $('tFind').value = ''; tSym = inMk(tK)[0].sym; drawTList(); drawTMain(); });
+  $('tFind').addEventListener('input', e => { tQ = e.target.value.trim().toLowerCase(); drawTList(); });
+  $('tList').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; tSym = b.dataset.k; $('tList').querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', String(x === b))); drawTMain(); });
+  function drawTList() {
+    const list = tQ ? I.filter(i => (i.sym + ' ' + i.name + ' ' + i.label).toLowerCase().includes(tQ)) : inMk(tK);
+    unbind($('tList'));
+    $('tList').innerHTML = list.length ? list.map(i => `<button class="trow" data-k="${i.sym}" aria-pressed="${i.sym === tSym}">${badge(i)}<span style="min-width:0"><b>${i.label}</b><small>${i.name}</small></span><span class="r"><span class="live" data-s="${i.sym}" data-f="mid"></span><small style="display:block" data-s="${i.sym}" data-f="chg"></small></span></button>`).join('') : `<p class="note" style="padding:14px">Nothing found for “${tQ}”. Try a ticker like BTC or TSLA.</p>`;
+    bind($('tList'));
+  }
+  function drawTMain() {
+    const i = BY[tSym], m = M[i.mk];
+    $('tmInst').innerHTML = `<div style="display:flex;gap:12px;align-items:center">${badge(i)}<div><b style="font-size:18px">${i.label}</b>${exTag(i.mk)}<div class="note">${i.name} · ${m.name}</div></div></div>`;
+    $('tmFacts').innerHTML = [['Trading hours', m.hours], ['Max leverage', m.lev], ['Typical spread', i.spr + (i.mk === 'forex' ? ' pips' : ' pts')]].map(([a, b]) => `<span>${a}<b>${b}</b></span>`).join('');
+    tick();
+  }
+  function tick() {
+    const i = BY[tSym], cv = $('tmChart');
+    const dpr = Math.min(2, devicePixelRatio || 1), W = cv.clientWidth, H = cv.clientHeight; if (!W) return;
+    if (cv.width !== W * dpr) { cv.width = W * dpr; cv.height = H * dpr; }
+    const ctx = cv.getContext('2d'); ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.clearRect(0, 0, W, H);
+    const pts = i.hist.concat(i.mid), lo = Math.min(...pts), hi = Math.max(...pts), pad = (hi - lo) * .12 || i.mid * .001, L = lo - pad, Hh = hi + pad, R = 76;
+    const x = k => k / (pts.length - 1) * (W - R - 8) + 4, y = v => (1 - (v - L) / (Hh - L)) * (H - 16) + 6;
+    ctx.font = '11px "JetBrains Mono", monospace'; ctx.fillStyle = '#8d929b'; ctx.strokeStyle = '#262a31';
+    for (let g = 0; g <= 4; g++) { const v = L + (Hh - L) * g / 4, yy = y(v); ctx.setLineDash([2, 4]); ctx.beginPath(); ctx.moveTo(0, yy); ctx.lineTo(W - R, yy); ctx.stroke(); ctx.setLineDash([]); ctx.fillText(fmt(i, v), W - R + 6, yy + 4); }
+    ctx.beginPath(); pts.forEach((v, k) => k ? ctx.lineTo(x(k), y(v)) : ctx.moveTo(x(k), y(v)));
+    ctx.strokeStyle = '#ff7a1a'; ctx.lineWidth = 2; ctx.lineJoin = 'round'; ctx.stroke();
+    ctx.lineTo(x(pts.length - 1), H); ctx.lineTo(x(0), H); ctx.closePath();
+    const gr = ctx.createLinearGradient(0, 0, 0, H); gr.addColorStop(0, 'rgba(255,122,26,.25)'); gr.addColorStop(1, 'rgba(255,122,26,0)'); ctx.fillStyle = gr; ctx.fill();
+    const ly = y(i.mid); ctx.fillStyle = '#ff7a1a'; ctx.beginPath(); ctx.arc(x(pts.length - 1), ly, 4, 0, 7); ctx.fill(); ctx.fillRect(W - R, ly - 9, R, 18); ctx.fillStyle = '#fff'; ctx.fillText(fmt(i, i.mid), W - R + 6, ly + 4);
+    $('tmPx').textContent = fmt(i, i.mid);
+    const c = chg(i); $('tmChg').textContent = fmtChg(c) + ' today'; $('tmChg').className = 'num ' + (c >= 0 ? 'up' : 'down');
+    $('tmBid').textContent = fmt(i, bid(i)); $('tmAsk').textContent = fmt(i, ask(i)); $('tmSpr').textContent = i.cur.toFixed(1);
+  }
+
+  // ---------- D · Exclusives ----------
+  $('ipoList').innerHTML = inMk('preipo').map(i => {
+    const [val, round, st, sector] = IPO[i.sym];
+    return `<div class="co"><span class="logo2">${i.name[0]}</span><span><b>${i.name}</b><small>${sector} · ${round} · ${val}</small></span><span class="r">${st === 'Open' ? `<span class="num live" data-s="${i.sym}" data-f="mid"></span><span class="num" style="font-size:12px" data-s="${i.sym}" data-f="chg"></span>` : '<span class="status wait">Waitlist</span><span class="note">Join to get notified</span>'}</span></div>`;
+  }).join('');
+  $('baskets').innerHTML = ['AILEAD', 'MAG7', 'GOLDBTC', 'EVMAKE'].map(s => {
+    const i = BY[s], b = BASKET[s];
+    return `<div class="basket"><div class="basket-top"><b>${i.name}</b><span class="num"><span class="live" data-s="${s}" data-f="mid"></span> <span data-s="${s}" data-f="chg"></span></span></div>
+      <div class="weights">${b.map(([, w], k) => `<i style="width:${w}%;background:${W_COL[k % W_COL.length]}"></i>`).join('')}</div>
+      <div class="wl">${b.map(([c, w], k) => `<span><i style="background:${W_COL[k % W_COL.length]}"></i>${c} ${w}%</span>`).join('')}</div></div>`;
+  }).join('');
+
+  // ---------- E · Index ----------
+  let iQ = '';
+  function drawCols() {
+    unbind($('cols'));
+    const cols = ORDER.map(k => {
+      const list = inMk(k).filter(i => !iQ || (i.sym + ' ' + i.name + ' ' + i.label).toLowerCase().includes(iQ));
+      if (iQ && !list.length) return '';
+      return `<div class="col ${M[k].ex ? 'hot' : ''}"><h3>${M[k].name}${M[k].ex ? '<span class="tag-ex">Ex</span>' : `<small>${M[k].count}</small>`}</h3>
+        <ul>${list.slice(0, 6).map(i => `<li><a href="#c"><b>${i.mk === 'stocks' || i.mk === 'etfs' || M[k].ex ? i.name : i.label}</b><span class="num" data-s="${i.sym}" data-f="chg"></span></a></li>`).join('')}</ul>
+        <a class="more" href="#a">All ${M[k].name.toLowerCase()} →</a></div>`;
+    }).join('');
+    $('cols').innerHTML = cols || `<p class="empty">Nothing matches “${iQ}”. Try a name like Gold or a ticker like NVDA.</p>`;
+    bind($('cols'));
+  }
+  $('iFind').addEventListener('input', e => { iQ = e.target.value.trim().toLowerCase(); drawCols(); });
+
+  // ---------- Boot ----------
+  drawExplorer(); drawTList(); drawTMain(); drawCols();
+  bind(document);
+  setInterval(tick, 600);
+  requestAnimationFrame(frame);
+  addEventListener('resize', () => { lastSpark = 0; I.forEach(i => i.sd = true); tick(); });
+})();
+</script>

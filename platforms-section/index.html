@@ -1,0 +1,363 @@
+<title>ABX Platforms Section</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bai+Jamjuree:wght@500;600&family=Geist:wght@400;500;600&family=Geist+Mono:wght@500&family=Manrope:wght@500;600;700&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+/* Layout: the Figma frame "Option 7C · Light, photo tiles" (1920 wide): eyebrow + title top-left, a wide light carbon card below. Two ways to place desktop + iPhone and the benefits: beside (A) or below (B). */
+:root {
+  color-scheme: light;
+  --page: #f3f3f3; --text: #0b0d12; --muted: #5d626b; --line: #e2e2e2;
+  --or: #fe7816; --ink: #08090b; --d-line: #262a31; --d-text: #f2f2f0; --d-muted: #8d929b;
+  --up: #11a14f; --down: #e5393f; --up-d: #33d17f; --down-d: #ff6a6a; --or-soft: #fff1e6;
+  --f-title: "Bai Jamjuree", "Arial Narrow", Arial, sans-serif;
+  --f-display: "Bai Jamjuree", "Arial Narrow", Arial, sans-serif;
+  --f-body: "Geist", "Manrope", "Segoe UI", system-ui, sans-serif;
+  --f-mono: "Geist Mono", "JetBrains Mono", ui-monospace, monospace;
+  --f-data: "JetBrains Mono", ui-monospace, monospace;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--page); color: var(--text); font-family: var(--f-body); font-size: 16px; line-height: 1.5; }
+:focus-visible { outline: 2px solid var(--or); outline-offset: 2px; }
+.num { font-variant-numeric: tabular-nums; }
+.up { color: var(--up); } .down { color: var(--down); }
+
+/* Page chrome for the review */
+.note-bar { max-width: 1792px; margin: 0 auto; padding: 28px max(16px, env(safe-area-inset-right, 0px)) 0 max(16px, env(safe-area-inset-left, 0px)); display: flex; flex-wrap: wrap; gap: 10px 24px; align-items: baseline; justify-content: space-between; }
+.note-bar b { font-family: var(--f-mono); font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--or); font-weight: 500; }
+.note-bar p { margin: 0; color: var(--muted); font-size: 14px; max-width: 80ch; }
+.jump { display: flex; gap: 8px; }
+.jump a { font-size: 13px; font-weight: 600; color: var(--text); text-decoration: none; background: #fff; border: 1px solid var(--line); border-radius: 999px; padding: 6px 12px; }
+.jump a:hover { border-color: var(--or); }
+
+/* Section (mirrors the Figma frame) */
+.sec { padding-block: 80px 96px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.sec + .sec { border-top: 1px solid var(--line); }
+.wrap { max-width: 1792px; margin: 0 auto; }
+.head-row { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; flex-wrap: wrap; padding-inline: 16px; }
+@media (max-width: 760px) { .head-row { padding-inline: 0; } }
+.eyebrow { display: inline-flex; align-items: center; gap: 8px; font-family: var(--f-mono); font-weight: 500; font-size: 13px; line-height: 16px; letter-spacing: .1em; text-transform: uppercase; color: var(--text); }
+.eyebrow i { color: var(--or); font-style: normal; letter-spacing: -.15em; font-weight: 600; }
+.title { font-family: var(--f-title); font-weight: 500; font-size: clamp(30px, 3.4vw, 44px); line-height: 1.25; letter-spacing: -.01em; margin: 20px 0 0; }
+.opt { font-family: var(--f-mono); font-size: 12px; color: var(--muted); margin-left: 10px; letter-spacing: .06em; }
+.ctas { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.btn { display: inline-flex; align-items: center; gap: 10px; border-radius: 10px; padding: 0 22px; height: 52px; font-weight: 600; font-size: 16px; text-decoration: none; white-space: nowrap; }
+.btn.or { background: var(--or); color: #fff; }
+.btn.or:hover { background: #ff8a33; }
+.store { display: inline-flex; align-items: center; gap: 10px; height: 52px; background: var(--ink); color: #fff; border-radius: 12px; padding: 0 18px 0 14px; text-decoration: none; }
+.store:hover { outline: 2px solid var(--or); outline-offset: 1px; }
+.store small { display: block; font-size: 11px; opacity: .8; line-height: 1.1; }
+.store b { display: block; font-size: 16px; line-height: 1.2; font-weight: 600; }
+
+/* Carbon card */
+.card { position: relative; margin-top: 56px; border-radius: 24px; overflow: hidden; background-color: #ececec;
+  background-image:
+    radial-gradient(120% 90% at 30% 0%, rgba(255,255,255,.9), rgba(255,255,255,0) 55%),
+    radial-gradient(60% 50% at 95% 100%, rgba(254,120,22,.10), transparent 70%),
+    repeating-linear-gradient(-28deg, rgba(255,255,255,.75) 0 3px, rgba(222,222,222,.55) 3px 6px),
+    repeating-linear-gradient(62deg, rgba(0,0,0,.025) 0 3px, rgba(255,255,255,.0) 3px 6px);
+}
+.card::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(236,236,236,.85) 0%, rgba(236,236,236,.35) 45%, rgba(236,236,236,0) 70%); pointer-events: none; }
+.card > * { position: relative; z-index: 1; }
+
+/* Benefits */
+.bens { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
+.ben { display: grid; grid-template-columns: 44px minmax(0, 1fr); gap: 16px; align-items: center; padding: 14px 0; border-bottom: 1px solid rgba(0,0,0,.08); }
+.ben:last-child { border-bottom: 0; }
+.ben .ic { width: 44px; height: 44px; border-radius: 12px; background: #fff; display: grid; place-items: center; color: var(--or); box-shadow: 0 1px 0 rgba(0,0,0,.04); }
+.ben b { display: block; font-size: 19px; font-weight: 600; line-height: 1.3; color: var(--text); }
+.ben > span:last-child > span { display: block; color: var(--muted); font-size: 15px; }
+.qr-row { display: flex; gap: 16px; align-items: center; margin-top: 28px; }
+.qr { width: 96px; height: 96px; background: #fff; border-radius: 14px; padding: 9px; flex: none; box-shadow: 0 1px 0 rgba(0,0,0,.05); }
+.qr canvas { width: 100%; height: 100%; display: block; image-rendering: pixelated; }
+.qr-row b { display: block; font-size: 17px; font-weight: 600; }
+.qr-row span { color: var(--muted); font-size: 15px; }
+@media (max-width: 760px) { .qr-row { display: none; } }
+
+/* A · beside */
+.a-grid { display: grid; grid-template-columns: minmax(300px, .62fr) minmax(0, 1fr); gap: 40px; align-items: end; padding: 64px 56px 0 64px; min-height: 700px; }
+.a-copy { align-self: center; padding-bottom: 64px; max-width: 460px; }
+.a-dev { align-self: end; margin-bottom: -2.5%; }
+@media (max-width: 1100px) {
+  .a-grid { grid-template-columns: 1fr; padding: 40px 28px 0; min-height: 0; gap: 32px; }
+  .a-copy { padding-bottom: 0; max-width: none; }
+  .a-dev { margin-inline: -4px; }
+}
+@media (max-width: 560px) { .a-grid { padding: 28px 18px 0; } }
+
+/* B · below */
+.b-card { padding: 72px 64px 0; display: flex; justify-content: center; min-height: 640px; align-items: flex-end; }
+.b-card .combo { max-width: 1180px; margin-bottom: -2.5%; }
+@media (max-width: 760px) { .b-card { padding: 32px 18px 0; min-height: 0; } }
+.b-bens { padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0; margin-top: 40px; }
+@media (max-width: 1000px) { .b-bens { grid-template-columns: 1fr 1fr; gap: 8px 0; } }
+@media (max-width: 560px) { .b-bens { grid-template-columns: 1fr; } }
+.b-bens li { list-style: none; padding: 4px 28px 4px 16px; display: grid; gap: 10px; align-content: start; border-left: 1px solid var(--line); }
+.b-bens li:first-child { border-left: 0; }
+@media (max-width: 560px) { .b-bens li { border-left: 0; border-top: 1px solid var(--line); padding: 16px 0; grid-template-columns: 44px 1fr; align-items: center; gap: 0 16px; } .b-bens li .ic { grid-row: span 2; } }
+.b-bens .ic { width: 44px; height: 44px; border-radius: 12px; background: #fff; display: grid; place-items: center; color: var(--or); }
+.b-bens b { font-size: 19px; font-weight: 600; line-height: 1.3; }
+.b-bens span { color: var(--muted); font-size: 15px; }
+.b-bens ul { margin: 0; padding: 0; }
+.b-foot { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; margin-top: 40px; padding-top: 28px; border-top: 1px solid var(--line); }
+.b-foot p { margin: 0; color: var(--muted); font-size: 14px; }
+
+.verdict { max-width: 1792px; margin: 0 auto; padding: 0 max(16px, env(safe-area-inset-right, 0px)) 64px max(16px, env(safe-area-inset-left, 0px)); display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+@media (max-width: 860px) { .verdict { grid-template-columns: 1fr; } }
+.verdict div { background: #fff; border: 1px solid var(--line); border-radius: 18px; padding: 22px; }
+.verdict b { display: block; font-size: 17px; margin-bottom: 6px; }
+.verdict p { margin: 0; color: var(--muted); font-size: 15px; }
+
+/* devices (shared with the app section page) */
+/* ---------- Device mockups ---------- */
+.phone { width: 280px; aspect-ratio: 280 / 580; background: #0b0c0e; border-radius: 46px; padding: 10px; box-shadow: 0 0 0 1.5px #2b2e33, 0 40px 80px -30px rgba(0,0,0,.55); position: relative; flex: none; }
+.phone .scr { height: 100%; border-radius: 36px; overflow: hidden; background: #0f1114; color: #f1f1ef; position: relative; display: flex; flex-direction: column; font-size: 12px; }
+.phone .scr.light { background: #fafaf9; color: #121315; }
+.phone .island { position: absolute; top: 18px; left: 50%; transform: translateX(-50%); width: 82px; height: 22px; background: #000; border-radius: 12px; z-index: 2; }
+.sb { display: flex; justify-content: space-between; padding: 14px 24px 0; font-size: 11px; font-weight: 600; height: 40px; }
+.app-h { display: flex; justify-content: space-between; align-items: center; padding: 6px 16px 10px; }
+.app-h b { font-family: var(--f-display); font-size: 18px; font-style: italic; letter-spacing: -.04em; }
+.app-h .bal { text-align: right; font-size: 10px; color: #8d929b; }
+.app-h .bal span { display: block; color: inherit; font-size: 14px; font-weight: 700; }
+.scr .tabs { display: flex; gap: 4px; padding: 0 12px 8px; }
+.scr .tabs span { font-size: 10px; font-weight: 700; padding: 4px 8px; border-radius: 999px; background: #1b1e23; color: #9aa0a7; }
+.scr.light .tabs span { background: #efefed; color: #6e737a; }
+.scr .tabs span.on { background: var(--or); color: #fff; }
+.wl { flex: 1; overflow: hidden; }
+.wl-row { display: grid; grid-template-columns: 26px minmax(0, 1fr) 56px auto; gap: 8px; align-items: center; padding: 8px 14px; border-top: 1px solid #1b1e23; }
+.scr.light .wl-row { border-top-color: #efefed; }
+.wl-row i { width: 26px; height: 26px; border-radius: 50%; display: grid; place-items: center; font-style: normal; font-size: 7.5px; font-weight: 700; color: #fff; font-family: var(--f-data); }
+.wl-row b { display: block; font-size: 12px; } .wl-row small { display: block; font-size: 9.5px; color: #8d929b; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.wl-row canvas { width: 56px; height: 22px; display: block; }
+.wl-row .r { text-align: right; font-size: 11.5px; font-weight: 700; }
+.wl-row .r small { font-size: 9.5px; font-weight: 700; }
+.navbar { display: flex; justify-content: space-around; padding: 10px 6px 22px; border-top: 1px solid #1b1e23; font-size: 9px; color: #8d929b; }
+.scr.light .navbar { border-top-color: #efefed; }
+.navbar span.on { color: var(--or); }
+.chartcard { margin: 0 12px 10px; border-radius: 16px; background: #15181c; padding: 12px; }
+.scr.light .chartcard { background: #f0f0ee; }
+.chartcard .t { display: flex; justify-content: space-between; align-items: baseline; }
+.chartcard .t b { font-size: 20px; font-family: var(--f-display); font-weight: 500; }
+.chartcard canvas { width: 100%; height: 96px; display: block; margin-top: 6px; }
+.bs { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-top: 10px; }
+.bs span { border-radius: 10px; padding: 8px; font-weight: 700; font-size: 11px; color: #fff; }
+.bs .s { background: var(--down); } .bs .b { background: var(--up); text-align: right; }
+
+.laptop { width: 100%; max-width: 760px; position: relative; }
+.laptop .lid { background: #0b0c0e; border-radius: 18px 18px 6px 6px; padding: 14px 14px 18px; box-shadow: 0 0 0 1.5px #2b2e33; }
+.laptop .base { height: 14px; margin: 0 -6%; background: linear-gradient(#cfd0d3, #9fa2a7); border-radius: 0 0 14px 14px; position: relative; }
+.laptop .base::before { content: ""; position: absolute; left: 50%; top: 0; width: 18%; height: 6px; transform: translateX(-50%); background: #b3b5b9; border-radius: 0 0 8px 8px; }
+.term { aspect-ratio: 16 / 10; background: #0d0f12; color: #e9e9e7; border-radius: 6px; overflow: hidden; display: grid; grid-template-rows: 26px minmax(0, 1fr); font-size: 10px; }
+.term-top { display: flex; align-items: center; gap: 12px; padding: 0 10px; border-bottom: 1px solid #1d2025; color: #8d929b; }
+.term-top b { font-family: var(--f-display); font-style: italic; color: #fff; font-size: 12px; }
+.term-top span.on { color: #fff; box-shadow: 0 7px 0 -5px var(--or); }
+.term-body { display: grid; grid-template-columns: 26% minmax(0, 1fr) 22%; min-height: 0; }
+.term-wl { border-right: 1px solid #1d2025; overflow: hidden; }
+.term-wl div { display: flex; justify-content: space-between; padding: 6px 8px; border-bottom: 1px solid #16191d; gap: 6px; }
+.term-wl div.on { background: #171a1f; box-shadow: inset 2px 0 0 var(--or); }
+.term-wl b { font-weight: 600; }
+.term-ch { display: grid; grid-template-rows: auto minmax(0, 1fr); min-width: 0; }
+.term-ch .hd { display: flex; justify-content: space-between; padding: 8px 10px; align-items: baseline; }
+.term-ch .hd b { font-family: var(--f-display); font-size: 16px; font-weight: 500; }
+.term-ch canvas { width: 100%; height: 100%; display: block; }
+.term-ord { border-left: 1px solid #1d2025; padding: 8px; display: grid; gap: 6px; align-content: start; }
+.term-ord .f { background: #15181c; border-radius: 6px; padding: 6px 8px; display: flex; justify-content: space-between; color: #8d929b; }
+.term-ord .f b { color: #fff; }
+.term-ord .s, .term-ord .b { border-radius: 6px; padding: 8px; color: #fff; font-weight: 700; display: flex; justify-content: space-between; }
+.term-ord .s { background: var(--down); } .term-ord .b { background: var(--up); }
+@media (max-width: 640px) { .term { font-size: 8px; } .term-ord { display: none; } .term-body { grid-template-columns: 34% minmax(0, 1fr); } }
+
+
+.combo { position: relative; width: 100%; padding-right: 9%; padding-bottom: 4%; }
+.combo .laptop { max-width: none; }
+.combo .phone { position: absolute; right: 0; bottom: 0; transform-origin: bottom right; }
+.phone { box-shadow: 0 0 0 1.5px #2b2e33, 0 50px 80px -40px rgba(0,0,0,.45); }
+.laptop .lid { box-shadow: 0 0 0 1.5px #2b2e33, 0 40px 80px -40px rgba(0,0,0,.4); }
+</style>
+
+<div class="note-bar">
+  <div><b>Platforms section · 2 layouts</b></div>
+  <p>Built on your Figma frame "Option 7C". A: benefits beside the devices, inside the card. B: devices alone in the card, benefits in a row below. Both stack on mobile.</p>
+  <nav class="jump"><a href="#a">A · Beside</a><a href="#b">B · Below</a></nav>
+</div>
+
+<!-- A · BESIDE -->
+<section class="sec" id="a">
+  <div class="wrap">
+    <div class="head-row">
+      <div>
+        <span class="eyebrow"><i>›››</i>Platforms<span class="opt">· Option A · beside</span></span>
+        <h2 class="title">Trade on any device<br>with one account</h2>
+      </div>
+      <div class="ctas">
+        <a class="store" href="#a"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.4 12.6c0-2.3 1.9-3.4 2-3.5-1.1-1.6-2.8-1.8-3.4-1.8-1.4-.2-2.8.9-3.5.9-.7 0-1.8-.8-3-.8-1.5 0-3 .9-3.8 2.3-1.6 2.8-.4 7 1.2 9.3.8 1.1 1.7 2.4 2.9 2.3 1.2 0 1.6-.7 3-.7s1.8.7 3 .7c1.3 0 2.1-1.1 2.8-2.3.9-1.3 1.3-2.6 1.3-2.6s-2.5-1-2.5-3.8ZM14.1 5.8c.6-.8 1.1-1.8 1-2.8-.9 0-2 .6-2.7 1.4-.6.7-1.1 1.7-1 2.7 1 .1 2-.5 2.7-1.3Z"/></svg><span><small>Download on the</small><b>App Store</b></span></a>
+        <a class="store" href="#a"><svg width="20" height="22" viewBox="0 0 20 22" aria-hidden="true"><path d="M1 1.2 11.2 11 1 20.8c-.3-.2-.5-.6-.5-1.1V2.3c0-.5.2-.9.5-1.1Z" fill="#33d17f"/><path d="M14.6 7.6 11.2 11 1 1.2c.3-.2.8-.2 1.2 0l12.4 6.4Z" fill="#7dd3fc"/><path d="M14.6 14.4 2.2 20.8c-.4.2-.9.2-1.2 0L11.2 11l3.4 3.4Z" fill="#ff6a6a"/><path d="m14.6 7.6 3.6 1.9c1.1.6 1.1 2.4 0 3l-3.6 1.9L11.2 11l3.4-3.4Z" fill="#ffc93c"/></svg><span><small>Get it on</small><b>Google Play</b></span></a>
+        <a class="btn or" href="#a">Open Web Platform →</a>
+      </div>
+    </div>
+    <div class="card">
+      <div class="a-grid">
+        <div class="a-copy">
+          <ul class="bens">
+            <li class="ben"><span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="14" height="10" rx="1.5"/><path d="M6 18h6"/><rect x="16" y="9" width="6" height="11" rx="1.5"/></svg></span><span><b>One account on phone and computer</b><span>Log in once, see the same positions everywhere.</span></span></li>
+            <li class="ben"><span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8Z"/></svg></span><span><b>Place a trade in a few taps</b><span>Clear buy and sell buttons with the live price.</span></span></li>
+            <li class="ben"><span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10 21a2 2 0 0 0 4 0"/></svg></span><span><b>Price alerts on your iPhone</b><span>Get notified when a market reaches your price.</span></span></li>
+            <li class="ben"><span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6l-8-3Z"/><path d="m9 12 2 2 4-4"/></svg></span><span><b>Your money is protected</b><span>Segregated accounts, regulated by CySEC.</span></span></li>
+          </ul>
+          <div class="qr-row"><div class="qr"><canvas id="qr" width="29" height="29"></canvas></div><div><b>Scan to download</b><span>Point your phone camera at the code.</span></div></div>
+        </div>
+        <div class="a-dev"><div class="combo" data-term="XAUUSD" data-ph="list" data-ratio=".3"></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- B · BELOW -->
+<section class="sec" id="b">
+  <div class="wrap">
+    <div class="head-row">
+      <div>
+        <span class="eyebrow"><i>›››</i>Platforms<span class="opt">· Option B · below</span></span>
+        <h2 class="title">Trade on any device<br>with one account</h2>
+      </div>
+      <div class="ctas">
+        <a class="store" href="#b"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.4 12.6c0-2.3 1.9-3.4 2-3.5-1.1-1.6-2.8-1.8-3.4-1.8-1.4-.2-2.8.9-3.5.9-.7 0-1.8-.8-3-.8-1.5 0-3 .9-3.8 2.3-1.6 2.8-.4 7 1.2 9.3.8 1.1 1.7 2.4 2.9 2.3 1.2 0 1.6-.7 3-.7s1.8.7 3 .7c1.3 0 2.1-1.1 2.8-2.3.9-1.3 1.3-2.6 1.3-2.6s-2.5-1-2.5-3.8ZM14.1 5.8c.6-.8 1.1-1.8 1-2.8-.9 0-2 .6-2.7 1.4-.6.7-1.1 1.7-1 2.7 1 .1 2-.5 2.7-1.3Z"/></svg><span><small>Download on the</small><b>App Store</b></span></a>
+        <a class="store" href="#b"><svg width="20" height="22" viewBox="0 0 20 22" aria-hidden="true"><path d="M1 1.2 11.2 11 1 20.8c-.3-.2-.5-.6-.5-1.1V2.3c0-.5.2-.9.5-1.1Z" fill="#33d17f"/><path d="M14.6 7.6 11.2 11 1 1.2c.3-.2.8-.2 1.2 0l12.4 6.4Z" fill="#7dd3fc"/><path d="M14.6 14.4 2.2 20.8c-.4.2-.9.2-1.2 0L11.2 11l3.4 3.4Z" fill="#ff6a6a"/><path d="m14.6 7.6 3.6 1.9c1.1.6 1.1 2.4 0 3l-3.6 1.9L11.2 11l3.4-3.4Z" fill="#ffc93c"/></svg><span><small>Get it on</small><b>Google Play</b></span></a>
+        <a class="btn or" href="#b">Open Web Platform →</a>
+      </div>
+    </div>
+    <div class="card b-card"><div class="combo" data-term="NAS100" data-ph="chart" data-sym="NAS100" data-ratio=".22"></div></div>
+    <ul class="b-bens">
+      <li><span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="14" height="10" rx="1.5"/><path d="M6 18h6"/><rect x="16" y="9" width="6" height="11" rx="1.5"/></svg></span><b>One account on phone and computer</b><span>Log in once, see the same positions everywhere.</span></li>
+      <li><span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8Z"/></svg></span><b>Place a trade in a few taps</b><span>Clear buy and sell buttons with the live price.</span></li>
+      <li><span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10 21a2 2 0 0 0 4 0"/></svg></span><b>Price alerts on your iPhone</b><span>Get notified when a market reaches your price.</span></li>
+      <li><span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6l-8-3Z"/><path d="m9 12 2 2 4-4"/></svg></span><b>Your money is protected</b><span>Segregated accounts, regulated by CySEC.</span></li>
+    </ul>
+  </div>
+</section>
+
+<section class="verdict" aria-label="Comparison">
+  <div><b>A · Beside: recommended</b><p>Benefits and devices are read together in one glance, the section stays at the height of your frame, and the buttons sit next to the title. On mobile: title, buttons, benefits, then devices.</p></div>
+  <div><b>B · Below: showcase</b><p>The card becomes a clean product shot with devices larger. Benefits sit in a calm row under it. The section is taller and the text is further from the picture, so it reads slightly slower.</p></div>
+</section>
+
+<script>
+
+(() => {
+  // ---------- Small feed ----------
+  const RAW = [
+    ['EURUSD', 'EUR/USD', 'Euro vs US Dollar', 1.15820, 5, 0.00003, '#2f5bd8'],
+    ['XAUUSD', 'Gold', 'Spot gold', 4010.50, 2, 0.6, '#c8901a'],
+    ['BTCUSD', 'Bitcoin', 'BTC/USD', 108540, 1, 40, '#e8730c'],
+    ['NVDA', 'NVIDIA', 'NASDAQ', 205.18, 2, 0.1, '#7a3fd0'],
+    ['US500', 'US 500', 'Index', 6821.4, 1, 0.8, '#5b5f68'],
+    ['NAS100', 'US Tech 100', 'Index', 25310.5, 1, 4, '#3b3f47'],
+    ['SPACEX', 'SpaceX', 'Pre-IPO', 212.00, 2, 0.04, '#ff7a1a'],
+    ['ETHUSD', 'Ethereum', 'ETH/USD', 3852.4, 2, 2, '#e8730c'],
+  ];
+  function gauss() { let u = 0, v = 0; while (!u) u = Math.random(); while (!v) v = Math.random(); return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v); }
+  const I = RAW.map(([sym, label, sub, p, dec, vol, color]) => {
+    const open = p * (1 - (Math.random() - .45) * .03), sig = p * .0005;
+    const w = [0]; for (let k = 1; k < 120; k++) w.push(w[k - 1] + gauss() * sig);
+    const hist = w.map((x, k) => { const t = k / 119; return open + (p - open) * t + x - w[119] * t; });
+    return { sym, label, sub, mid: p, anchor: p, open, dec, vol, color, hist };
+  });
+  const BY = Object.fromEntries(I.map(i => [i.sym, i]));
+  const chg = i => (i.mid - i.open) / i.open * 100;
+  const fmt = (i, v) => v.toLocaleString('en-US', { minimumFractionDigits: i.dec, maximumFractionDigits: i.dec });
+  const pct = v => (v >= 0 ? '+' : '−') + Math.abs(v).toFixed(2) + '%';
+  setInterval(() => { for (let k = 0; k < 3; k++) { const i = I[Math.floor(Math.random() * I.length)]; i.mid += gauss() * i.vol + (i.anchor - i.mid) * .03; } }, 500);
+  setInterval(() => I.forEach(i => { i.hist.push(i.mid); i.hist.shift(); }), 2000);
+
+  function line(cv, i, opt = {}) {
+    const dpr = Math.min(2, devicePixelRatio || 1), W = cv.clientWidth, H = cv.clientHeight; if (!W || !H) return;
+    if (cv.width !== Math.round(W * dpr)) { cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr); }
+    const ctx = cv.getContext('2d'); ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.clearRect(0, 0, W, H);
+    const pts = i.hist.concat(i.mid), lo = Math.min(...pts), hi = Math.max(...pts), sp = hi - lo || 1;
+    const col = opt.accent ? '255,122,26' : chg(i) >= 0 ? '17,161,79' : '229,57,63';
+    const R = opt.axis ? 46 : 0;
+    const x = k => k / (pts.length - 1) * (W - R - 2) + 1, y = v => 3 + (1 - (v - lo) / sp) * (H - 6);
+    if (opt.axis) {
+      ctx.font = '9px "JetBrains Mono", monospace'; ctx.fillStyle = '#6f747d'; ctx.strokeStyle = '#1d2025';
+      for (let g = 0; g <= 4; g++) { const v = lo + sp * g / 4, yy = y(v); ctx.beginPath(); ctx.moveTo(0, yy); ctx.lineTo(W - R, yy); ctx.stroke(); ctx.fillText(fmt(i, v), W - R + 4, yy + 3); }
+    }
+    ctx.beginPath(); pts.forEach((v, k) => k ? ctx.lineTo(x(k), y(v)) : ctx.moveTo(x(k), y(v)));
+    ctx.strokeStyle = `rgb(${col})`; ctx.lineWidth = opt.w || 1.4; ctx.lineJoin = 'round'; ctx.stroke();
+    if (!opt.noFill) { ctx.lineTo(x(pts.length - 1), H); ctx.lineTo(x(0), H); ctx.closePath(); const g = ctx.createLinearGradient(0, 0, 0, H); g.addColorStop(0, `rgba(${col},.28)`); g.addColorStop(1, `rgba(${col},0)`); ctx.fillStyle = g; ctx.fill(); }
+    if (opt.axis) { const ly = y(i.mid); ctx.fillStyle = `rgb(${col})`; ctx.fillRect(W - R, ly - 7, R, 14); ctx.fillStyle = '#fff'; ctx.fillText(fmt(i, i.mid), W - R + 4, ly + 3); }
+  }
+
+  // ---------- Desktop + iPhone combos ----------
+  document.querySelectorAll('.combo[data-term]').forEach(c => {
+    const light = c.dataset.light === '1';
+    c.innerHTML = `<div class="laptop"><div class="lid"><div class="term" data-term="${c.dataset.term}"></div></div><div class="base"></div></div>
+      <div class="phone"><div class="island"></div><div class="scr ${light ? 'light' : ''}" data-ph="${c.dataset.ph}" ${c.dataset.sym ? `data-sym="${c.dataset.sym}"` : ''}></div></div>`;
+    // the combo's own attributes must not be picked up by the screen builders below
+    c.removeAttribute('data-term'); c.removeAttribute('data-ph'); c.removeAttribute('data-sym');
+  });
+  // the phone is built at 280px and scaled to a share of the combo width, so it keeps its detail at any size
+  function fitPhones() {
+    document.querySelectorAll('.combo').forEach(c => {
+      const ph = c.querySelector('.phone'); if (!ph) return;
+      const s = Math.max(.32, c.clientWidth * (+c.dataset.ratio || .3) / 280);
+      ph.style.transform = `scale(${s.toFixed(3)})`;
+    });
+  }
+  fitPhones(); addEventListener('resize', fitPhones);
+
+  // ---------- Phone screens ----------
+  const status = `<div class="sb"><span>9:41</span><span>●●● ▲ ▮</span></div>`;
+  const nav = `<div class="navbar"><span class="on">Markets</span><span>Portfolio</span><span>Trade</span><span>Alerts</span><span>Account</span></div>`;
+  const head = `<div class="app-h"><b>ABX</b><span class="bal">Equity<span class="num">€24,318.40</span></span></div>`;
+  const row = i => `<div class="wl-row" data-s="${i.sym}"><i style="background:${i.color}">${i.sym.slice(0, 3)}</i><span style="min-width:0"><b>${i.label}</b><small>${i.sub}</small></span><canvas></canvas><span class="r num"><span class="p"></span><small class="c"></small></span></div>`;
+  document.querySelectorAll('[data-ph="list"]').forEach(s => {
+    s.innerHTML = status + head + `<div class="tabs"><span class="on">Popular</span><span>Forex</span><span>Crypto</span><span>Pre-IPO</span></div><div class="wl">${['EURUSD', 'XAUUSD', 'BTCUSD', 'NVDA', 'SPACEX', 'US500', 'ETHUSD'].map(s => row(BY[s])).join('')}</div>` + nav;
+  });
+  document.querySelectorAll('[data-ph="chart"]').forEach(s => {
+    const i = BY[s.dataset.sym];
+    s.innerHTML = status + head + `<div class="chartcard" data-s="${i.sym}"><div class="t"><span><small style="color:#8d929b">${i.label}</small><br><b class="num p"></b></span><span class="num c" style="font-weight:700"></span></div><canvas></canvas><div class="bs"><span class="s">Sell<br><span class="num sv"></span></span><span class="b">Buy<br><span class="num bv"></span></span></div></div><div class="wl">${['EURUSD', 'XAUUSD', 'SPACEX', 'US500'].filter(x => x !== i.sym).map(x => row(BY[x])).join('')}</div>` + nav;
+  });
+
+  // ---------- Terminal screens ----------
+  document.querySelectorAll('[data-term]').forEach(t => {
+    const i = BY[t.dataset.term];
+    t.innerHTML = `<div class="term-top"><b>ABX</b><span class="on">Trade</span><span>Portfolio</span><span>Markets</span><span>Alerts</span><span style="margin-left:auto" class="num">Equity €24,318.40</span></div>
+      <div class="term-body"><div class="term-wl">${I.map(x => `<div class="${x.sym === i.sym ? 'on' : ''}" data-s="${x.sym}"><b>${x.label}</b><span class="num c"></span></div>`).join('')}</div>
+      <div class="term-ch" data-s="${i.sym}"><div class="hd"><span><span style="color:#8d929b">${i.label} · 1H</span><br><b class="num p"></b></span><span class="num c"></span></div><canvas></canvas></div>
+      <div class="term-ord" data-s="${i.sym}"><div class="f"><span>Volume</span><b>1.00</b></div><div class="f"><span>Stop loss</span><b>—</b></div><div class="f"><span>Take profit</span><b>—</b></div><div class="s"><span>Sell</span><span class="num sv"></span></div><div class="b"><span>Buy</span><span class="num bv"></span></div></div></div>`;
+  });
+
+  // ---------- Render ----------
+  function render() {
+    document.querySelectorAll('[data-s]').forEach(el => {
+      const i = BY[el.dataset.s]; if (!i) return;
+      const c = chg(i), sp = i.mid * 0.00012;
+      el.querySelectorAll(':scope .p').forEach(p => p.textContent = fmt(i, i.mid));
+      el.querySelectorAll(':scope .c').forEach(p => { p.textContent = pct(c); p.className = p.className.replace(/ ?(up|down)/g, '') + (c >= 0 ? ' up' : ' down'); });
+      el.querySelectorAll(':scope .sv').forEach(p => p.textContent = fmt(i, i.mid - sp));
+      el.querySelectorAll(':scope .bv').forEach(p => p.textContent = fmt(i, i.mid + sp));
+    });
+  }
+  function charts() {
+    document.querySelectorAll('.wl-row').forEach(r => line(r.querySelector('canvas'), BY[r.dataset.s], { noFill: true, w: 1.2 }));
+    document.querySelectorAll('.chartcard').forEach(c => line(c.querySelector('canvas'), BY[c.dataset.s], { accent: true, w: 1.8 }));
+    document.querySelectorAll('.term-ch').forEach(c => line(c.querySelector('canvas'), BY[c.dataset.s], { accent: true, axis: true, w: 1.6 }));
+  }
+  render(); charts();
+  setInterval(render, 500); setInterval(charts, 1500);
+  addEventListener('resize', charts);
+
+  // ---------- QR placeholder (pattern, not a real code) ----------
+  (() => {
+    const cv = document.getElementById('qr'), ctx = cv.getContext('2d'), N = 29;
+    ctx.fillStyle = '#fff'; ctx.fillRect(0, 0, N, N); ctx.fillStyle = '#08090b';
+    let seed = 7; const rnd = () => (seed = (seed * 9301 + 49297) % 233280) / 233280;
+    for (let y = 0; y < N; y++) for (let x = 0; x < N; x++) if (rnd() > .52) ctx.fillRect(x, y, 1, 1);
+    const finder = (x, y) => { ctx.fillStyle = '#08090b'; ctx.fillRect(x, y, 7, 7); ctx.fillStyle = '#fff'; ctx.fillRect(x + 1, y + 1, 5, 5); ctx.fillStyle = '#08090b'; ctx.fillRect(x + 2, y + 2, 3, 3); };
+    [[0, 0], [N - 7, 0], [0, N - 7]].forEach(([x, y]) => { ctx.fillStyle = '#fff'; ctx.fillRect(x - 1, y - 1, 9, 9); finder(x, y); });
+    ctx.fillStyle = '#ff7a1a'; ctx.fillRect(12, 12, 5, 5);
+  })();
+
+})();
+
+</script>

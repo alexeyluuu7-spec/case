@@ -268,5 +268,12 @@
   "acc3.in_elite": "5%",
   "acc3.in_private": "5%",
   "acc3.va": "Columns",
-  "acc3.vb": "Compare"
+  "acc3.vb": "Compare",
+  "acc4.g_trade": "Trading",
+  "acc4.g_serv": "Service",
+  "acc4.all": "All 250+ instruments",
+  "acc4.res_basic": "Essential research",
+  "acc4.res_ext": "Extended research and analysis",
+  "acc4.prio": "Priority support",
+  "acc4.terms": "Terms apply"
 }

@@ -268,5 +268,12 @@
   "acc3.in_elite": "5 %",
   "acc3.in_private": "5 %",
   "acc3.va": "Sloupce",
-  "acc3.vb": "Porovnání"
+  "acc3.vb": "Porovnání",
+  "acc4.g_trade": "Obchodování",
+  "acc4.g_serv": "Servis",
+  "acc4.all": "Všech 250+ nástrojů",
+  "acc4.res_basic": "Základní analýzy",
+  "acc4.res_ext": "Rozšířené analýzy a research",
+  "acc4.prio": "Prioritní podpora",
+  "acc4.terms": "Platí podmínky"
 }

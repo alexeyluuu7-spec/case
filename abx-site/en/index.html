@@ -15,7 +15,7 @@
 <link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@600;700;800&family=Inter:wght@400;500;600&family=Geist+Mono:wght@500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap">
 <!-- Hero photo preload: enable with the <picture> slot in .hero-media once the files exist (tools/optimize-media.sh).
 <link rel="preload" as="image" type="image/avif" fetchpriority="high"
       imagesrcset="../assets/img/v2/hero-960.avif 960w, ../assets/img/v2/hero-1600.avif 1600w, ../assets/img/v2/hero-2400.avif 2400w" imagesizes="100vw">
@@ -54,7 +54,7 @@
 
     <!-- F1 side profile, viewBox 0 0 1000 260 (drawn placeholder until the client photos land) -->
     <symbol id="r-car" viewBox="0 0 1000 260">
-      <ellipse cx="520" cy="236" rx="470" ry="14" fill="url(#g-glow)" opacity=".7"/>
+      <ellipse cx="520" cy="236" rx="470" ry="14" fill="#000" fill-opacity=".55" opacity=".7"/>
       <g fill="url(#g-body)" stroke="url(#g-rim)" stroke-width="1.5" stroke-linejoin="round">
         <path d="M40 50h126v13H40zM46 67h114v8H46zM118 50h11v104h-11z"/>
         <path d="M129 132 L262 120 C300 110 318 70 352 62 L392 60 C410 60 420 74 430 86 L462 90 C486 92 500 96 520 104 C600 120 700 134 790 146 L940 170 C958 174 960 187 944 190 L760 194 L640 200 L268 202 L150 198 L129 160 Z"/>
@@ -72,28 +72,28 @@
     </symbol>
 
     <symbol id="r-shield" viewBox="0 0 200 220">
-      <ellipse cx="100" cy="212" rx="70" ry="8" fill="url(#g-glow)"/>
+      <ellipse cx="100" cy="212" rx="70" ry="8" fill="#000" fill-opacity=".55"/>
       <path d="M100 10 L178 40 V104 C178 154 145 190 100 208 C55 190 22 154 22 104 V40 Z" fill="url(#g-steel-edge)" transform="translate(4 6)"/>
       <path d="M100 10 L178 40 V104 C178 154 145 190 100 208 C55 190 22 154 22 104 V40 Z" fill="url(#g-steel)" stroke="url(#g-rim)" stroke-width="2"/>
       <path d="M100 28 L162 52 V104 C162 144 136 174 100 190 C64 174 38 144 38 104 V52 Z" fill="none" stroke="#F5F4EF" stroke-opacity=".08" stroke-width="1.5"/>
-      <text x="100" y="134" text-anchor="middle" font-family="Archivo, sans-serif" font-weight="800" font-size="84" fill="url(#g-lava)" filter="url(#f-glow)">€</text>
+      <text x="100" y="134" text-anchor="middle" font-family="Archivo, sans-serif" font-weight="800" font-size="84" fill="url(#g-lava)">€</text>
     </symbol>
 
     <symbol id="r-coin" viewBox="0 0 200 220">
-      <ellipse cx="100" cy="206" rx="72" ry="9" fill="url(#g-glow)"/>
+      <ellipse cx="100" cy="206" rx="72" ry="9" fill="#000" fill-opacity=".55"/>
       <ellipse cx="108" cy="112" rx="78" ry="80" fill="url(#g-steel-edge)"/>
       <ellipse cx="108" cy="112" rx="78" ry="80" fill="none" stroke="#FF711D" stroke-opacity=".55" stroke-width="2"/>
       <circle cx="98" cy="106" r="80" fill="url(#g-steel)" stroke="url(#g-rim)" stroke-width="2"/>
       <circle cx="98" cy="106" r="64" fill="none" stroke="#F5F4EF" stroke-opacity=".1" stroke-width="1.5" stroke-dasharray="2 5"/>
-      <text x="98" y="124" text-anchor="middle" font-family="Archivo, sans-serif" font-weight="800" font-size="46" letter-spacing="-1.5" fill="url(#g-lava)" filter="url(#f-glow)">ABX</text>
+      <text x="98" y="124" text-anchor="middle" font-family="Archivo, sans-serif" font-weight="800" font-size="46" letter-spacing="-1.5" fill="url(#g-lava)">ABX</text>
     </symbol>
 
     <symbol id="r-badge" viewBox="0 0 200 220">
-      <ellipse cx="100" cy="208" rx="70" ry="8" fill="url(#g-glow)"/>
+      <ellipse cx="100" cy="208" rx="70" ry="8" fill="#000" fill-opacity=".55"/>
       <path d="M100 14 L124 30 L152 28 L160 56 L184 72 L172 100 L184 128 L160 144 L152 172 L124 170 L100 186 L76 170 L48 172 L40 144 L16 128 L28 100 L16 72 L40 56 L48 28 L76 30 Z" fill="url(#g-steel-edge)" transform="translate(4 6)"/>
       <path d="M100 14 L124 30 L152 28 L160 56 L184 72 L172 100 L184 128 L160 144 L152 172 L124 170 L100 186 L76 170 L48 172 L40 144 L16 128 L28 100 L16 72 L40 56 L48 28 L76 30 Z" fill="url(#g-steel)" stroke="url(#g-rim)" stroke-width="2"/>
       <circle cx="100" cy="100" r="54" fill="none" stroke="#F5F4EF" stroke-opacity=".08" stroke-width="1.5"/>
-      <path d="M72 102 L92 122 L130 82" fill="none" stroke="url(#g-lava)" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" filter="url(#f-glow)"/>
+      <path d="M72 102 L92 122 L130 82" fill="none" stroke="url(#g-lava)" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
     </symbol>
 
     <!-- Lucide icons (stroke 1.75, 24 grid) -->
@@ -104,6 +104,10 @@
     <symbol id="i-star" viewBox="0 0 24 24"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/></symbol>
     <symbol id="i-chevron" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></symbol>
     <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+    <symbol id="i-layers" viewBox="0 0 24 24"><path d="M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83z"/><path d="M2 12a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 12"/><path d="M2 17a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 17"/></symbol>
+    <symbol id="i-candles" viewBox="0 0 24 24"><path d="M9 5v4"/><rect width="4" height="6" x="7" y="9" rx="1"/><path d="M9 15v2"/><path d="M17 3v2"/><rect width="4" height="8" x="15" y="5" rx="1"/><path d="M17 13v3"/><path d="M3 3v18h18"/></symbol>
+    <symbol id="i-landmark" viewBox="0 0 24 24"><path d="M3 22h18"/><path d="M6 18v-7"/><path d="M10 18v-7"/><path d="M14 18v-7"/><path d="M18 18v-7"/><path d="M12 2 20 7H4z"/></symbol>
+    <symbol id="i-key" viewBox="0 0 24 24"><path d="M2.586 17.414A2 2 0 0 0 2 18.828V21a1 1 0 0 0 1 1h3a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h1a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h.172a2 2 0 0 0 1.414-.586l.814-.814a6.5 6.5 0 1 0-4-4z"/><circle cx="16.5" cy="7.5" r=".5"/></symbol>
     <symbol id="i-message" viewBox="0 0 24 24"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></symbol>
   </defs>
 </svg>
@@ -165,7 +169,7 @@
         <span class="l1 intro" style="--d:1">Trade with</span>
         <span class="l2 intro" style="--d:2"><span class="nw">the best<svg class="ramp" viewBox="0 0 132 100" aria-hidden="true"><path d="M4 100h26L60 0H34z"/><path d="M40 100h26L96 0H70z"/><path d="M76 100h26l30-100h-26z"/></svg></span></span>
       </h1>
-      <p class="hero-sub intro" style="--d:3">Global markets. Technology in your hands.</p>
+      <p class="hero-sub intro" style="--d:3">Global markets. Technology in your hands</p>
       <div class="hero-cta intro" style="--d:4">
         <a class="pill pill-orange pill-lg" href="#accounts">Open an account<svg class="ic" aria-hidden="true"><use href="#i-arrow"/></svg></a>
         <a class="pill pill-glass pill-lg" href="#platform">Explore the platform</a>
@@ -189,14 +193,14 @@
 <section class="trust" aria-labelledby="trust-title">
   <div class="wrap">
     <div class="center-head">
-      <p class="kicker rv"><span class="mono">02</span>Trust</p>
-      <h2 class="h2 rv" id="trust-title"><span>Trusted on the grid.</span> <span class="l2">Worldwide.</span></h2>
+      <p class="kicker"><span class="mono">02</span>Trust</p>
+      <h2 class="h2" id="trust-title"><span>Trusted by traders</span> <span class="l2">in 133 countries</span></h2>
     </div>
     <dl class="stats" data-placeholder="trust-numbers">
-      <div class="stat rv" style="--d:0"><dt>traders worldwide</dt><dd data-count="21500" data-suffix="+">21,500+</dd></div>
-      <div class="stat rv" style="--d:1"><dt>countries served</dt><dd data-count="133" data-suffix="+">133+</dd></div>
-      <div class="stat stat-accent rv" style="--d:2"><dt>investor protection</dt><dd data-count="20" data-prefix="€" data-suffix="k">€20k</dd></div>
-      <div class="stat rv" style="--d:3"><dt>years on the markets</dt><dd data-count="15" data-suffix="+">15+</dd></div>
+      <div class="stat" style="--d:0"><dt>traders worldwide</dt><dd data-count="21500" data-suffix="+">21,500+</dd></div>
+      <div class="stat" style="--d:1"><dt>countries served</dt><dd data-count="133" data-suffix="+">133+</dd></div>
+      <div class="stat stat-accent" style="--d:2"><dt>investor protection</dt><dd data-count="20" data-prefix="€" data-suffix="k">€20k</dd></div>
+      <div class="stat" style="--d:3"><dt>years on the markets</dt><dd data-count="15" data-suffix="+">15+</dd></div>
     </dl>
   </div>
   <div class="marquee" aria-label="Payment, banking and infrastructure partners" data-placeholder="partner-logos">
@@ -217,13 +221,13 @@
 <section class="sec" id="markets" aria-labelledby="markets-title">
   <div class="wrap">
     <div class="center-head">
-      <p class="kicker rv"><span class="mono">03</span>Markets</p>
-      <h2 class="h2 rv" id="markets-title"><span>Every market.</span> <span class="l2">One account.</span></h2>
-      <p class="lead rv">Stocks, ETFs, commodities, forex and indices, plus pre-IPO access to the companies everyone is talking about.</p>
+      <p class="kicker"><span class="mono">03</span>Markets</p>
+      <h2 class="h2" id="markets-title"><span>Every market</span> <span class="l2">One account</span></h2>
+      <p class="lead">Stocks, ETFs, commodities, forex and indices, plus pre-IPO access to the companies everyone is talking about.</p>
     </div>
 
     <div class="bento mk-bento">
-      <article class="tile mk-stocks rv">
+      <article class="tile mk-stocks">
         <div class="tile-head">
           <h3 class="h3">Stocks &amp; ETFs</h3>
           <p>Own the names that move the world. Fractional shares from €1.</p>
@@ -236,16 +240,15 @@
           <div class="tile3d t4"><b>X</b><span>SPACEX</span><em class="pre">Pre-IPO</em></div>
         </div>
       </article>
-      <article class="tile mk-photo rv" style="--d:1">
+      <article class="tile mk-photo" style="--d:1">
         <div class="tile-head">
           <h3 class="h3">Commodities</h3>
           <p>Gold, silver, oil and gas. Hedge, speculate, diversify.</p>
           <a class="more" href="#">Learn more<svg class="ic" aria-hidden="true"><use href="#i-chevron"/></svg></a>
         </div>
         <div class="tile-media"><div class="art art-coin" aria-hidden="true"><svg viewBox="0 0 200 220"><use href="#r-coin"/></svg></div></div>
-        <a class="plus" href="#" aria-label="Learn more: Commodities"><svg class="ic" aria-hidden="true"><use href="#i-plus"/></svg></a>
       </article>
-      <article class="tile mk-photo rv" style="--d:2">
+      <article class="tile mk-photo" style="--d:2">
         <div class="tile-head">
           <h3 class="h3">Forex &amp; Indices</h3>
           <p>60+ currency pairs and the world's major indices.</p>
@@ -260,11 +263,10 @@
             <svg class="track-car" viewBox="0 0 1000 260"><use href="#r-car"/></svg>
           </div>
         </div>
-        <a class="plus" href="#" aria-label="Learn more: Forex &amp; Indices"><svg class="ic" aria-hidden="true"><use href="#i-plus"/></svg></a>
       </article>
     </div>
 
-    <div class="tower rv" data-tower>
+    <div class="tower" data-tower>
       <div class="seg" role="tablist" aria-label="Market prices">
         <button role="tab" aria-selected="true" data-filter="pop">Popular</button>
         <button role="tab" aria-selected="false" data-filter="stocks">Stocks</button>
@@ -295,29 +297,29 @@
 <section class="sec" aria-labelledby="why-title">
   <div class="wrap">
     <div class="center-head">
-      <p class="kicker rv"><span class="mono">04</span>Why ABX</p>
-      <h2 class="h2 rv" id="why-title"><span>Built for traders.</span> <span class="l2">Measured in numbers.</span></h2>
+      <p class="kicker"><span class="mono">04</span>Why ABX</p>
+      <h2 class="h2" id="why-title"><span>Built for traders</span> <span class="l2">Measured in numbers</span></h2>
     </div>
     <ul class="why-grid">
-      <li class="tile why why-accent rv" style="--d:0">
+      <li class="tile why why-accent" style="--d:0">
         <p class="why-n" data-placeholder="bonus">5%<small>p.a.</small></p>
         <div><h3 class="h4">Interest bonus</h3><p>Earn up to 5% a year on your uninvested balance.</p></div>
         <a class="more" href="#">See conditions<svg class="ic" aria-hidden="true"><use href="#i-chevron"/></svg></a>
       </li>
-      <li class="tile why rv" style="--d:1">
+      <li class="tile why" style="--d:1">
         <p class="why-n" data-placeholder="spreads">0.0<small>pips</small></p>
         <div><h3 class="h4">Low commissions</h3><p>Raw spreads from 0.0 pips on major pairs. No hidden fees.</p></div>
       </li>
-      <li class="tile why rv" style="--d:2">
+      <li class="tile why" style="--d:2">
         <p class="why-n">250+</p>
         <div><h3 class="h4">Instruments</h3><p>Stocks, ETFs, commodities, forex and indices in one place.</p></div>
       </li>
-      <li class="tile why rv" style="--d:3">
+      <li class="tile why" style="--d:3">
         <p class="why-n">1:1</p>
         <div><h3 class="h4">Personal service</h3><p>A dedicated account manager who knows your strategy.</p></div>
       </li>
     </ul>
-    <p class="fine center rv" data-placeholder="bonus-terms">An interest rate of up to 5% p.a. applies to Elite accounts and above; the standard rate is 3.25% p.a. Rates are variable and may change. Full terms apply.</p>
+    <p class="fine center" data-placeholder="bonus-terms">An interest rate of up to 5% p.a. applies to Elite accounts and above; the standard rate is 3.25% p.a. Rates are variable and may change. Full terms apply.</p>
   </div>
 </section>
 
@@ -325,9 +327,9 @@
 <section class="sec pf" id="platform" aria-labelledby="platform-title">
   <div class="wrap">
     <div class="center-head">
-      <p class="kicker rv"><span class="mono">05</span>Trading Platform</p>
-      <h2 class="h2 h2-xl rv" id="platform-title"><span>Your view.</span> <span class="l2">Your decision.</span></h2>
-      <p class="lead rv">A professional terminal with TradingView charts, one-click execution and real-time data on every screen you own.</p>
+      <p class="kicker"><span class="mono">05</span>Trading Platform</p>
+      <h2 class="h2 h2-xl" id="platform-title"><span>Your view</span> <span class="l2">Your decision</span></h2>
+      <p class="lead">A professional terminal with TradingView charts, one-click execution and real-time data on every screen you own.</p>
     </div>
   </div>
   <div class="pf-scroll" data-pf>
@@ -360,41 +362,8 @@
   </div>
   <div class="wrap">
     <div class="bento pf-tiles">
-      <article class="tile tile-orange rv" style="--d:0">
-        <div class="tile-head"><h3 class="h3">Everything connected.</h3><p>Account, markets, analytics and support in one ecosystem.</p></div>
-        <svg class="schema" viewBox="0 0 400 220" aria-hidden="true">
-          <g fill="none" stroke="#000" stroke-width="1.5">
-            <path class="wire" d="M200 110 H60 V40"/><path class="wire" d="M200 110 H340 V40"/>
-            <path class="wire" d="M200 110 V190 H90"/><path class="wire" d="M200 110 V190 H310"/>
-            <rect x="166" y="86" width="68" height="48" rx="14" fill="#000"/>
-            <circle cx="60" cy="40" r="10"/><circle cx="340" cy="40" r="10"/><circle cx="90" cy="190" r="10"/><circle cx="310" cy="190" r="10"/>
-          </g>
-          <text x="200" y="116" text-anchor="middle" font-family="Inter Tight, sans-serif" font-weight="700" font-size="15" fill="#FF711D">ABX</text>
-        </svg>
-      </article>
-      <article class="tile tile-photo rv" style="--d:1">
-        <div class="tile-head"><h3 class="h3">Precision in every detail.</h3><p>100+ indicators, drawing tools and multiple timeframes.</p></div>
-        <div class="tile-media">
-          <div class="art art-wheel" aria-hidden="true">
-            <svg viewBox="0 0 400 260">
-              <g fill="url(#g-body)" stroke="url(#g-rim)" stroke-width="1.5">
-                <path d="M60 70 C60 50 80 40 110 40 H290 C320 40 340 50 340 70 L360 170 C364 196 344 214 320 214 H280 L262 186 H138 L120 214 H80 C56 214 36 196 40 170 Z"/>
-              </g>
-              <rect x="146" y="70" width="108" height="76" rx="10" fill="#050505" stroke="#2a2c2f"/>
-              <text x="200" y="118" text-anchor="middle" font-family="Inter Tight, sans-serif" font-weight="800" font-size="40" fill="#FF711D">7</text>
-              <text x="200" y="138" text-anchor="middle" font-family="Geist Mono, monospace" font-size="11" fill="#A1A1A6">312 KM/H</text>
-              <g class="leds">
-                <circle cx="150" cy="56" r="4"/><circle cx="164" cy="56" r="4"/><circle cx="178" cy="56" r="4"/><circle cx="192" cy="56" r="4"/>
-                <circle cx="208" cy="56" r="4"/><circle cx="222" cy="56" r="4"/><circle cx="236" cy="56" r="4"/><circle cx="250" cy="56" r="4"/>
-              </g>
-              <g fill="#1d1e20" stroke="#2a2c2f"><circle cx="100" cy="110" r="10"/><circle cx="100" cy="146" r="10"/><circle cx="300" cy="110" r="10"/><circle cx="300" cy="146" r="10"/></g>
-            </svg>
-          </div>
-          <span class="tv-badge">Powered by TradingView</span>
-        </div>
-      </article>
-      <article class="tile tile-dark rv" style="--d:2">
-        <div class="tile-head"><h3 class="h3">Web. Mobile. Your space.</h3><p>Start on desktop, finish on your phone. Your layouts follow you.</p></div>
+      <article class="tile tile-dark" style="--d:2">
+        <div class="tile-head"><h3 class="h3">Web. Mobile. Your space</h3><p>Start on desktop, finish on your phone. Your layouts follow you.</p></div>
         <div class="phone" aria-hidden="true">
           <div class="phone-screen">
             <span class="ph-island"></span>
@@ -407,6 +376,15 @@
           </div>
         </div>
       </article>
+      <article class="tile">
+        <span class="tile-icon"><svg class="ic" aria-hidden="true"><use href="#i-layers"/></svg></span>
+        <div class="tile-head"><h3 class="h3">Everything connected</h3><p>Account, markets, analytics and support in one ecosystem.</p></div>
+      </article>
+      <article class="tile">
+        <span class="tile-icon"><svg class="ic" aria-hidden="true"><use href="#i-candles"/></svg></span>
+        <div class="tile-head"><h3 class="h3">Precision in every detail</h3><p>100+ indicators, drawing tools and multiple timeframes.</p></div>
+        <p class="tile-foot">Powered by TradingView</p>
+      </article>
     </div>
   </div>
 </section>
@@ -415,25 +393,25 @@
 <section class="sec" id="security" aria-labelledby="security-title">
   <div class="wrap">
     <div class="center-head">
-      <p class="kicker rv"><span class="mono">06</span>Security &amp; Transparency</p>
-      <h2 class="h2 rv" id="security-title"><span>Your money.</span> <span class="l2">Protected.</span></h2>
-      <p class="lead rv">Regulated in the EU, built on segregated accounts and bank-grade security.</p>
+      <p class="kicker"><span class="mono">06</span>Security &amp; Transparency</p>
+      <h2 class="h2" id="security-title"><span>Your money</span> <span class="l2">Protected</span></h2>
+      <p class="lead">Regulated in the EU, built on segregated accounts and bank-grade security.</p>
     </div>
     <div class="sec-grid">
-      <article class="tile sec-card rv" style="--d:0">
+      <article class="tile sec-card sec-main">
         <svg class="render" viewBox="0 0 200 220" aria-hidden="true"><use href="#r-shield"/></svg>
-        <h3 class="h4">Investor protection</h3><p>Eligible clients are covered by the Investor Compensation Fund up to €20,000.</p>
+        <h3 class="h3">Investor protection</h3><p>Eligible clients are covered by the Investor Compensation Fund up to €20,000.</p>
       </article>
-      <article class="tile sec-card rv" style="--d:1">
-        <svg class="render" viewBox="0 0 200 220" aria-hidden="true"><use href="#r-coin"/></svg>
+      <article class="tile sec-card">
+        <span class="tile-icon"><svg class="ic" aria-hidden="true"><use href="#i-landmark"/></svg></span>
         <h3 class="h4">Segregated funds</h3><p>Client money is held separately from company funds at top-tier European banks.</p>
       </article>
-      <article class="tile sec-card rv" style="--d:2">
-        <svg class="render" viewBox="0 0 200 220" aria-hidden="true"><use href="#r-badge"/></svg>
+      <article class="tile sec-card">
+        <span class="tile-icon"><svg class="ic" aria-hidden="true"><use href="#i-key"/></svg></span>
         <h3 class="h4">Account security</h3><p>Two-factor authentication, encryption and 24/7 monitoring of every login.</p>
       </article>
     </div>
-    <div class="regs rv">
+    <div class="regs">
       <span class="regs-l">Regulated by</span>
       <span class="reg" data-placeholder="cysec-licence"><b>CySEC</b><span>Licence no. 000/00</span></span>
       <span class="reg"><b>MiFID II</b><span>EU-wide passporting</span></span>
@@ -445,34 +423,34 @@
 <section class="sec" id="accounts" aria-labelledby="accounts-title">
   <div class="wrap">
     <div class="center-head">
-      <p class="kicker rv"><span class="mono">07</span>Account Types</p>
-      <h2 class="h2 rv" id="accounts-title"><span>Choose your</span> <span class="l2">level.</span></h2>
-      <p class="lead rv">Every account includes the full platform. Higher levels unlock better pricing and closer service.</p>
+      <p class="kicker"><span class="mono">07</span>Account Types</p>
+      <h2 class="h2" id="accounts-title"><span>Choose your</span> <span class="l2">level</span></h2>
+      <p class="lead">Every account includes the full platform. Higher levels unlock better pricing and closer service.</p>
     </div>
 
     <ul class="plans" data-placeholder="account-features">
-      <li class="plan rv" style="--d:0">
+      <li class="plan" style="--d:0">
         <div class="plate plate-classic" aria-hidden="true"><span class="plate-logo">ABX</span><span class="plate-tier">Classic</span><span class="plate-chip"></span></div>
         <h3 class="plan-name">Classic</h3>
         <p class="plan-from">Min. deposit <b>€50k</b></p>
         <a class="pill pill-white" href="#">Open account</a>
         <ul class="plan-feat"><li>Spreads from 1.0 pips</li><li>Interest 3.25% p.a.</li><li>Support 24/5</li></ul>
       </li>
-      <li class="plan rv" style="--d:1">
+      <li class="plan" style="--d:1">
         <div class="plate plate-premium" aria-hidden="true"><span class="plate-logo">ABX</span><span class="plate-tier">Premium</span><span class="plate-chip"></span></div>
         <h3 class="plan-name">Premium</h3>
         <p class="plan-from">Min. deposit <b>€100k</b></p>
         <a class="pill pill-white" href="#">Open account</a>
         <ul class="plan-feat"><li>Spreads from 0.6 pips</li><li>Interest 3.75% p.a.</li><li>Priority support</li></ul>
       </li>
-      <li class="plan plan-pop rv" style="--d:2">
+      <li class="plan plan-pop" style="--d:2">
         <div class="plate plate-elite" aria-hidden="true"><span class="plate-logo">ABX</span><span class="plate-tier">Elite</span><span class="plate-chip"></span><span class="plate-ramp">///</span></div>
         <h3 class="plan-name">Elite <span class="badge">Popular</span></h3>
         <p class="plan-from">Min. deposit <b>€250k</b></p>
         <a class="pill pill-orange" href="#">Open account</a>
         <ul class="plan-feat"><li>Spreads from 0.2 pips</li><li>Interest 5% p.a.</li><li>Dedicated account manager</li></ul>
       </li>
-      <li class="plan rv" style="--d:3">
+      <li class="plan" style="--d:3">
         <div class="plate plate-private" aria-hidden="true"><span class="plate-logo">ABX</span><span class="plate-tier">Private</span><span class="plate-chip"></span></div>
         <h3 class="plan-name">Private</h3>
         <p class="plan-from">Min. deposit <b>€500k</b></p>
@@ -481,7 +459,7 @@
       </li>
     </ul>
 
-    <article class="ex rv" data-ex>
+    <article class="ex" data-ex>
       <div class="ex-head">
         <div class="plate plate-ex" aria-hidden="true"><span class="plate-logo">ABX</span><span class="plate-tier">Exclusive</span><span class="plate-chip"></span><span class="plate-ramp">///</span></div>
         <div class="ex-id">
@@ -513,20 +491,16 @@
 <section class="sec" aria-labelledby="steps-title">
   <div class="wrap">
     <div class="center-head">
-      <p class="kicker rv"><span class="mono">08</span>Getting Started</p>
-      <h2 class="h2 rv" id="steps-title"><span>Four steps.</span> <span class="l2">Then the markets.</span></h2>
-      <p class="lead rv">From sign-up to your first trade in one afternoon.</p>
-    </div>
-    <div class="lights" data-lights aria-hidden="true">
-      <span class="pod"><i></i><i></i></span><span class="pod"><i></i><i></i></span><span class="pod"><i></i><i></i></span><span class="pod"><i></i><i></i></span>
+      <p class="kicker"><span class="mono">08</span>Getting Started</p>
+      <h2 class="h2" id="steps-title"><span>Four steps</span> <span class="l2">Then the markets</span></h2>
+      <p class="lead">From sign-up to your first trade in one afternoon.</p>
     </div>
     <ol class="steps">
-      <li class="step rv" style="--d:0"><span class="step-n" aria-hidden="true">01</span><h3 class="h4">Create your account</h3><p>Sign up in minutes with your email or phone.</p></li>
-      <li class="step rv" style="--d:1"><span class="step-n" aria-hidden="true">02</span><h3 class="h4">Verify your identity</h3><p>Upload an ID and a selfie. Most checks are done the same day.</p></li>
-      <li class="step rv" style="--d:2"><span class="step-n" aria-hidden="true">03</span><h3 class="h4">Fund your account</h3><p>Deposit by card, bank transfer or e-wallet.</p></li>
-      <li class="step rv" style="--d:3"><span class="step-n" aria-hidden="true">04</span><h3 class="h4">Start trading</h3><p>Pick a market, set your risk and place your first trade.</p></li>
+      <li class="step" style="--d:0"><span class="step-n" aria-hidden="true">P1</span><h3 class="h4">Create your account</h3><p>Sign up in minutes with your email or phone.</p></li>
+      <li class="step" style="--d:1"><span class="step-n" aria-hidden="true">P2</span><h3 class="h4">Verify your identity</h3><p>Upload an ID and a selfie. Most checks are done the same day.</p></li>
+      <li class="step" style="--d:2"><span class="step-n" aria-hidden="true">P3</span><h3 class="h4">Fund your account</h3><p>Deposit by card, bank transfer or e-wallet.</p></li>
+      <li class="step" style="--d:3"><span class="step-n" aria-hidden="true">P4</span><h3 class="h4">Start trading</h3><p>Pick a market, set your risk and place your first trade.</p></li>
     </ol>
-    <p class="lights-cap rv">Lights out and away we go.</p>
   </div>
 </section>
 
@@ -534,20 +508,20 @@
 <section class="sec" id="faq" aria-labelledby="faq-title">
   <div class="wrap faq">
     <div class="faq-side">
-      <p class="kicker rv"><span class="mono">09</span>FAQ</p>
-      <h2 class="h2 rv" id="faq-title"><span>Questions.</span> <span class="l2">Answered.</span></h2>
-      <div class="tile still rv">
+      <p class="kicker"><span class="mono">09</span>FAQ</p>
+      <h2 class="h2" id="faq-title"><span>Questions</span> <span class="l2">Answered</span></h2>
+      <div class="tile still">
         <h3 class="h4">Still have questions?</h3><p>Our team answers in your language, 24/5.</p>
         <a class="pill pill-white" href="#"><svg class="ic" aria-hidden="true"><use href="#i-message"/></svg>Contact us</a>
       </div>
     </div>
     <div class="acc-list" data-accordion>
-      <div class="qa is-open rv"><h3><button type="button" id="q1" aria-expanded="true" aria-controls="a1">What is ABX?<span class="qa-ic"><svg class="ic" aria-hidden="true"><use href="#i-plus"/></svg></span></button></h3><div class="qa-a" id="a1" role="region" aria-labelledby="q1"><div><p>ABX Global is a regulated online broker offering stocks, ETFs, commodities, forex and indices on one platform.</p></div></div></div>
-      <div class="qa rv"><h3><button type="button" id="q2" aria-expanded="false" aria-controls="a2">How do I open an account?<span class="qa-ic"><svg class="ic" aria-hidden="true"><use href="#i-plus"/></svg></span></button></h3><div class="qa-a" id="a2" role="region" aria-labelledby="q2" inert><div><p>Complete the sign-up form, verify your identity and fund your account. The whole process usually takes less than 10 minutes.</p></div></div></div>
-      <div class="qa rv"><h3><button type="button" id="q3" aria-expanded="false" aria-controls="a3">Which markets can I trade?<span class="qa-ic"><svg class="ic" aria-hidden="true"><use href="#i-plus"/></svg></span></button></h3><div class="qa-a" id="a3" role="region" aria-labelledby="q3" inert><div><p>More than 250 instruments: stocks and ETFs, commodities, currency pairs, global indices and selected pre-IPO opportunities.</p></div></div></div>
-      <div class="qa rv"><h3><button type="button" id="q4" aria-expanded="false" aria-controls="a4">Are my funds protected?<span class="qa-ic"><svg class="ic" aria-hidden="true"><use href="#i-plus"/></svg></span></button></h3><div class="qa-a" id="a4" role="region" aria-labelledby="q4" inert><div><p>Yes. Client funds are held in segregated accounts at leading European banks, and eligible clients are covered up to €20,000.</p></div></div></div>
-      <div class="qa rv"><h3><button type="button" id="q5" aria-expanded="false" aria-controls="a5">How do deposits and withdrawals work?<span class="qa-ic"><svg class="ic" aria-hidden="true"><use href="#i-plus"/></svg></span></button></h3><div class="qa-a" id="a5" role="region" aria-labelledby="q5" inert><div><p>Deposit by card, bank transfer or e-wallet. Withdrawals are usually processed within 24 hours, back to the account the deposit came from.</p></div></div></div>
-      <div class="qa rv"><h3><button type="button" id="q6" aria-expanded="false" aria-controls="a6">Can I trade on mobile?<span class="qa-ic"><svg class="ic" aria-hidden="true"><use href="#i-plus"/></svg></span></button></h3><div class="qa-a" id="a6" role="region" aria-labelledby="q6" inert><div><p>Yes. The ABX app for iOS and Android has the same tools, charts and accounts as the web platform.</p></div></div></div>
+      <div class="qa is-open"><h3><button type="button" id="q1" aria-expanded="true" aria-controls="a1">What is ABX?<span class="qa-ic"><svg class="ic" aria-hidden="true"><use href="#i-plus"/></svg></span></button></h3><div class="qa-a" id="a1" role="region" aria-labelledby="q1"><div><p>ABX Global is a regulated online broker offering stocks, ETFs, commodities, forex and indices on one platform.</p></div></div></div>
+      <div class="qa"><h3><button type="button" id="q2" aria-expanded="false" aria-controls="a2">How do I open an account?<span class="qa-ic"><svg class="ic" aria-hidden="true"><use href="#i-plus"/></svg></span></button></h3><div class="qa-a" id="a2" role="region" aria-labelledby="q2" inert><div><p>Complete the sign-up form, verify your identity and fund your account. The whole process usually takes less than 10 minutes.</p></div></div></div>
+      <div class="qa"><h3><button type="button" id="q3" aria-expanded="false" aria-controls="a3">Which markets can I trade?<span class="qa-ic"><svg class="ic" aria-hidden="true"><use href="#i-plus"/></svg></span></button></h3><div class="qa-a" id="a3" role="region" aria-labelledby="q3" inert><div><p>More than 250 instruments: stocks and ETFs, commodities, currency pairs, global indices and selected pre-IPO opportunities.</p></div></div></div>
+      <div class="qa"><h3><button type="button" id="q4" aria-expanded="false" aria-controls="a4">Are my funds protected?<span class="qa-ic"><svg class="ic" aria-hidden="true"><use href="#i-plus"/></svg></span></button></h3><div class="qa-a" id="a4" role="region" aria-labelledby="q4" inert><div><p>Yes. Client funds are held in segregated accounts at leading European banks, and eligible clients are covered up to €20,000.</p></div></div></div>
+      <div class="qa"><h3><button type="button" id="q5" aria-expanded="false" aria-controls="a5">How do deposits and withdrawals work?<span class="qa-ic"><svg class="ic" aria-hidden="true"><use href="#i-plus"/></svg></span></button></h3><div class="qa-a" id="a5" role="region" aria-labelledby="q5" inert><div><p>Deposit by card, bank transfer or e-wallet. Withdrawals are usually processed within 24 hours, back to the account the deposit came from.</p></div></div></div>
+      <div class="qa"><h3><button type="button" id="q6" aria-expanded="false" aria-controls="a6">Can I trade on mobile?<span class="qa-ic"><svg class="ic" aria-hidden="true"><use href="#i-plus"/></svg></span></button></h3><div class="qa-a" id="a6" role="region" aria-labelledby="q6" inert><div><p>Yes. The ABX app for iOS and Android has the same tools, charts and accounts as the web platform.</p></div></div></div>
     </div>
   </div>
 </section>
@@ -563,13 +537,13 @@
     </div>
   </div>
   <div class="wrap final-body">
-    <p class="kicker rv"><span class="mono">10</span>Start</p>
-    <h2 class="display display-final rv" id="final-title">
-      <span class="l1">Your markets.</span>
-      <span class="l2"><span class="nw">Your next move.<svg class="ramp" viewBox="0 0 132 100" aria-hidden="true"><path d="M4 100h26L60 0H34z"/><path d="M40 100h26L96 0H70z"/><path d="M76 100h26l30-100h-26z"/></svg></span></span>
+    <p class="kicker"><span class="mono">10</span>Start</p>
+    <h2 class="display display-final" id="final-title">
+      <span class="l1">Your markets</span>
+      <span class="l2"><span class="nw">Your next move<svg class="ramp" viewBox="0 0 132 100" aria-hidden="true"><path d="M4 100h26L60 0H34z"/><path d="M40 100h26L96 0H70z"/><path d="M76 100h26l30-100h-26z"/></svg></span></span>
     </h2>
-    <p class="lead rv">Open your account in minutes. Trade the world's markets from one place.</p>
-    <a class="pill pill-orange pill-lg rv" href="#accounts">Open an account<svg class="ic" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+    <p class="lead">Open your account in minutes. Trade the world's markets from one place.</p>
+    <a class="pill pill-orange pill-lg" href="#accounts">Open an account<svg class="ic" aria-hidden="true"><use href="#i-arrow"/></svg></a>
   </div>
 </section>
 </main>

@@ -40,7 +40,6 @@
       entries.forEach(e => {
         if (!e.isIntersecting) return;
         e.target.classList.add('is-in');
-        $$('[data-count]', e.target).forEach(countUp);
         io.unobserve(e.target);
       });
     }, { rootMargin: '0px 0px -8% 0px', threshold: 0.12 });
@@ -152,48 +151,6 @@
     svg.appendChild(el('path', { d: 'M' + pts.map(p => p.join(' ')).join(' L'), fill: 'none', stroke: down ? '#FF5A4E' : '#3FD17A', 'stroke-width': 1.5, 'vector-effect': 'non-scaling-stroke' }));
   });
 
-  /* Platform scroll story: tablet straightens and grows with scroll progress */
-  const pf = $('[data-pf]');
-  if (pf && !reduce()) {
-    const tab = $('.tablet', pf), glow = $('.pf-glow', pf);
-    let ticking = false;
-    const update = () => {
-      ticking = false;
-      if (window.innerWidth <= 680) { tab.style.removeProperty('--rx'); tab.style.removeProperty('--sc'); return; }
-      const r = pf.getBoundingClientRect();
-      const t = Math.min(1, Math.max(0, (innerHeight - r.top) / (r.height * 0.75)));
-      const e = 1 - Math.pow(1 - t, 3);
-      tab.style.setProperty('--rx', (24 - 24 * e).toFixed(2) + 'deg');
-      tab.style.setProperty('--sc', (0.82 + 0.18 * e).toFixed(3));
-      glow.style.setProperty('--glow', (0.3 + 0.7 * e).toFixed(2));
-    };
-    const onS = () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } };
-    window.addEventListener('scroll', onS, { passive: true });
-    window.addEventListener('resize', onS);
-    update();
-  }
-
-  /* Start lights: pods light one by one, then "lights out", then the steps light up */
-  const lights = $('[data-lights]');
-  if (lights) {
-    const pods = $$('.pod', lights), steps = $$('.step');
-    const finish = () => { pods.forEach(p => p.classList.add('on')); steps.forEach(s => s.classList.add('is-lit')); };
-    if (reduce() || !('IntersectionObserver' in window)) finish();
-    else {
-      const io = new IntersectionObserver(([en]) => {
-        if (!en.isIntersecting) return;
-        io.disconnect();
-        pods.forEach((p, i) => setTimeout(() => p.classList.add('on'), 450 + i * 550));
-        setTimeout(() => {
-          lights.classList.add('out');
-          steps.forEach((s, i) => setTimeout(() => s.classList.add('is-lit'), i * 120));
-          setTimeout(() => lights.classList.remove('out'), 1400);
-        }, 450 + pods.length * 550 + 700);
-      }, { threshold: 0.6 });
-      io.observe(lights);
-    }
-  }
-
   /* Watchlist ticks (illustrative quotes, flagged as placeholders) */
   const quotes = $$('[data-q]');
   if (quotes.length && !reduce()) {
@@ -233,7 +190,7 @@
       const map = (vx, vy) => ({ x: c.left - r.left + c.width * vx / 1000, y: c.top - r.top + c.height * vy / 260 });
       em = [map(330, 204), map(560, 201)];
       streaks.length = 0;
-      const n = small() ? 10 : 22;
+      const n = small() ? 6 : 14;
       for (let i = 0; i < n; i++) streaks.push(newStreak(true));
     }
     function newStreak(anywhere) {
@@ -248,7 +205,7 @@
       };
     }
     function spawn() {
-      const n = (small() ? 2 : 4) + (Math.random() < 0.08 ? 18 : 0);
+      const n = (small() ? 1 : 3) + (Math.random() < 0.05 ? 10 : 0);
       for (let i = 0; i < n; i++) {
         const e = em[Math.random() < 0.6 ? 0 : 1];
         sparks.push({ x: e.x + (Math.random() - 0.5) * 30, y: e.y, vx: -(5 + Math.random() * 16), vy: -(0.4 + Math.random() * 4.2), life: 0, max: 24 + Math.random() * 46, w: 0.8 + Math.random() * 1.4 });

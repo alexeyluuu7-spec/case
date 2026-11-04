@@ -173,6 +173,23 @@
     track.addEventListener('scroll', sync, { passive: true }); window.addEventListener('resize', sync); sync();
   });
 
+  /* Minimal page: platform feature list switches the phone screen; account rows switch the card */
+  $$('[data-feat]').forEach(box => {
+    const items = $$('.feat-item', box), panes = $$('[data-pane]', box);
+    items.forEach((it, i) => $('button', it).addEventListener('click', () => {
+      items.forEach((x, j) => { const on = j === i; x.classList.toggle('is-open', on); $('button', x).setAttribute('aria-expanded', String(on)); $('p', x).hidden = !on; });
+      panes.forEach(p => p.classList.toggle('is-on', p.dataset.pane === String(i + 1)));
+    }));
+  });
+  $$('[data-plans]').forEach(box => {
+    $$('[data-tier]', box).forEach(row => {
+      const pick = () => { box.dataset.active = row.dataset.tier; };
+      row.addEventListener('mouseenter', pick);
+      row.addEventListener('click', pick);
+      row.addEventListener('focusin', pick);
+    });
+  });
+
   /* Markets review switch: ?markets=a|b|c keeps the chosen layout in the link */
   const mkRoot = $('[data-mk-root]');
   if (mkRoot) {

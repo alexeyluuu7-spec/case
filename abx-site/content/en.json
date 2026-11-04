@@ -322,5 +322,9 @@
   "tk.lev": "Leverage",
   "fd.mob": "Mobile",
   "fd.web": "Desktop and web",
-  "fd.bal": "Balance"
+  "fd.bal": "Balance",
+  "mk6.va": "Slider",
+  "mk6.vb": "Bento",
+  "mk6.vc": "Strips",
+  "mk6.vd": "Index"
 }

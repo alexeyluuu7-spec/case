@@ -268,6 +268,20 @@
     io.observe(card);
   });
 
+  /* Market cards: one active card shared by the "strips" and "index" layouts */
+  $$('[data-xp]').forEach(root => {
+    const items = $$('.slider-track > li', root), rows = $$('[data-xp-go]', root);
+    const set = i => {
+      items.forEach((li, k) => li.classList.toggle('is-on', k === i));
+      rows.forEach((r, k) => { const on = k === i; r.classList.toggle('is-on', on); r.setAttribute('aria-pressed', String(on)); });
+    };
+    items.forEach((li, i) => {
+      li.addEventListener('mouseenter', () => { if (root.dataset.v === 'c') set(i); });
+      li.addEventListener('focusin', () => { if (root.dataset.v === 'c') set(i); });
+    });
+    rows.forEach((r, i) => { r.addEventListener('click', () => set(i)); r.addEventListener('mouseenter', () => set(i)); });
+  });
+
   /* Accounts layout switch (minimal page): Plasma columns or card fan + comparison */
   $$('[data-accv-root]').forEach(root => {
     const btns = $$('[data-accv]');

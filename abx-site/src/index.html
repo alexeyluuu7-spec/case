@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>{{meta.title}}</title>
 <meta name="description" content="{{meta.description}}">
-<meta name="theme-color" content="#080909">
+<meta name="theme-color" content="#000000">
 <meta name="color-scheme" content="dark">
 <meta property="og:title" content="{{meta.title}}">
 <meta property="og:description" content="{{meta.description}}">
@@ -15,8 +15,8 @@
 <link rel="icon" href="{{=base}}assets/img/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,800&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap">
-<!-- Hero photo: LCP image, never lazy. Activate together with the <picture> in .hero-media once the files exist (tools/optimize-media.sh).
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@600;700;800&family=Inter:wght@400;500;600&family=Geist+Mono:wght@500&display=swap">
+<!-- Hero photo preload: enable with the <picture> slot in .hero-media once the files exist (tools/optimize-media.sh).
 <link rel="preload" as="image" type="image/avif" fetchpriority="high"
       imagesrcset="{{=base}}assets/img/v2/hero-960.avif 960w, {{=base}}assets/img/v2/hero-1600.avif 1600w, {{=base}}assets/img/v2/hero-2400.avif 2400w" imagesizes="100vw">
 -->
@@ -25,94 +25,16 @@
 </head>
 <body>
 <a class="skip" href="#main">{{skip}}</a>
+<!--SPRITE-->
 
-<!-- Shared SVG: gradients, filters, icons (Lucide) and drawn renders. Kept in the DOM (not display:none) so gradients resolve. -->
-<svg class="sprite" aria-hidden="true" focusable="false">
-  <defs>
-    <linearGradient id="g-steel" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#4a4d51"/><stop offset=".38" stop-color="#1c1d1f"/>
-      <stop offset=".7" stop-color="#0b0c0d"/><stop offset="1" stop-color="#2b2d30"/>
-    </linearGradient>
-    <linearGradient id="g-steel-edge" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#2a2c2f"/><stop offset="1" stop-color="#060606"/>
-    </linearGradient>
-    <linearGradient id="g-rim" x1="0" y1="1" x2="0" y2="0">
-      <stop offset="0" stop-color="#FF711D" stop-opacity=".95"/><stop offset=".45" stop-color="#FF711D" stop-opacity=".25"/>
-      <stop offset="1" stop-color="#F5F4EF" stop-opacity=".18"/>
-    </linearGradient>
-    <radialGradient id="g-lava" cx=".5" cy=".55" r=".6">
-      <stop offset="0" stop-color="#FFC48A"/><stop offset=".3" stop-color="#FF8A40"/>
-      <stop offset=".65" stop-color="#FF711D"/><stop offset="1" stop-color="#9c3206"/>
-    </radialGradient>
-    <radialGradient id="g-glow" cx=".5" cy=".5" r=".5">
-      <stop offset="0" stop-color="#FF711D" stop-opacity=".55"/><stop offset="1" stop-color="#FF711D" stop-opacity="0"/>
-    </radialGradient>
-    <linearGradient id="g-body" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#1b1c1e"/><stop offset=".55" stop-color="#0b0c0c"/><stop offset="1" stop-color="#040404"/>
-    </linearGradient>
-    <filter id="f-glow" x="-50%" y="-50%" width="200%" height="200%">
-      <feGaussianBlur stdDeviation="6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-    </filter>
-
-    <!-- F1 side profile, viewBox 0 0 1000 260 (drawn placeholder until the client photos land) -->
-    <symbol id="r-car" viewBox="0 0 1000 260">
-      <ellipse cx="520" cy="236" rx="470" ry="14" fill="url(#g-glow)" opacity=".7"/>
-      <g fill="url(#g-body)" stroke="url(#g-rim)" stroke-width="1.5" stroke-linejoin="round">
-        <path d="M40 50h126v13H40zM46 67h114v8H46zM118 50h11v104h-11z"/>
-        <path d="M129 132 L262 120 C300 110 318 70 352 62 L392 60 C410 60 420 74 430 86 L462 90 C486 92 500 96 520 104 C600 120 700 134 790 146 L940 170 C958 174 960 187 944 190 L760 194 L640 200 L268 202 L150 198 L129 160 Z"/>
-        <path d="M450 140 C520 126 620 130 690 150 L700 196 L450 200 Z" fill="#0e0f10"/>
-        <path d="M826 204 H992 V216 H816 Z"/><path d="M972 184 h18 v32 h-18z"/>
-      </g>
-      <path d="M440 89 C470 66 520 70 542 102" fill="none" stroke="#2a2c2f" stroke-width="7" stroke-linecap="round"/>
-      <g stroke="#1e1f21" stroke-width="5" stroke-linecap="round"><path d="M200 178 L300 150M200 178 L290 192M800 184 L700 160M800 184 L690 188"/></g>
-      <g>
-        <circle cx="200" cy="178" r="62" fill="#050505" stroke="#1d1e20" stroke-width="3"/>
-        <circle cx="200" cy="178" r="34" fill="#0c0c0d" stroke="#FF711D" stroke-opacity=".5" stroke-width="2"/>
-        <circle cx="800" cy="184" r="56" fill="#050505" stroke="#1d1e20" stroke-width="3"/>
-        <circle cx="800" cy="184" r="30" fill="#0c0c0d" stroke="#FF711D" stroke-opacity=".5" stroke-width="2"/>
-      </g>
-    </symbol>
-
-    <symbol id="r-shield" viewBox="0 0 200 220">
-      <ellipse cx="100" cy="212" rx="70" ry="8" fill="url(#g-glow)"/>
-      <path d="M100 10 L178 40 V104 C178 154 145 190 100 208 C55 190 22 154 22 104 V40 Z" fill="url(#g-steel-edge)" transform="translate(4 6)"/>
-      <path d="M100 10 L178 40 V104 C178 154 145 190 100 208 C55 190 22 154 22 104 V40 Z" fill="url(#g-steel)" stroke="url(#g-rim)" stroke-width="2"/>
-      <path d="M100 28 L162 52 V104 C162 144 136 174 100 190 C64 174 38 144 38 104 V52 Z" fill="none" stroke="#F5F4EF" stroke-opacity=".08" stroke-width="1.5"/>
-      <text x="100" y="134" text-anchor="middle" font-family="Archivo, sans-serif" font-weight="800" font-size="84" fill="url(#g-lava)" filter="url(#f-glow)">€</text>
-    </symbol>
-
-    <symbol id="r-coin" viewBox="0 0 200 220">
-      <ellipse cx="100" cy="206" rx="72" ry="9" fill="url(#g-glow)"/>
-      <ellipse cx="108" cy="112" rx="78" ry="80" fill="url(#g-steel-edge)"/>
-      <ellipse cx="108" cy="112" rx="78" ry="80" fill="none" stroke="#FF711D" stroke-opacity=".55" stroke-width="2"/>
-      <circle cx="98" cy="106" r="80" fill="url(#g-steel)" stroke="url(#g-rim)" stroke-width="2"/>
-      <circle cx="98" cy="106" r="64" fill="none" stroke="#F5F4EF" stroke-opacity=".1" stroke-width="1.5" stroke-dasharray="2 5"/>
-      <text x="98" y="124" text-anchor="middle" font-family="Archivo, sans-serif" font-weight="800" font-size="46" letter-spacing="-1.5" fill="url(#g-lava)" filter="url(#f-glow)">ABX</text>
-    </symbol>
-
-    <symbol id="r-badge" viewBox="0 0 200 220">
-      <ellipse cx="100" cy="208" rx="70" ry="8" fill="url(#g-glow)"/>
-      <path d="M100 14 L124 30 L152 28 L160 56 L184 72 L172 100 L184 128 L160 144 L152 172 L124 170 L100 186 L76 170 L48 172 L40 144 L16 128 L28 100 L16 72 L40 56 L48 28 L76 30 Z" fill="url(#g-steel-edge)" transform="translate(4 6)"/>
-      <path d="M100 14 L124 30 L152 28 L160 56 L184 72 L172 100 L184 128 L160 144 L152 172 L124 170 L100 186 L76 170 L48 172 L40 144 L16 128 L28 100 L16 72 L40 56 L48 28 L76 30 Z" fill="url(#g-steel)" stroke="url(#g-rim)" stroke-width="2"/>
-      <circle cx="100" cy="100" r="54" fill="none" stroke="#F5F4EF" stroke-opacity=".08" stroke-width="1.5"/>
-      <path d="M72 102 L92 122 L130 82" fill="none" stroke="url(#g-lava)" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" filter="url(#f-glow)"/>
-    </symbol>
-
-    <!-- Lucide icons (stroke 1.75, 24 grid) -->
-    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></symbol>
-    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M12 5v14"/></symbol>
-    <symbol id="i-lock" viewBox="0 0 24 24"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></symbol>
-    <symbol id="i-lock-open" viewBox="0 0 24 24"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 9.9-1"/></symbol>
-    <symbol id="i-star" viewBox="0 0 24 24"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/></symbol>
-    <symbol id="i-message" viewBox="0 0 24 24"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></symbol>
-  </defs>
-</svg>
+<!-- Risk bar, capital.com pattern -->
+<div class="riskbar" data-placeholder="cfd-percent"><div class="wrap">{{risk.bar}}</div></div>
 
 <header class="nav" data-nav>
   <div class="wrap nav-in">
     <a class="logo" href="#top" aria-label="ABX Global" data-placeholder="logo">
       <svg class="logo-mark" viewBox="0 0 60 40" aria-hidden="true"><path d="M8 40h11L37 0H26zM26 40h11L55 0H44z" fill="#FF711D"/></svg>
-      <span class="logo-word">ABX</span><span class="logo-sub">Global</span>
+      <span class="logo-word">ABX</span>
     </a>
     <nav class="nav-links" aria-label="Primary">
       <a href="#markets">{{nav.markets}}</a>
@@ -127,27 +49,25 @@
         <a href="{{=href_en}}" hreflang="en" lang="en" {{=cur_en}}>EN</a>
       </div>
       <a class="nav-login" href="#">{{nav.login}}</a>
-      <a class="btn btn-primary btn-sm" href="#accounts">{{nav.open}}<svg class="ic" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+      <a class="pill pill-white pill-sm" href="#accounts">{{nav.signup}}</a>
     </div>
   </div>
 </header>
 
 <main id="main">
 
-<!-- 01 · HERO -->
+<!-- 01 · HERO — Revolut-scale type over a full-bleed night-race scene -->
 <section class="hero" id="top" aria-labelledby="hero-title">
   <div class="hero-media" aria-hidden="true">
     <div class="hero-zoom">
       <div class="hero-art"></div>
       <svg class="hero-car" viewBox="0 0 1000 260"><use href="#r-car"/></svg>
-      <!-- Client photo slot (img/v2/hero.jpg). Uncomment with the preload in <head>.
+      <!-- Client photo slot (img/v2/hero.jpg):
       <picture class="hero-photo">
         <source type="image/avif" srcset="{{=base}}assets/img/v2/hero-960.avif 960w, {{=base}}assets/img/v2/hero-1600.avif 1600w, {{=base}}assets/img/v2/hero-2400.avif 2400w" sizes="100vw">
         <source type="image/webp" srcset="{{=base}}assets/img/v2/hero-960.webp 960w, {{=base}}assets/img/v2/hero-1600.webp 1600w, {{=base}}assets/img/v2/hero-2400.webp 2400w" sizes="100vw">
-        <source media="(max-width: 680px)" type="image/webp" srcset="{{=base}}assets/img/v2/hero-mobile-750.webp 750w, {{=base}}assets/img/v2/hero-mobile-1200.webp 1200w" sizes="100vw">
         <img src="{{=base}}assets/img/v2/hero-1600.jpg" alt="" width="2400" height="1350" fetchpriority="high" decoding="async">
-      </picture>
-      -->
+      </picture> -->
     </div>
     <canvas class="hero-fx"></canvas>
     <div class="hero-scrim"></div>
@@ -155,17 +75,19 @@
 
   <div class="wrap hero-body">
     <div class="hero-content">
-      <p class="eyebrow hero-eyebrow intro" style="--d:0">
-        <span class="mono">ABX</span><span class="slash">/</span><span class="tag">{{hero.tag}}</span><span>{{hero.eyebrow}}</span>
-      </p>
-      <h1 class="h-display" id="hero-title">
+      <a class="announce intro" style="--d:0" href="#markets">
+        <span class="announce-tag">{{hero.tag}}</span>
+        <span>{{hero.eyebrow}}</span>
+        <svg class="ic" aria-hidden="true"><use href="#i-chevron"/></svg>
+      </a>
+      <h1 class="display" id="hero-title">
         <span class="l1 intro" style="--d:1">{{hero.h1_1}}</span>
         <span class="l2 intro" style="--d:2"><span class="nw">{{hero.h1_2}}<svg class="ramp" viewBox="0 0 132 100" aria-hidden="true"><path d="M4 100h26L60 0H34z"/><path d="M40 100h26L96 0H70z"/><path d="M76 100h26l30-100h-26z"/></svg></span></span>
       </h1>
       <p class="hero-sub intro" style="--d:3">{{hero.sub}}</p>
       <div class="hero-cta intro" style="--d:4">
-        <a class="btn btn-primary" href="#accounts">{{hero.cta1}}<svg class="ic" aria-hidden="true"><use href="#i-arrow"/></svg></a>
-        <a class="btn btn-ghost" href="#platform">{{hero.cta2}}</a>
+        <a class="pill pill-orange pill-lg" href="#accounts">{{hero.cta1}}<svg class="ic" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        <a class="pill pill-glass pill-lg" href="#platform">{{hero.cta2}}</a>
         <a class="rating" href="#" data-placeholder="trustpilot">
           <span class="stars" aria-hidden="true"><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></span>
           <span>{{hero.rating}}</span><span class="sr-only"> ({{hero.rating_aria}})</span>
@@ -174,24 +96,25 @@
     </div>
     <div class="hero-foot intro" style="--d:5">
       <nav class="hero-anchors" aria-label="{{nav.markets}}">
-        <a href="#markets"><span class="mono">01 /</span> {{hero.a1}}</a>
-        <a href="#platform"><span class="mono">02 /</span> {{hero.a2}}</a>
-        <a href="#accounts"><span class="mono">03 /</span> {{hero.a3}}</a>
+        <a href="#markets"><span class="mono">01</span>{{hero.a1}}</a>
+        <a href="#platform"><span class="mono">02</span>{{hero.a2}}</a>
+        <a href="#accounts"><span class="mono">03</span>{{hero.a3}}</a>
       </nav>
-      <p class="hero-risk" data-placeholder="cfd-percent">{{hero.risk}}</p>
     </div>
   </div>
 </section>
 
-<!-- 02 · TRUST STRIP -->
+<!-- 02 · TRUST — Apple-style centred statement + capital.com stats -->
 <section class="trust" aria-labelledby="trust-title">
   <div class="wrap">
-    <p class="eyebrow rv"><span>02 / {{trust.label}}</span></p>
-    <h2 class="sr-only" id="trust-title">{{trust.h}}</h2>
+    <div class="center-head">
+      <p class="kicker rv"><span class="mono">02</span>{{trust.label}}</p>
+      <h2 class="h2 rv" id="trust-title"><span>{{trust.h_1}}</span> <span class="l2">{{trust.h_2}}</span></h2>
+    </div>
     <dl class="stats" data-placeholder="trust-numbers">
       <div class="stat rv" style="--d:0"><dt>{{trust.n1_l}}</dt><dd data-count="21500" data-suffix="+">{{trust.n1}}</dd></div>
       <div class="stat rv" style="--d:1"><dt>{{trust.n2_l}}</dt><dd data-count="133" data-suffix="+">{{trust.n2}}</dd></div>
-      <div class="stat rv" style="--d:2"><dt>{{trust.n3_l}}</dt><dd data-count="20" data-prefix="€" data-suffix="k">{{trust.n3}}</dd></div>
+      <div class="stat stat-accent rv" style="--d:2"><dt>{{trust.n3_l}}</dt><dd data-count="20" data-prefix="€" data-suffix="k">{{trust.n3}}</dd></div>
       <div class="stat rv" style="--d:3"><dt>{{trust.n4_l}}</dt><dd data-count="15" data-suffix="+">{{trust.n4}}</dd></div>
     </dl>
   </div>
@@ -209,111 +132,127 @@
   </div>
 </section>
 
-<!-- 03 · MARKETS -->
+<!-- 03 · MARKETS — Apple bento + capital.com market table styled as an F1 timing tower -->
 <section class="sec" id="markets" aria-labelledby="markets-title">
   <div class="wrap">
-    <div class="sec-head">
-      <div>
-        <p class="eyebrow rv"><span>03 / {{markets.label}}</span></p>
-        <h2 class="h2 rv" id="markets-title"><span>{{markets.h_1}}</span> <span class="l2">{{markets.h_2}}</span></h2>
-      </div>
+    <div class="center-head">
+      <p class="kicker rv"><span class="mono">03</span>{{markets.label}}</p>
+      <h2 class="h2 rv" id="markets-title"><span>{{markets.h_1}}</span> <span class="l2">{{markets.h_2}}</span></h2>
       <p class="lead rv">{{markets.lead}}</p>
     </div>
 
-    <div class="mk-grid">
-      <article class="card mk-stocks rv">
+    <div class="bento mk-bento">
+      <article class="tile mk-stocks rv">
+        <div class="tile-head">
+          <h3 class="h3">{{markets.stocks_t}}</h3>
+          <p>{{markets.stocks_d}}</p>
+          <a class="more" href="#">{{markets.stocks_cta}}<svg class="ic" aria-hidden="true"><use href="#i-chevron"/></svg></a>
+        </div>
         <div class="mk-tiles" aria-hidden="true" data-placeholder="stock-logos">
           <div class="tile3d t1"><b>T</b><span>TSLA</span><em class="up">+2.41%</em></div>
           <div class="tile3d t2"><b>A</b><span>AAPL</span><em class="up">+0.86%</em></div>
           <div class="tile3d t3"><b>N</b><span>NVDA</span><em class="dn">−1.12%</em></div>
           <div class="tile3d t4"><b>X</b><span>SPACEX</span><em class="pre">{{hero.tag}}</em></div>
         </div>
-        <div class="card-body">
-          <h3 class="h3">{{markets.stocks_t}}</h3>
-          <p>{{markets.stocks_d}}</p>
-          <a class="link" href="#">{{markets.stocks_cta}}<svg class="ic" aria-hidden="true"><use href="#i-arrow"/></svg></a>
-        </div>
       </article>
-
-      <article class="card mk-photo rv" style="--d:1">
-        <div class="card-media">
-          <div class="art art-coin" aria-hidden="true"><svg viewBox="0 0 200 220"><use href="#r-coin"/></svg></div>
-          <!-- Client photo slot: <picture> img/v2/commodities-*.webp, loading="lazy" -->
-        </div>
-        <div class="card-body">
+      <article class="tile mk-photo rv" style="--d:1">
+        <div class="tile-head">
           <h3 class="h3">{{markets.comm_t}}</h3>
           <p>{{markets.comm_d}}</p>
-          <a class="link" href="#">{{markets.more}}<svg class="ic" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+          <a class="more" href="#">{{markets.more}}<svg class="ic" aria-hidden="true"><use href="#i-chevron"/></svg></a>
         </div>
+        <div class="tile-media"><div class="art art-coin" aria-hidden="true"><svg viewBox="0 0 200 220"><use href="#r-coin"/></svg></div></div>
+        <a class="plus" href="#" aria-label="{{markets.more}}: {{markets.comm_t}}"><svg class="ic" aria-hidden="true"><use href="#i-plus"/></svg></a>
       </article>
-
-      <article class="card mk-photo rv" style="--d:2">
-        <div class="card-media">
+      <article class="tile mk-photo rv" style="--d:2">
+        <div class="tile-head">
+          <h3 class="h3">{{markets.fx_t}}</h3>
+          <p>{{markets.fx_d}}</p>
+          <a class="more" href="#">{{markets.more}}<svg class="ic" aria-hidden="true"><use href="#i-chevron"/></svg></a>
+        </div>
+        <div class="tile-media">
           <div class="art art-track" aria-hidden="true">
             <svg class="track" viewBox="0 0 600 300" preserveAspectRatio="xMidYMid slice">
-              <path d="M300 40 L-60 300 M300 40 L660 300" stroke="#F5F4EF" stroke-opacity=".14" stroke-width="2"/>
+              <path d="M300 40 L-60 300 M300 40 L660 300" stroke="#F5F5F7" stroke-opacity=".14" stroke-width="2"/>
               <path d="M300 40 L180 300 M300 40 L420 300" stroke="#FF711D" stroke-opacity=".5" stroke-width="2" stroke-dasharray="14 16"/>
-              <path d="M0 40 H600" stroke="#FF711D" stroke-opacity=".35"/>
             </svg>
             <svg class="track-car" viewBox="0 0 1000 260"><use href="#r-car"/></svg>
           </div>
-          <!-- Client photo slot: <picture> img/v2/forex-*.webp, loading="lazy" -->
         </div>
-        <div class="card-body">
-          <h3 class="h3">{{markets.fx_t}}</h3>
-          <p>{{markets.fx_d}}</p>
-          <a class="link" href="#">{{markets.more}}<svg class="ic" aria-hidden="true"><use href="#i-arrow"/></svg></a>
-        </div>
+        <a class="plus" href="#" aria-label="{{markets.more}}: {{markets.fx_t}}"><svg class="ic" aria-hidden="true"><use href="#i-plus"/></svg></a>
       </article>
     </div>
+
+    <div class="tower rv" data-tower>
+      <div class="seg" role="tablist" aria-label="{{markets.table_aria}}">
+        <button role="tab" aria-selected="true" data-filter="pop">{{markets.tab_all}}</button>
+        <button role="tab" aria-selected="false" data-filter="stocks">{{markets.tab_stocks}}</button>
+        <button role="tab" aria-selected="false" data-filter="comm">{{markets.tab_comm}}</button>
+        <button role="tab" aria-selected="false" data-filter="fx">{{markets.tab_fx}}</button>
+        <button role="tab" aria-selected="false" data-filter="idx">{{markets.tab_idx}}</button>
+      </div>
+      <table class="tt" aria-label="{{markets.table_aria}}" data-placeholder="indicative-prices">
+        <thead><tr><th class="c-pos" scope="col">{{markets.col_pos}}</th><th scope="col">{{markets.col_inst}}</th><th class="c-chg" scope="col">{{markets.col_chg}}</th><th class="c-spark" scope="col"><span class="sr-only">7D</span></th><th class="c-px" scope="col">{{markets.col_sell}}</th><th class="c-px" scope="col">{{markets.col_buy}}</th></tr></thead>
+        <tbody>
+          <tr data-cat="stocks pop"><td class="c-pos"><b>P1</b></td><td><span class="sym"><i class="logo-dot">T</i><span><b>Tesla</b><small>TSLA</small></span></span></td><td class="c-chg up">+2.41%</td><td class="c-spark"><svg data-spark-row="11" viewBox="0 0 100 28" preserveAspectRatio="none"></svg></td><td class="c-px"><button class="px sell">342.12</button></td><td class="c-px"><button class="px buy">342.24</button></td></tr>
+          <tr data-cat="comm pop"><td class="c-pos"><b>P2</b></td><td><span class="sym"><i class="logo-dot">Au</i><span><b>Gold</b><small>XAU/USD</small></span></span></td><td class="c-chg up">+0.74%</td><td class="c-spark"><svg data-spark-row="5" viewBox="0 0 100 28" preserveAspectRatio="none"></svg></td><td class="c-px"><button class="px sell">2,684.10</button></td><td class="c-px"><button class="px buy">2,684.60</button></td></tr>
+          <tr data-cat="idx pop"><td class="c-pos"><b>P3</b></td><td><span class="sym"><i class="logo-dot">US</i><span><b>US 500</b><small>US500</small></span></span></td><td class="c-chg up">+0.48%</td><td class="c-spark"><svg data-spark-row="7" viewBox="0 0 100 28" preserveAspectRatio="none"></svg></td><td class="c-px"><button class="px sell">5,932.1</button></td><td class="c-px"><button class="px buy">5,932.6</button></td></tr>
+          <tr data-cat="fx pop"><td class="c-pos"><b>P4</b></td><td><span class="sym"><i class="logo-dot">€</i><span><b>EUR/USD</b><small>Forex</small></span></span></td><td class="c-chg up">+0.12%</td><td class="c-spark"><svg data-spark-row="3" viewBox="0 0 100 28" preserveAspectRatio="none"></svg></td><td class="c-px"><button class="px sell">1.08406</button></td><td class="c-px"><button class="px buy">1.08418</button></td></tr>
+          <tr data-cat="stocks pop"><td class="c-pos"><b>P5</b></td><td><span class="sym"><i class="logo-dot">N</i><span><b>Nvidia</b><small>NVDA</small></span></span></td><td class="c-chg dn">−1.12%</td><td class="c-spark"><svg data-spark-row="19" data-down viewBox="0 0 100 28" preserveAspectRatio="none"></svg></td><td class="c-px"><button class="px sell">138.58</button></td><td class="c-px"><button class="px buy">138.66</button></td></tr>
+          <tr data-cat="stocks"><td class="c-pos"><b>P6</b></td><td><span class="sym"><i class="logo-dot">A</i><span><b>Apple</b><small>AAPL</small></span></span></td><td class="c-chg up">+0.86%</td><td class="c-spark"><svg data-spark-row="23" viewBox="0 0 100 28" preserveAspectRatio="none"></svg></td><td class="c-px"><button class="px sell">228.31</button></td><td class="c-px"><button class="px buy">228.39</button></td></tr>
+          <tr data-cat="comm"><td class="c-pos"><b>P7</b></td><td><span class="sym"><i class="logo-dot">Oil</i><span><b>Brent</b><small>BRENT</small></span></span></td><td class="c-chg dn">−0.35%</td><td class="c-spark"><svg data-spark-row="29" data-down viewBox="0 0 100 28" preserveAspectRatio="none"></svg></td><td class="c-px"><button class="px sell">73.02</button></td><td class="c-px"><button class="px buy">73.08</button></td></tr>
+          <tr data-cat="idx"><td class="c-pos"><b>P8</b></td><td><span class="sym"><i class="logo-dot">DE</i><span><b>Germany 40</b><small>GER40</small></span></span></td><td class="c-chg up">+0.21%</td><td class="c-spark"><svg data-spark-row="31" viewBox="0 0 100 28" preserveAspectRatio="none"></svg></td><td class="c-px"><button class="px sell">19,411.9</button></td><td class="c-px"><button class="px buy">19,413.5</button></td></tr>
+          <tr data-cat="fx"><td class="c-pos"><b>P9</b></td><td><span class="sym"><i class="logo-dot">£</i><span><b>GBP/USD</b><small>Forex</small></span></span></td><td class="c-chg dn">−0.08%</td><td class="c-spark"><svg data-spark-row="37" data-down viewBox="0 0 100 28" preserveAspectRatio="none"></svg></td><td class="c-px"><button class="px sell">1.29512</button></td><td class="c-px"><button class="px buy">1.29526</button></td></tr>
+        </tbody>
+      </table>
+      <p class="tt-note">{{markets.table_note}}</p>
+    </div>
   </div>
 </section>
 
-<!-- 04 · WHY ABX -->
-<section class="sec sec-tight" aria-labelledby="why-title">
+<!-- 04 · WHY ABX — Revolut feature cards -->
+<section class="sec" aria-labelledby="why-title">
   <div class="wrap">
-    <div class="sec-head">
-      <div>
-        <p class="eyebrow rv"><span>04 / {{why.label}}</span></p>
-        <h2 class="h2 rv" id="why-title"><span>{{why.h_1}}</span> <span class="l2">{{why.h_2}}</span></h2>
-      </div>
+    <div class="center-head">
+      <p class="kicker rv"><span class="mono">04</span>{{why.label}}</p>
+      <h2 class="h2 rv" id="why-title"><span>{{why.h_1}}</span> <span class="l2">{{why.h_2}}</span></h2>
     </div>
     <ul class="why-grid">
-      <li class="card why why-accent rv" style="--d:0">
+      <li class="tile why why-accent rv" style="--d:0">
         <p class="why-n" data-placeholder="bonus">{{why.c1_n}}<small>{{why.c1_u}}</small></p>
-        <h3 class="h4">{{why.c1_t}}</h3><p>{{why.c1_d}}</p>
-        <a class="link" href="#">{{why.c1_link}}<svg class="ic" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        <div><h3 class="h4">{{why.c1_t}}</h3><p>{{why.c1_d}}</p></div>
+        <a class="more" href="#">{{why.c1_link}}<svg class="ic" aria-hidden="true"><use href="#i-chevron"/></svg></a>
       </li>
-      <li class="card why rv" style="--d:1">
+      <li class="tile why rv" style="--d:1">
         <p class="why-n" data-placeholder="spreads">{{why.c2_n}}<small>{{why.c2_u}}</small></p>
-        <h3 class="h4">{{why.c2_t}}</h3><p>{{why.c2_d}}</p>
+        <div><h3 class="h4">{{why.c2_t}}</h3><p>{{why.c2_d}}</p></div>
       </li>
-      <li class="card why rv" style="--d:2">
+      <li class="tile why rv" style="--d:2">
         <p class="why-n">{{why.c3_n}}</p>
-        <h3 class="h4">{{why.c3_t}}</h3><p>{{why.c3_d}}</p>
+        <div><h3 class="h4">{{why.c3_t}}</h3><p>{{why.c3_d}}</p></div>
       </li>
-      <li class="card why rv" style="--d:3">
+      <li class="tile why rv" style="--d:3">
         <p class="why-n">{{why.c4_n}}</p>
-        <h3 class="h4">{{why.c4_t}}</h3><p>{{why.c4_d}}</p>
+        <div><h3 class="h4">{{why.c4_t}}</h3><p>{{why.c4_d}}</p></div>
       </li>
     </ul>
-    <p class="fine rv" data-placeholder="bonus-terms">{{why.disclaimer}}</p>
+    <p class="fine center rv" data-placeholder="bonus-terms">{{why.disclaimer}}</p>
   </div>
 </section>
 
-<!-- 05 · TRADING PLATFORM -->
-<section class="sec" id="platform" aria-labelledby="platform-title">
+<!-- 05 · PLATFORM — Apple scroll story: the tablet straightens as you scroll -->
+<section class="sec pf" id="platform" aria-labelledby="platform-title">
   <div class="wrap">
-    <div class="sec-head">
-      <div>
-        <p class="eyebrow rv"><span>05 / {{platform.label}}</span></p>
-        <h2 class="h2 rv" id="platform-title"><span>{{platform.h_1}}</span> <span class="l2">{{platform.h_2}}</span></h2>
-      </div>
+    <div class="center-head">
+      <p class="kicker rv"><span class="mono">05</span>{{platform.label}}</p>
+      <h2 class="h2 h2-xl rv" id="platform-title"><span>{{platform.h_1}}</span> <span class="l2">{{platform.h_2}}</span></h2>
       <p class="lead rv">{{platform.lead}}</p>
     </div>
-
-    <div class="pf-stage rv" aria-hidden="true">
-      <div class="tablet">
+  </div>
+  <div class="pf-scroll" data-pf>
+    <div class="pf-sticky">
+      <div class="pf-glow" aria-hidden="true"></div>
+      <div class="tablet" aria-hidden="true">
         <div class="term">
           <div class="term-bar">
             <span class="term-sym"><b>XAU/USD</b> <span class="mono">2,684.35</span> <em class="up">+0.74%</em></span>
@@ -332,39 +271,37 @@
               <li><b>NVDA</b><span data-q="138.62">138.62</span><em class="dn">−1.12%</em></li>
               <li><b>BRENT</b><span data-q="73.05">73.05</span><em class="dn">−0.35%</em></li>
               <li><b>GER40</b><span data-q="19412.7">19,412.7</span><em class="up">+0.21%</em></li>
-              <li><b>BTC/USD</b><span data-q="68210">68,210</span><em class="up">+1.86%</em></li>
             </ul>
           </div>
         </div>
       </div>
     </div>
-
-    <div class="pf-tiles">
-      <article class="card tile tile-orange rv" style="--d:0">
+  </div>
+  <div class="wrap">
+    <div class="bento pf-tiles">
+      <article class="tile tile-orange rv" style="--d:0">
+        <div class="tile-head"><h3 class="h3">{{platform.t1_t}}</h3><p>{{platform.t1_d}}</p></div>
         <svg class="schema" viewBox="0 0 400 220" aria-hidden="true">
-          <g fill="none" stroke="#080909" stroke-width="1.5">
+          <g fill="none" stroke="#000" stroke-width="1.5">
             <path class="wire" d="M200 110 H60 V40"/><path class="wire" d="M200 110 H340 V40"/>
             <path class="wire" d="M200 110 V190 H90"/><path class="wire" d="M200 110 V190 H310"/>
-            <rect x="170" y="86" width="60" height="48" rx="6" fill="#080909"/>
+            <rect x="166" y="86" width="68" height="48" rx="14" fill="#000"/>
             <circle cx="60" cy="40" r="10"/><circle cx="340" cy="40" r="10"/><circle cx="90" cy="190" r="10"/><circle cx="310" cy="190" r="10"/>
           </g>
-          <text x="200" y="117" text-anchor="middle" font-family="Geist Mono, monospace" font-size="14" fill="#FF711D">ABX</text>
+          <text x="200" y="116" text-anchor="middle" font-family="Inter Tight, sans-serif" font-weight="700" font-size="15" fill="#FF711D">ABX</text>
         </svg>
-        <div class="card-body">
-          <h3 class="h3">{{platform.t1_t}}</h3><p>{{platform.t1_d}}</p>
-        </div>
       </article>
-
-      <article class="card tile tile-photo rv" style="--d:1">
-        <div class="card-media">
+      <article class="tile tile-photo rv" style="--d:1">
+        <div class="tile-head"><h3 class="h3">{{platform.t2_t}}</h3><p>{{platform.t2_d}}</p></div>
+        <div class="tile-media">
           <div class="art art-wheel" aria-hidden="true">
             <svg viewBox="0 0 400 260">
               <g fill="url(#g-body)" stroke="url(#g-rim)" stroke-width="1.5">
                 <path d="M60 70 C60 50 80 40 110 40 H290 C320 40 340 50 340 70 L360 170 C364 196 344 214 320 214 H280 L262 186 H138 L120 214 H80 C56 214 36 196 40 170 Z"/>
               </g>
-              <rect x="146" y="70" width="108" height="76" rx="6" fill="#050505" stroke="#2a2c2f"/>
-              <text x="200" y="118" text-anchor="middle" font-family="Archivo, sans-serif" font-weight="800" font-size="40" fill="#FF711D">7</text>
-              <text x="200" y="138" text-anchor="middle" font-family="Geist Mono, monospace" font-size="11" fill="#B9B7B0">312 KM/H</text>
+              <rect x="146" y="70" width="108" height="76" rx="10" fill="#050505" stroke="#2a2c2f"/>
+              <text x="200" y="118" text-anchor="middle" font-family="Inter Tight, sans-serif" font-weight="800" font-size="40" fill="#FF711D">7</text>
+              <text x="200" y="138" text-anchor="middle" font-family="Geist Mono, monospace" font-size="11" fill="#A1A1A6">312 KM/H</text>
               <g class="leds">
                 <circle cx="150" cy="56" r="4"/><circle cx="164" cy="56" r="4"/><circle cx="178" cy="56" r="4"/><circle cx="192" cy="56" r="4"/>
                 <circle cx="208" cy="56" r="4"/><circle cx="222" cy="56" r="4"/><circle cx="236" cy="56" r="4"/><circle cx="250" cy="56" r="4"/>
@@ -372,116 +309,109 @@
               <g fill="#1d1e20" stroke="#2a2c2f"><circle cx="100" cy="110" r="10"/><circle cx="100" cy="146" r="10"/><circle cx="300" cy="110" r="10"/><circle cx="300" cy="146" r="10"/></g>
             </svg>
           </div>
-          <!-- Client photo slot: cockpit <picture> img/v2/cockpit-*.webp, loading="lazy" -->
           <span class="tv-badge">{{platform.t2_badge}}</span>
         </div>
-        <div class="card-body">
-          <h3 class="h3">{{platform.t2_t}}</h3><p>{{platform.t2_d}}</p>
-        </div>
       </article>
-
-      <article class="card tile tile-dark rv" style="--d:2">
+      <article class="tile tile-dark rv" style="--d:2">
+        <div class="tile-head"><h3 class="h3">{{platform.t3_t}}</h3><p>{{platform.t3_d}}</p></div>
         <div class="phone" aria-hidden="true">
           <div class="phone-screen">
+            <span class="ph-island"></span>
             <span class="ph-label">{{platform.balance}}</span>
             <b class="ph-bal">€48,216.40</b>
             <em class="up">+€1,204.18 · 2.56%</em>
             <svg viewBox="0 0 200 90" preserveAspectRatio="none" class="ph-chart" data-spark></svg>
             <span class="ph-row"><b>TSLA</b><i class="up">+2.41%</i></span>
             <span class="ph-row"><b>XAU</b><i class="up">+0.74%</i></span>
-            <span class="ph-row"><b>NVDA</b><i class="dn">−1.12%</i></span>
           </div>
-        </div>
-        <div class="card-body">
-          <h3 class="h3">{{platform.t3_t}}</h3><p>{{platform.t3_d}}</p>
         </div>
       </article>
     </div>
   </div>
 </section>
 
-<!-- 06 · SECURITY & TRANSPARENCY -->
+<!-- 06 · SECURITY -->
 <section class="sec" id="security" aria-labelledby="security-title">
   <div class="wrap">
-    <div class="sec-head">
-      <div>
-        <p class="eyebrow rv"><span>06 / {{security.label}}</span></p>
-        <h2 class="h2 rv" id="security-title"><span>{{security.h_1}}</span> <span class="l2">{{security.h_2}}</span></h2>
-      </div>
+    <div class="center-head">
+      <p class="kicker rv"><span class="mono">06</span>{{security.label}}</p>
+      <h2 class="h2 rv" id="security-title"><span>{{security.h_1}}</span> <span class="l2">{{security.h_2}}</span></h2>
       <p class="lead rv">{{security.lead}}</p>
     </div>
     <div class="sec-grid">
-      <article class="card sec-card rv" style="--d:0">
+      <article class="tile sec-card rv" style="--d:0">
         <svg class="render" viewBox="0 0 200 220" aria-hidden="true"><use href="#r-shield"/></svg>
         <h3 class="h4">{{security.c1_t}}</h3><p>{{security.c1_d}}</p>
       </article>
-      <article class="card sec-card rv" style="--d:1">
+      <article class="tile sec-card rv" style="--d:1">
         <svg class="render" viewBox="0 0 200 220" aria-hidden="true"><use href="#r-coin"/></svg>
         <h3 class="h4">{{security.c2_t}}</h3><p>{{security.c2_d}}</p>
       </article>
-      <article class="card sec-card rv" style="--d:2">
+      <article class="tile sec-card rv" style="--d:2">
         <svg class="render" viewBox="0 0 200 220" aria-hidden="true"><use href="#r-badge"/></svg>
         <h3 class="h4">{{security.c3_t}}</h3><p>{{security.c3_d}}</p>
       </article>
     </div>
     <div class="regs rv">
-      <span class="eyebrow eyebrow-plain">{{security.reg}}</span>
-      <div class="reg" data-placeholder="cysec-licence"><b>CySEC</b><span>{{security.reg1_d}}</span></div>
-      <div class="reg"><b>MiFID II</b><span>{{security.reg2_d}}</span></div>
+      <span class="regs-l">{{security.reg}}</span>
+      <span class="reg" data-placeholder="cysec-licence"><b>CySEC</b><span>{{security.reg1_d}}</span></span>
+      <span class="reg"><b>MiFID II</b><span>{{security.reg2_d}}</span></span>
     </div>
   </div>
 </section>
 
-<!-- 07 · ACCOUNT TYPES -->
+<!-- 07 · ACCOUNTS — Revolut plan cards + Apple compare columns -->
 <section class="sec" id="accounts" aria-labelledby="accounts-title">
   <div class="wrap">
-    <div class="sec-head">
-      <div>
-        <p class="eyebrow rv"><span>07 / {{accounts.label}}</span></p>
-        <h2 class="h2 rv" id="accounts-title"><span>{{accounts.h_1}}</span> <span class="l2">{{accounts.h_2}}</span></h2>
-      </div>
+    <div class="center-head">
+      <p class="kicker rv"><span class="mono">07</span>{{accounts.label}}</p>
+      <h2 class="h2 rv" id="accounts-title"><span>{{accounts.h_1}}</span> <span class="l2">{{accounts.h_2}}</span></h2>
       <p class="lead rv">{{accounts.lead}}</p>
     </div>
 
-    <ul class="acc-grid" data-placeholder="account-features">
-      <li class="card acc rv" style="--d:0">
-        <h3 class="acc-name">Classic</h3>
-        <p class="acc-from"><span>{{accounts.from}}</span><b>€50k</b></p>
-        <ul class="chev"><li>{{accounts.classic_1}}</li><li>{{accounts.classic_2}}</li><li>{{accounts.classic_3}}</li></ul>
-        <a class="btn btn-ghost" href="#">{{accounts.select}}<svg class="ic" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+    <ul class="plans" data-placeholder="account-features">
+      <li class="plan rv" style="--d:0">
+        <div class="plate plate-classic" aria-hidden="true"><span class="plate-logo">ABX</span><span class="plate-tier">Classic</span><span class="plate-chip"></span></div>
+        <h3 class="plan-name">Classic</h3>
+        <p class="plan-from">{{accounts.from}} <b>€50k</b></p>
+        <a class="pill pill-white" href="#">{{accounts.select}}</a>
+        <ul class="plan-feat"><li>{{accounts.classic_1}}</li><li>{{accounts.classic_2}}</li><li>{{accounts.classic_3}}</li></ul>
       </li>
-      <li class="card acc rv" style="--d:1">
-        <h3 class="acc-name">Premium</h3>
-        <p class="acc-from"><span>{{accounts.from}}</span><b>€100k</b></p>
-        <ul class="chev"><li>{{accounts.premium_1}}</li><li>{{accounts.premium_2}}</li><li>{{accounts.premium_3}}</li></ul>
-        <a class="btn btn-ghost" href="#">{{accounts.select}}<svg class="ic" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+      <li class="plan rv" style="--d:1">
+        <div class="plate plate-premium" aria-hidden="true"><span class="plate-logo">ABX</span><span class="plate-tier">Premium</span><span class="plate-chip"></span></div>
+        <h3 class="plan-name">Premium</h3>
+        <p class="plan-from">{{accounts.from}} <b>€100k</b></p>
+        <a class="pill pill-white" href="#">{{accounts.select}}</a>
+        <ul class="plan-feat"><li>{{accounts.premium_1}}</li><li>{{accounts.premium_2}}</li><li>{{accounts.premium_3}}</li></ul>
       </li>
-      <li class="card acc acc-pop rv" style="--d:2">
-        <span class="badge">{{accounts.popular}}</span>
-        <h3 class="acc-name">Elite</h3>
-        <p class="acc-from"><span>{{accounts.from}}</span><b>€250k</b></p>
-        <ul class="chev"><li>{{accounts.elite_1}}</li><li>{{accounts.elite_2}}</li><li>{{accounts.elite_3}}</li></ul>
-        <a class="btn btn-primary" href="#">{{accounts.select}}<svg class="ic" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+      <li class="plan plan-pop rv" style="--d:2">
+        <div class="plate plate-elite" aria-hidden="true"><span class="plate-logo">ABX</span><span class="plate-tier">Elite</span><span class="plate-chip"></span><span class="plate-ramp">///</span></div>
+        <h3 class="plan-name">Elite <span class="badge">{{accounts.popular}}</span></h3>
+        <p class="plan-from">{{accounts.from}} <b>€250k</b></p>
+        <a class="pill pill-orange" href="#">{{accounts.select}}</a>
+        <ul class="plan-feat"><li>{{accounts.elite_1}}</li><li>{{accounts.elite_2}}</li><li>{{accounts.elite_3}}</li></ul>
       </li>
-      <li class="card acc rv" style="--d:3">
-        <h3 class="acc-name">Private</h3>
-        <p class="acc-from"><span>{{accounts.from}}</span><b>€500k</b></p>
-        <ul class="chev"><li>{{accounts.private_1}}</li><li>{{accounts.private_2}}</li><li>{{accounts.private_3}}</li></ul>
-        <a class="btn btn-ghost" href="#">{{accounts.select}}<svg class="ic" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+      <li class="plan rv" style="--d:3">
+        <div class="plate plate-private" aria-hidden="true"><span class="plate-logo">ABX</span><span class="plate-tier">Private</span><span class="plate-chip"></span></div>
+        <h3 class="plan-name">Private</h3>
+        <p class="plan-from">{{accounts.from}} <b>€500k</b></p>
+        <a class="pill pill-white" href="#">{{accounts.select}}</a>
+        <ul class="plan-feat"><li>{{accounts.private_1}}</li><li>{{accounts.private_2}}</li><li>{{accounts.private_3}}</li></ul>
       </li>
     </ul>
 
     <article class="ex rv" data-ex>
       <div class="ex-head">
+        <div class="plate plate-ex" aria-hidden="true"><span class="plate-logo">ABX</span><span class="plate-tier">Exclusive</span><span class="plate-chip"></span><span class="plate-ramp">///</span></div>
         <div class="ex-id">
-          <p class="eyebrow eyebrow-plain">{{accounts.ex_kicker}}</p>
+          <p class="ex-kicker">{{accounts.ex_kicker}}</p>
           <h3 class="ex-name" id="ex-title">Exclusive <span>€1M</span></h3>
           <p class="ex-d">{{accounts.ex_d}}</p>
+          <button class="pill pill-silver pill-lg" type="button" aria-expanded="false" aria-controls="ex-perks" data-ex-toggle>
+            <span class="lockic" aria-hidden="true"><svg class="ic lk-closed"><use href="#i-lock"/></svg><svg class="ic lk-open"><use href="#i-lock-open"/></svg></span>
+            <span class="ex-label" data-open-label="{{accounts.ex_lock}}" data-closed-label="{{accounts.ex_unlock}}">{{accounts.ex_unlock}}</span>
+          </button>
         </div>
-        <button class="btn btn-silver" type="button" aria-expanded="false" aria-controls="ex-perks" data-ex-toggle>
-          <span class="lockic" aria-hidden="true"><svg class="ic lk-closed"><use href="#i-lock"/></svg><svg class="ic lk-open"><use href="#i-lock-open"/></svg></span>
-          <span class="ex-label" data-open-label="{{accounts.ex_lock}}" data-closed-label="{{accounts.ex_unlock}}">{{accounts.ex_unlock}}</span>
-        </button>
       </div>
       <div class="ex-body" id="ex-perks" role="region" aria-labelledby="ex-title" inert>
         <div class="ex-inner">
@@ -491,22 +421,23 @@
             <li><span class="mono">03</span><b>{{accounts.ex_p3_t}}</b><p>{{accounts.ex_p3_d}}</p></li>
             <li><span class="mono">04</span><b>{{accounts.ex_p4_t}}</b><p>{{accounts.ex_p4_d}}</p></li>
           </ul>
-          <a class="btn btn-primary" href="#">{{accounts.ex_cta}}<svg class="ic" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+          <a class="pill pill-orange" href="#">{{accounts.ex_cta}}<svg class="ic" aria-hidden="true"><use href="#i-arrow"/></svg></a>
         </div>
       </div>
     </article>
   </div>
 </section>
 
-<!-- 08 · GETTING STARTED -->
+<!-- 08 · GETTING STARTED — start lights + private-bank numerals -->
 <section class="sec" aria-labelledby="steps-title">
   <div class="wrap">
-    <div class="sec-head">
-      <div>
-        <p class="eyebrow rv"><span>08 / {{steps.label}}</span></p>
-        <h2 class="h2 rv" id="steps-title"><span>{{steps.h_1}}</span> <span class="l2">{{steps.h_2}}</span></h2>
-      </div>
+    <div class="center-head">
+      <p class="kicker rv"><span class="mono">08</span>{{steps.label}}</p>
+      <h2 class="h2 rv" id="steps-title"><span>{{steps.h_1}}</span> <span class="l2">{{steps.h_2}}</span></h2>
       <p class="lead rv">{{steps.lead}}</p>
+    </div>
+    <div class="lights" data-lights aria-hidden="true">
+      <span class="pod"><i></i><i></i></span><span class="pod"><i></i><i></i></span><span class="pod"><i></i><i></i></span><span class="pod"><i></i><i></i></span>
     </div>
     <ol class="steps">
       <li class="step rv" style="--d:0"><span class="step-n" aria-hidden="true">01</span><h3 class="h4">{{steps.s1_t}}</h3><p>{{steps.s1_d}}</p></li>
@@ -514,6 +445,7 @@
       <li class="step rv" style="--d:2"><span class="step-n" aria-hidden="true">03</span><h3 class="h4">{{steps.s3_t}}</h3><p>{{steps.s3_d}}</p></li>
       <li class="step rv" style="--d:3"><span class="step-n" aria-hidden="true">04</span><h3 class="h4">{{steps.s4_t}}</h3><p>{{steps.s4_d}}</p></li>
     </ol>
+    <p class="lights-cap rv">{{steps.lights}}</p>
   </div>
 </section>
 
@@ -521,67 +453,71 @@
 <section class="sec" id="faq" aria-labelledby="faq-title">
   <div class="wrap faq">
     <div class="faq-side">
-      <p class="eyebrow rv"><span>09 / {{faq.label}}</span></p>
+      <p class="kicker rv"><span class="mono">09</span>{{faq.label}}</p>
       <h2 class="h2 rv" id="faq-title"><span>{{faq.h_1}}</span> <span class="l2">{{faq.h_2}}</span></h2>
-      <div class="card still rv">
+      <div class="tile still rv">
         <h3 class="h4">{{faq.still_t}}</h3><p>{{faq.still_d}}</p>
-        <a class="btn btn-ghost" href="#"><svg class="ic" aria-hidden="true"><use href="#i-message"/></svg>{{faq.still_cta}}</a>
+        <a class="pill pill-white" href="#"><svg class="ic" aria-hidden="true"><use href="#i-message"/></svg>{{faq.still_cta}}</a>
       </div>
     </div>
     <div class="acc-list" data-accordion>
-      <div class="qa is-open rv"><h3><button type="button" id="q1" aria-expanded="true" aria-controls="a1">{{faq.q1}}<svg class="ic" aria-hidden="true"><use href="#i-plus"/></svg></button></h3><div class="qa-a" id="a1" role="region" aria-labelledby="q1"><div><p>{{faq.a1}}</p></div></div></div>
-      <div class="qa rv"><h3><button type="button" id="q2" aria-expanded="false" aria-controls="a2">{{faq.q2}}<svg class="ic" aria-hidden="true"><use href="#i-plus"/></svg></button></h3><div class="qa-a" id="a2" role="region" aria-labelledby="q2" inert><div><p>{{faq.a2}}</p></div></div></div>
-      <div class="qa rv"><h3><button type="button" id="q3" aria-expanded="false" aria-controls="a3">{{faq.q3}}<svg class="ic" aria-hidden="true"><use href="#i-plus"/></svg></button></h3><div class="qa-a" id="a3" role="region" aria-labelledby="q3" inert><div><p>{{faq.a3}}</p></div></div></div>
-      <div class="qa rv"><h3><button type="button" id="q4" aria-expanded="false" aria-controls="a4">{{faq.q4}}<svg class="ic" aria-hidden="true"><use href="#i-plus"/></svg></button></h3><div class="qa-a" id="a4" role="region" aria-labelledby="q4" inert><div><p>{{faq.a4}}</p></div></div></div>
-      <div class="qa rv"><h3><button type="button" id="q5" aria-expanded="false" aria-controls="a5">{{faq.q5}}<svg class="ic" aria-hidden="true"><use href="#i-plus"/></svg></button></h3><div class="qa-a" id="a5" role="region" aria-labelledby="q5" inert><div><p>{{faq.a5}}</p></div></div></div>
-      <div class="qa rv"><h3><button type="button" id="q6" aria-expanded="false" aria-controls="a6">{{faq.q6}}<svg class="ic" aria-hidden="true"><use href="#i-plus"/></svg></button></h3><div class="qa-a" id="a6" role="region" aria-labelledby="q6" inert><div><p>{{faq.a6}}</p></div></div></div>
+      <div class="qa is-open rv"><h3><button type="button" id="q1" aria-expanded="true" aria-controls="a1">{{faq.q1}}<span class="qa-ic"><svg class="ic" aria-hidden="true"><use href="#i-plus"/></svg></span></button></h3><div class="qa-a" id="a1" role="region" aria-labelledby="q1"><div><p>{{faq.a1}}</p></div></div></div>
+      <div class="qa rv"><h3><button type="button" id="q2" aria-expanded="false" aria-controls="a2">{{faq.q2}}<span class="qa-ic"><svg class="ic" aria-hidden="true"><use href="#i-plus"/></svg></span></button></h3><div class="qa-a" id="a2" role="region" aria-labelledby="q2" inert><div><p>{{faq.a2}}</p></div></div></div>
+      <div class="qa rv"><h3><button type="button" id="q3" aria-expanded="false" aria-controls="a3">{{faq.q3}}<span class="qa-ic"><svg class="ic" aria-hidden="true"><use href="#i-plus"/></svg></span></button></h3><div class="qa-a" id="a3" role="region" aria-labelledby="q3" inert><div><p>{{faq.a3}}</p></div></div></div>
+      <div class="qa rv"><h3><button type="button" id="q4" aria-expanded="false" aria-controls="a4">{{faq.q4}}<span class="qa-ic"><svg class="ic" aria-hidden="true"><use href="#i-plus"/></svg></span></button></h3><div class="qa-a" id="a4" role="region" aria-labelledby="q4" inert><div><p>{{faq.a4}}</p></div></div></div>
+      <div class="qa rv"><h3><button type="button" id="q5" aria-expanded="false" aria-controls="a5">{{faq.q5}}<span class="qa-ic"><svg class="ic" aria-hidden="true"><use href="#i-plus"/></svg></span></button></h3><div class="qa-a" id="a5" role="region" aria-labelledby="q5" inert><div><p>{{faq.a5}}</p></div></div></div>
+      <div class="qa rv"><h3><button type="button" id="q6" aria-expanded="false" aria-controls="a6">{{faq.q6}}<span class="qa-ic"><svg class="ic" aria-hidden="true"><use href="#i-plus"/></svg></span></button></h3><div class="qa-a" id="a6" role="region" aria-labelledby="q6" inert><div><p>{{faq.a6}}</p></div></div></div>
     </div>
   </div>
 </section>
 
-<!-- 10 · FINAL CTA -->
+<!-- 10 · FINAL CTA — Apple-style centred close over the car -->
 <section class="final" aria-labelledby="final-title">
   <div class="final-media" aria-hidden="true">
     <div class="final-zoom">
       <svg class="final-car" viewBox="0 0 1000 260">
         <use href="#r-car"/>
-        <text x="575" y="182" text-anchor="middle" font-family="Archivo, sans-serif" font-weight="800" font-size="34" letter-spacing="-1" fill="#FF711D" opacity=".9">ABX</text>
+        <text x="575" y="182" text-anchor="middle" font-family="Inter Tight, sans-serif" font-weight="800" font-size="34" letter-spacing="-1" fill="#FF711D" opacity=".9">ABX</text>
       </svg>
     </div>
   </div>
   <div class="wrap final-body">
-    <p class="eyebrow rv"><span>10 / {{final.label}}</span></p>
-    <h2 class="h-display h-final rv" id="final-title">
+    <p class="kicker rv"><span class="mono">10</span>{{final.label}}</p>
+    <h2 class="display display-final rv" id="final-title">
       <span class="l1">{{final.h_1}}</span>
       <span class="l2"><span class="nw">{{final.h_2}}<svg class="ramp" viewBox="0 0 132 100" aria-hidden="true"><path d="M4 100h26L60 0H34z"/><path d="M40 100h26L96 0H70z"/><path d="M76 100h26l30-100h-26z"/></svg></span></span>
     </h2>
-    <a class="btn btn-primary btn-lg rv" href="#accounts">{{final.cta}}<svg class="ic" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+    <p class="lead rv">{{final.sub}}</p>
+    <a class="pill pill-orange pill-lg rv" href="#accounts">{{final.cta}}<svg class="ic" aria-hidden="true"><use href="#i-arrow"/></svg></a>
   </div>
 </section>
 </main>
 
+<!-- Footer — Apple-style footnotes first, then link columns -->
 <footer class="foot">
   <div class="wrap">
+    <div class="foot-legal">
+      <p data-placeholder="cfd-percent">{{footer.disclaimer}}</p>
+      <p data-placeholder="cysec-licence">{{footer.entity}}</p>
+    </div>
     <div class="foot-top">
       <div class="foot-brand">
         <a class="logo" href="#top" aria-label="ABX Global">
           <svg class="logo-mark" viewBox="0 0 60 40" aria-hidden="true"><path d="M8 40h11L37 0H26zM26 40h11L55 0H44z" fill="#FF711D"/></svg>
-          <span class="logo-word">ABX</span><span class="logo-sub">Global</span>
+          <span class="logo-word">ABX</span>
         </a>
         <p>{{footer.tagline}}</p>
-        <div class="lang" role="group" aria-label="{{nav.lang}}">
-          <a href="{{=href_cs}}" hreflang="cs" lang="cs" {{=cur_cs}}>CS</a>
-          <a href="{{=href_en}}" hreflang="en" lang="en" {{=cur_en}}>EN</a>
-        </div>
       </div>
       <nav class="foot-col" aria-labelledby="fm"><h2 id="fm">{{footer.markets}}</h2><ul><li><a href="#markets">{{footer.m1}}</a></li><li><a href="#markets">{{footer.m2}}</a></li><li><a href="#markets">{{footer.m3}}</a></li><li><a href="#markets">{{footer.m4}}</a></li><li><a href="#markets">{{footer.m5}}</a></li></ul></nav>
       <nav class="foot-col" aria-labelledby="fc"><h2 id="fc">{{footer.company}}</h2><ul><li><a href="#">{{footer.c1}}</a></li><li><a href="#">{{footer.c2}}</a></li><li><a href="#">{{footer.c3}}</a></li><li><a href="#">{{footer.c4}}</a></li></ul></nav>
       <nav class="foot-col" aria-labelledby="fl"><h2 id="fl">{{footer.legal}}</h2><ul><li><a href="#">{{footer.l1}}</a></li><li><a href="#">{{footer.l2}}</a></li><li><a href="#">{{footer.l3}}</a></li><li><a href="#">{{footer.l4}}</a></li><li><a href="#">{{footer.l5}}</a></li></ul></nav>
     </div>
-    <div class="foot-legal">
-      <p data-placeholder="cfd-percent">{{footer.disclaimer}}</p>
-      <p data-placeholder="cysec-licence">{{footer.entity}}</p>
+    <div class="foot-bottom">
       <p>{{footer.rights}}</p>
+      <div class="lang" role="group" aria-label="{{nav.lang}}">
+        <a href="{{=href_cs}}" hreflang="cs" lang="cs" {{=cur_cs}}>Čeština</a>
+        <a href="{{=href_en}}" hreflang="en" lang="en" {{=cur_en}}>English</a>
+      </div>
     </div>
   </div>
 </footer>

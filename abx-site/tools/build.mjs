@@ -6,7 +6,7 @@ import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
-const tpl = readFileSync(join(root, 'src/index.html'), 'utf8');
+const tpl = readFileSync(join(root, 'src/index.html'), 'utf8').replace('<!--SPRITE-->', readFileSync(join(root, 'src/_sprite.html'), 'utf8'));
 const langs = ['cs', 'en'];
 const dict = Object.fromEntries(langs.map(l => [l, JSON.parse(readFileSync(join(root, `content/${l}.json`), 'utf8'))]));
 

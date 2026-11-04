@@ -2,16 +2,13 @@
   "meta.title": "ABX Global — Trade with the best",
   "meta.description": "Stocks, ETFs, commodities, forex and indices on one platform. An EU-regulated broker.",
   "skip": "Skip to content",
-
   "nav.markets": "Markets",
   "nav.platform": "Platform",
   "nav.security": "Security",
   "nav.accounts": "Accounts",
   "nav.faq": "FAQ",
   "nav.login": "Log in",
-  "nav.open": "Open account",
   "nav.lang": "Language",
-
   "hero.tag": "Pre-IPO",
   "hero.eyebrow": "SpaceX and Stripe now on ABX",
   "hero.h1_1": "Trade with",
@@ -24,10 +21,7 @@
   "hero.a1": "Markets",
   "hero.a2": "Technology",
   "hero.a3": "Your strategy",
-  "hero.risk": "CFDs are complex instruments and come with a high risk of losing money rapidly due to leverage. XX% of retail investor accounts lose money when trading CFDs with this provider.",
-
   "trust.label": "Trust",
-  "trust.h": "Trusted by traders worldwide",
   "trust.n1": "21,500+",
   "trust.n1_l": "traders worldwide",
   "trust.n2": "133+",
@@ -37,7 +31,6 @@
   "trust.n4": "15+",
   "trust.n4_l": "years on the markets",
   "trust.partners": "Payment, banking and infrastructure partners",
-
   "markets.label": "Markets",
   "markets.h_1": "Every market.",
   "markets.h_2": "One account.",
@@ -50,7 +43,6 @@
   "markets.fx_t": "Forex & Indices",
   "markets.fx_d": "60+ currency pairs and the world's major indices.",
   "markets.more": "Learn more",
-
   "why.label": "Why ABX",
   "why.h_1": "Built for traders.",
   "why.h_2": "Measured in numbers.",
@@ -70,7 +62,6 @@
   "why.c4_t": "Personal service",
   "why.c4_d": "A dedicated account manager who knows your strategy.",
   "why.disclaimer": "An interest rate of up to 5% p.a. applies to Elite accounts and above; the standard rate is 3.25% p.a. Rates are variable and may change. Full terms apply.",
-
   "platform.label": "Trading Platform",
   "platform.h_1": "Your view.",
   "platform.h_2": "Your decision.",
@@ -87,7 +78,6 @@
   "platform.t3_t": "Web. Mobile. Your space.",
   "platform.t3_d": "Start on desktop, finish on your phone. Your layouts follow you.",
   "platform.balance": "Balance",
-
   "security.label": "Security & Transparency",
   "security.h_1": "Your money.",
   "security.h_2": "Protected.",
@@ -101,7 +91,6 @@
   "security.reg": "Regulated by",
   "security.reg1_d": "Licence no. 000/00",
   "security.reg2_d": "EU-wide passporting",
-
   "accounts.label": "Account Types",
   "accounts.h_1": "Choose your",
   "accounts.h_2": "level.",
@@ -134,7 +123,6 @@
   "accounts.ex_p4_t": "Events & hospitality",
   "accounts.ex_p4_d": "Invitations to private events, including race weekends.",
   "accounts.ex_cta": "Request an invitation",
-
   "steps.label": "Getting Started",
   "steps.h_1": "Four steps.",
   "steps.h_2": "Then the markets.",
@@ -147,7 +135,6 @@
   "steps.s3_d": "Deposit by card, bank transfer or e-wallet.",
   "steps.s4_t": "Start trading",
   "steps.s4_d": "Pick a market, set your risk and place your first trade.",
-
   "faq.label": "FAQ",
   "faq.h_1": "Questions.",
   "faq.h_2": "Answered.",
@@ -166,12 +153,10 @@
   "faq.a5": "Deposit by card, bank transfer or e-wallet. Withdrawals are usually processed within 24 hours, back to the account the deposit came from.",
   "faq.q6": "Can I trade on mobile?",
   "faq.a6": "Yes. The ABX app for iOS and Android has the same tools, charts and accounts as the web platform.",
-
   "final.label": "Start",
   "final.h_1": "Your markets.",
   "final.h_2": "Your next move.",
   "final.cta": "Open an account",
-
   "footer.tagline": "Global markets. Technology in your hands.",
   "footer.markets": "Markets",
   "footer.m1": "Stocks & ETFs",
@@ -192,5 +177,23 @@
   "footer.l5": "Complaints",
   "footer.disclaimer": "Risk warning: CFDs are complex instruments and come with a high risk of losing money rapidly due to leverage. XX% of retail investor accounts lose money when trading CFDs with this provider. You should consider whether you understand how CFDs work and whether you can afford to take the high risk of losing your money. Past performance is not a reliable indicator of future results. The information on this website does not constitute investment advice.",
   "footer.entity": "ABX Global Ltd is authorised and regulated by the Cyprus Securities and Exchange Commission (CySEC), licence no. 000/00.",
-  "footer.rights": "© 2026 ABX Global. All rights reserved."
+  "footer.rights": "© 2026 ABX Global. All rights reserved.",
+  "risk.bar": "CFDs are complex instruments with a high risk of losing money rapidly due to leverage. XX% of retail investor accounts lose money when trading CFDs with this provider.",
+  "nav.signup": "Open account",
+  "trust.h_1": "Trusted on the grid.",
+  "trust.h_2": "Worldwide.",
+  "markets.tab_all": "Popular",
+  "markets.tab_stocks": "Stocks",
+  "markets.tab_comm": "Commodities",
+  "markets.tab_fx": "Forex",
+  "markets.tab_idx": "Indices",
+  "markets.col_pos": "Pos",
+  "markets.col_inst": "Instrument",
+  "markets.col_chg": "Change",
+  "markets.col_sell": "Sell",
+  "markets.col_buy": "Buy",
+  "markets.table_note": "Indicative prices. Live quotes in the platform.",
+  "markets.table_aria": "Market prices",
+  "steps.lights": "Lights out and away we go.",
+  "final.sub": "Open your account in minutes. Trade the world's markets from one place."
 }

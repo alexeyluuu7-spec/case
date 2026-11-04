@@ -128,6 +128,72 @@
     svg.appendChild(el('path', { d, fill: 'none', stroke: '#FF711D', 'stroke-width': 1.6, 'vector-effect': 'non-scaling-stroke' }));
   });
 
+
+  /* Markets timing tower: tab filter, re-numbered positions, leader highlight */
+  $$('[data-tower]').forEach(tower => {
+    const tabs = $$('[role="tab"]', tower), rows = $$('tbody tr', tower);
+    const apply = f => {
+      let n = 0;
+      rows.forEach(r => {
+        const show = r.dataset.cat.split(' ').includes(f);
+        r.hidden = !show;
+        r.classList.toggle('lead', show && n === 0);
+        if (show) $('.c-pos b', r).textContent = 'P' + (++n);
+      });
+      tabs.forEach(t => t.setAttribute('aria-selected', String(t.dataset.filter === f)));
+    };
+    tabs.forEach(t => t.addEventListener('click', () => apply(t.dataset.filter)));
+    apply('pop');
+  });
+  $$('[data-spark-row]').forEach(svg => {
+    const r = rng(Number(svg.dataset.sparkRow)), down = svg.hasAttribute('data-down');
+    let v = 14; const pts = [];
+    for (let i = 0; i <= 24; i++) { v += (r() - 0.5) * 6 + (down ? 0.25 : -0.25); v = Math.max(4, Math.min(24, v)); pts.push([i * 100 / 24, v]); }
+    svg.appendChild(el('path', { d: 'M' + pts.map(p => p.join(' ')).join(' L'), fill: 'none', stroke: down ? '#FF5A4E' : '#3FD17A', 'stroke-width': 1.5, 'vector-effect': 'non-scaling-stroke' }));
+  });
+
+  /* Platform scroll story: tablet straightens and grows with scroll progress */
+  const pf = $('[data-pf]');
+  if (pf && !reduce()) {
+    const tab = $('.tablet', pf), glow = $('.pf-glow', pf);
+    let ticking = false;
+    const update = () => {
+      ticking = false;
+      if (window.innerWidth <= 680) { tab.style.removeProperty('--rx'); tab.style.removeProperty('--sc'); return; }
+      const r = pf.getBoundingClientRect();
+      const t = Math.min(1, Math.max(0, (innerHeight - r.top) / (r.height * 0.75)));
+      const e = 1 - Math.pow(1 - t, 3);
+      tab.style.setProperty('--rx', (24 - 24 * e).toFixed(2) + 'deg');
+      tab.style.setProperty('--sc', (0.82 + 0.18 * e).toFixed(3));
+      glow.style.setProperty('--glow', (0.3 + 0.7 * e).toFixed(2));
+    };
+    const onS = () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } };
+    window.addEventListener('scroll', onS, { passive: true });
+    window.addEventListener('resize', onS);
+    update();
+  }
+
+  /* Start lights: pods light one by one, then "lights out", then the steps light up */
+  const lights = $('[data-lights]');
+  if (lights) {
+    const pods = $$('.pod', lights), steps = $$('.step');
+    const finish = () => { pods.forEach(p => p.classList.add('on')); steps.forEach(s => s.classList.add('is-lit')); };
+    if (reduce() || !('IntersectionObserver' in window)) finish();
+    else {
+      const io = new IntersectionObserver(([en]) => {
+        if (!en.isIntersecting) return;
+        io.disconnect();
+        pods.forEach((p, i) => setTimeout(() => p.classList.add('on'), 450 + i * 550));
+        setTimeout(() => {
+          lights.classList.add('out');
+          steps.forEach((s, i) => setTimeout(() => s.classList.add('is-lit'), i * 120));
+          setTimeout(() => lights.classList.remove('out'), 1400);
+        }, 450 + pods.length * 550 + 700);
+      }, { threshold: 0.6 });
+      io.observe(lights);
+    }
+  }
+
   /* Watchlist ticks (illustrative quotes, flagged as placeholders) */
   const quotes = $$('[data-q]');
   if (quotes.length && !reduce()) {

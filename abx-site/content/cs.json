@@ -2,16 +2,13 @@
   "meta.title": "ABX Global — Obchodujte s nejlepšími",
   "meta.description": "Akcie, ETF, komodity, forex a indexy na jedné platformě. Broker regulovaný v EU.",
   "skip": "Přeskočit na obsah",
-
   "nav.markets": "Trhy",
   "nav.platform": "Platforma",
   "nav.security": "Bezpečnost",
   "nav.accounts": "Účty",
   "nav.faq": "FAQ",
   "nav.login": "Přihlásit",
-  "nav.open": "Otevřít účet",
   "nav.lang": "Jazyk",
-
   "hero.tag": "Pre-IPO",
   "hero.eyebrow": "SpaceX a Stripe nyní na ABX",
   "hero.h1_1": "Obchodujte s",
@@ -24,10 +21,7 @@
   "hero.a1": "Trhy",
   "hero.a2": "Technologie",
   "hero.a3": "Vaše strategie",
-  "hero.risk": "CFD jsou složité nástroje a kvůli pákovému efektu s sebou nesou vysoké riziko rychlé ztráty peněz. XX % účtů retailových investorů při obchodování s CFD u tohoto poskytovatele přichází o peníze.",
-
   "trust.label": "Důvěra",
-  "trust.h": "Důvěřují nám obchodníci po celém světě",
   "trust.n1": "21 500+",
   "trust.n1_l": "obchodníků po celém světě",
   "trust.n2": "133+",
@@ -37,7 +31,6 @@
   "trust.n4": "15+",
   "trust.n4_l": "let na trzích",
   "trust.partners": "Platební, bankovní a technologičtí partneři",
-
   "markets.label": "Trhy",
   "markets.h_1": "Všechny trhy.",
   "markets.h_2": "Jeden účet.",
@@ -50,7 +43,6 @@
   "markets.fx_t": "Forex a indexy",
   "markets.fx_d": "Více než 60 měnových párů a hlavní světové indexy.",
   "markets.more": "Zjistit více",
-
   "why.label": "Proč ABX",
   "why.h_1": "Pro obchodníky.",
   "why.h_2": "Měřeno čísly.",
@@ -70,7 +62,6 @@
   "why.c4_t": "Osobní přístup",
   "why.c4_d": "Vlastní account manažer, který zná vaši strategii.",
   "why.disclaimer": "Úroková sazba až 5 % p. a. platí pro účty Elite a vyšší; standardní sazba je 3,25 % p. a. Sazby jsou proměnlivé a mohou se změnit. Platí úplné obchodní podmínky.",
-
   "platform.label": "Obchodní platforma",
   "platform.h_1": "Váš pohled.",
   "platform.h_2": "Vaše rozhodnutí.",
@@ -87,7 +78,6 @@
   "platform.t3_t": "Web. Mobil. Váš prostor.",
   "platform.t3_d": "Začněte na počítači, dokončete v telefonu. Vaše rozvržení jde s vámi.",
   "platform.balance": "Zůstatek",
-
   "security.label": "Bezpečnost a transparentnost",
   "security.h_1": "Vaše peníze.",
   "security.h_2": "V bezpečí.",
@@ -101,7 +91,6 @@
   "security.reg": "Regulace",
   "security.reg1_d": "Licence č. 000/00",
   "security.reg2_d": "Platnost v celé EU",
-
   "accounts.label": "Typy účtů",
   "accounts.h_1": "Vyberte si",
   "accounts.h_2": "svou úroveň.",
@@ -134,7 +123,6 @@
   "accounts.ex_p4_t": "Akce a hospitality",
   "accounts.ex_p4_d": "Pozvánky na soukromé akce včetně závodních víkendů.",
   "accounts.ex_cta": "Požádat o pozvánku",
-
   "steps.label": "Začínáme",
   "steps.h_1": "Čtyři kroky.",
   "steps.h_2": "Pak už jen trhy.",
@@ -147,7 +135,6 @@
   "steps.s3_d": "Kartou, bankovním převodem nebo e-peněženkou.",
   "steps.s4_t": "Začněte obchodovat",
   "steps.s4_d": "Vyberte trh, nastavte riziko a zadejte první obchod.",
-
   "faq.label": "Časté dotazy",
   "faq.h_1": "Otázky.",
   "faq.h_2": "Odpovědi.",
@@ -166,12 +153,10 @@
   "faq.a5": "Vkládat můžete kartou, bankovním převodem nebo e-peněženkou. Výběry zpracováváme obvykle do 24 hodin, a to na účet, ze kterého vklad přišel.",
   "faq.q6": "Mohu obchodovat v mobilu?",
   "faq.a6": "Ano. Aplikace ABX pro iOS a Android nabízí stejné nástroje, grafy i účty jako webová platforma.",
-
   "final.label": "Start",
   "final.h_1": "Vaše trhy.",
   "final.h_2": "Váš další tah.",
   "final.cta": "Otevřít účet",
-
   "footer.tagline": "Globální trhy. Technologie ve vašich rukou.",
   "footer.markets": "Trhy",
   "footer.m1": "Akcie a ETF",
@@ -192,5 +177,23 @@
   "footer.l5": "Stížnosti",
   "footer.disclaimer": "Upozornění na rizika: CFD jsou složité nástroje a kvůli pákovému efektu s sebou nesou vysoké riziko rychlé ztráty peněz. XX % účtů retailových investorů při obchodování s CFD u tohoto poskytovatele přichází o peníze. Měli byste zvážit, zda rozumíte tomu, jak CFD fungují, a zda si můžete dovolit podstoupit vysoké riziko ztráty svých peněz. Minulá výkonnost není spolehlivým ukazatelem budoucích výsledků. Informace na tomto webu nepředstavují investiční poradenství.",
   "footer.entity": "Společnost ABX Global Ltd je autorizována a regulována Kyperskou komisí pro cenné papíry (CySEC), licence č. 000/00.",
-  "footer.rights": "© 2026 ABX Global. Všechna práva vyhrazena."
+  "footer.rights": "© 2026 ABX Global. Všechna práva vyhrazena.",
+  "risk.bar": "CFD jsou složité nástroje s vysokým rizikem rychlé ztráty peněz kvůli pákovému efektu. XX % účtů retailových investorů při obchodování s CFD u tohoto poskytovatele přichází o peníze.",
+  "nav.signup": "Otevřít účet",
+  "trust.h_1": "Důvěra na startovním roštu.",
+  "trust.h_2": "Po celém světě.",
+  "markets.tab_all": "Populární",
+  "markets.tab_stocks": "Akcie",
+  "markets.tab_comm": "Komodity",
+  "markets.tab_fx": "Forex",
+  "markets.tab_idx": "Indexy",
+  "markets.col_pos": "Poz.",
+  "markets.col_inst": "Nástroj",
+  "markets.col_chg": "Změna",
+  "markets.col_sell": "Prodat",
+  "markets.col_buy": "Koupit",
+  "markets.table_note": "Orientační ceny. Živé kotace najdete na platformě.",
+  "markets.table_aria": "Ceny na trzích",
+  "steps.lights": "Světla zhasnou a jede se.",
+  "final.sub": "Otevřete si účet za pár minut. Obchodujte světové trhy z jednoho místa."
 }

@@ -78,14 +78,12 @@
 <section class="trust" aria-label="{{trust.label}}">
   <div class="wrap">
     <dl class="figs rv" data-countup data-placeholder="trust-numbers">
-      <div><dt>{{trust.n1_l}}</dt><dd data-count="21500" data-suffix="+">{{trust.n1}}</dd></div>
-      <div><dt>{{trust.n2_l}}</dt><dd data-count="133" data-suffix="+">{{trust.n2}}</dd></div>
-      <div><dt>{{trust.n3_l}}</dt><dd class="hot" data-count="20" data-prefix="€" data-suffix="k">{{trust.n3}}</dd></div>
-      <div><dt>{{trust.n4_l}}</dt><dd data-count="15" data-suffix="+">{{trust.n4}}</dd></div>
+      <div><dt>{{trust.n1_l}}</dt><dd data-count="21500" data-suffix="+">{{trust.n1}}</dd><svg class="ic fig-ic" aria-hidden="true"><use href="#i-users"/></svg></div>
+      <div><dt>{{trust.n2_l}}</dt><dd data-count="133" data-suffix="+">{{trust.n2}}</dd><svg class="ic fig-ic" aria-hidden="true"><use href="#i-globe"/></svg></div>
+      <div><dt>{{trust.n3_l}}</dt><dd class="hot" data-count="20" data-prefix="€" data-suffix="k">{{trust.n3}}</dd><svg class="ic fig-ic" aria-hidden="true"><use href="#i-shield"/></svg></div>
+      <div><dt>{{trust.n4_l}}</dt><dd data-count="15" data-suffix="+">{{trust.n4}}</dd><svg class="ic fig-ic" aria-hidden="true"><use href="#i-clock"/></svg></div>
     </dl>
-    <ul class="logos rv" aria-label="{{trust.partners}}" data-placeholder="partner-logos">
-      <li class="pl-visa">VISA</li><li>mastercard</li><li class="pl-serif">J.P.Morgan</li><li class="pl-serif">UBS</li><li>TradingView</li><li class="pl-mono">CySEC</li>
-    </ul>
+    <div class="plogos rv" role="img" aria-label="{{trust.partners}}: Visa, Mastercard, J.P. Morgan, UBS, TradingView, CySEC" data-placeholder="partner-logos"><div class="plogos-track"><ul><li class="pl-visa">VISA</li><li>mastercard</li><li class="pl-serif">J.P.Morgan</li><li class="pl-serif">UBS</li><li>TradingView</li><li class="pl-mono">CySEC</li></ul><ul><li class="pl-visa">VISA</li><li>mastercard</li><li class="pl-serif">J.P.Morgan</li><li class="pl-serif">UBS</li><li>TradingView</li><li class="pl-mono">CySEC</li></ul></div></div>
   </div>
 </section>
 
@@ -128,6 +126,14 @@
         </table>
         <p class="mnote">{{markets.table_note}}</p>
       </div>
+        <div class="watch">
+          <p class="watch-t">{{min.watch_t}}</p>
+          <div class="watch-g">
+            <div class="w-card"><p class="w-h"><svg class="ic" aria-hidden="true"><use href="#i-activity"/></svg>{{min.w1}}</p><ul><li><b>TSLA</b><span>342.18</span><i class="up">+2.41%</i></li><li><b>EUR/USD</b><span>1.0841</span><i class="up">+0.12%</i></li><li><b>XAU/USD</b><span>2,684.35</span><i class="up">+0.74%</i></li></ul></div>
+            <div class="w-card"><p class="w-h"><svg class="ic" aria-hidden="true"><use href="#i-up"/></svg>{{min.w2}}</p><ul><li><b>TSLA</b><span>342.18</span><i class="up">+2.41%</i></li><li><b>XAG/USD</b><span>31.42</span><i class="up">+1.10%</i></li><li><b>AAPL</b><span>228.35</span><i class="up">+0.86%</i></li></ul></div>
+            <div class="w-card"><p class="w-h"><svg class="ic" aria-hidden="true"><use href="#i-down"/></svg>{{min.w3}}</p><ul><li><b>NVDA</b><span>138.62</span><i class="dn">−1.12%</i></li><li><b>BRENT</b><span>73.05</span><i class="dn">−0.35%</i></li><li><b>JP225</b><span>39,280</span><i class="dn">−0.30%</i></li></ul></div>
+          </div>
+        </div>
       <div class="center"><a class="btn btn-orange" href="#markets-all">{{min.mk_all}}</a></div>
     </div>
 
@@ -183,20 +189,6 @@
       <li class="rv" style="--d:2"><p class="why-n">{{why.c3_n}}</p><div><b>{{why.c3_t}}</b><span>{{why.c3_d}}</span></div></li>
       <li class="rv" style="--d:3"><p class="why-n">{{why.c4_n}}</p><div><b>{{why.c4_t}}</b><span>{{why.c4_d}}</span></div></li>
     </ul>
-    <div class="calc rv" data-calc>
-      <div class="calc-in">
-        <p class="calc-t">{{calc.t}}</p>
-        <label class="calc-l" for="calc-r">{{calc.dep}} <output id="calc-dep" for="calc-r">€100,000</output></label>
-        <input class="calc-range" type="range" id="calc-r" min="0" max="100" step="1" value="19" aria-describedby="calc-note">
-        <div class="calc-ticks" aria-hidden="true"><span style="left:0">50k</span><span style="left:43.6%">250k</span><span style="left:81.2%">1M</span><span style="left:100%">2M</span></div>
-      </div>
-      <div class="calc-out" aria-live="polite">
-        <span class="calc-k">{{calc.year}}</span>
-        <output class="calc-v" id="calc-v">€3,750</output>
-        <span class="calc-m">{{calc.tier}} <b id="calc-tier">Premium</b> · {{calc.rate}} <b id="calc-rate">3.75 %</b></span>
-        <span class="calc-note" id="calc-note">{{calc.note}}</span>
-      </div>
-    </div>
     <p class="fine" data-placeholder="bonus-terms">{{why.disclaimer}}</p>
   </div>
 </section>
@@ -265,22 +257,20 @@
 <!-- 07 · Accounts (traderise "Your trade. Your choice."): panel, tier rows left, the chosen card right -->
 <section class="sec" id="accounts" aria-labelledby="accounts-title">
   <div class="wrap">
-    <div class="panel plans rv" data-plans data-active="elite">
-      <div class="plans-text">
-        <h2 class="h2" id="accounts-title">{{accounts.h_1}} <span class="dim">{{accounts.h_2}}</span></h2>
-        <p class="sub">{{accounts.lead}}</p>
-        <ul class="plan-rows" data-placeholder="account-features">
-          <li data-tier="classic"><span class="pr-name">Classic</span><span class="pr-amt">€50k</span><span class="pr-feat">{{accounts.classic_1}} · {{accounts.classic_3}}</span><a class="btn btn-dark btn-sm" href="#">{{accounts.select}}</a></li>
-          <li data-tier="premium"><span class="pr-name">Premium</span><span class="pr-amt">€100k</span><span class="pr-feat">{{accounts.premium_1}} · {{accounts.premium_3}}</span><a class="btn btn-dark btn-sm" href="#">{{accounts.select}}</a></li>
-          <li data-tier="elite"><span class="pr-name">Elite <span class="badge">{{accounts.popular}}</span></span><span class="pr-amt">€250k</span><span class="pr-feat">{{accounts.elite_1}} · {{accounts.elite_3}}</span><a class="btn btn-orange btn-sm" href="#">{{accounts.select}}</a></li>
-          <li data-tier="private"><span class="pr-name">Private</span><span class="pr-amt">€500k</span><span class="pr-feat">{{accounts.private_1}} · {{accounts.private_3}}</span><a class="btn btn-dark btn-sm" href="#">{{accounts.select}}</a></li>
-        </ul>
-      </div>
-      <div class="plans-stage" aria-hidden="true">
-        <div class="plate plate-classic" data-plate="classic"><span>ABX</span><span class="plate-t">Classic</span></div>
-        <div class="plate plate-premium" data-plate="premium"><span>ABX</span><span class="plate-t">Premium</span></div>
-        <div class="plate plate-elite" data-plate="elite"><span>ABX</span><span class="plate-t">Elite</span><span class="plate-r">///</span></div>
-        <div class="plate plate-private" data-plate="private"><span>ABX</span><span class="plate-t">Private</span></div>
+    <div class="center-h-wrap">
+      <h2 class="h2 center-h rv" id="accounts-title">{{accounts.h_1}} <span class="dim">{{accounts.h_2}}</span></h2>
+      <p class="sub center-p rv">{{accounts.lead}}</p>
+    </div>
+    <div class="acc rv" data-acc data-active="elite">
+      <div class="acc-stage" aria-hidden="true"><div class="tcard tc-classic" data-card="classic"><span class="tc-top"><b>ABX</b><span>Classic</span></span><span class="tc-chip"></span><span class="tc-bot"><span class="tc-name">Classic</span><span class="tc-min">{{accounts.from}} €50k</span></span></div><div class="tcard tc-premium" data-card="premium"><span class="tc-top"><b>ABX</b><span>Premium</span></span><span class="tc-chip"></span><span class="tc-bot"><span class="tc-name">Premium</span><span class="tc-min">{{accounts.from}} €100k</span></span></div><div class="tcard tc-elite" data-card="elite"><span class="tc-top"><b>ABX</b><span>Elite</span></span><span class="tc-chip"></span><span class="tc-ramp">///</span><span class="tc-bot"><span class="tc-name">Elite</span><span class="tc-min">{{accounts.from}} €250k</span></span></div><div class="tcard tc-private" data-card="private"><span class="tc-top"><b>ABX</b><span>Private</span></span><span class="tc-chip"></span><span class="tc-bot"><span class="tc-name">Private</span><span class="tc-min">{{accounts.from}} €500k</span></span></div></div>
+      <div class="acc-pick" role="radiogroup" aria-label="{{accounts.label}}"><button type="button" role="radio" aria-checked="false" data-pick="classic">Classic</button><button type="button" role="radio" aria-checked="false" data-pick="premium">Premium</button><button type="button" role="radio" aria-checked="true" data-pick="elite">Elite</button><button type="button" role="radio" aria-checked="false" data-pick="private">Private</button></div>
+      <div class="cmp" data-placeholder="account-features">
+        <table class="cmp-t">
+          <caption class="sr-only">{{accounts.label}}</caption>
+          <thead><tr><th scope="col"><span class="sr-only">{{acc2.feature}}</span></th><th scope="col" data-col="classic"><span class="ch-name">Classic</span></th><th scope="col" data-col="premium"><span class="ch-name">Premium</span></th><th scope="col" data-col="elite"><span class="ch-name">Elite</span><span class="badge">{{accounts.popular}}</span></th><th scope="col" data-col="private"><span class="ch-name">Private</span></th></tr></thead>
+          <tbody><tr><th scope="row"><svg class="ic" aria-hidden="true"><use href="#i-wallet"/></svg>{{acc2.r_dep}}</th><td data-col="classic">€50k</td><td data-col="premium">€100k</td><td data-col="elite">€250k</td><td data-col="private">€500k</td></tr><tr><th scope="row"><svg class="ic" aria-hidden="true"><use href="#i-activity"/></svg>{{acc2.r_spread}}</th><td data-col="classic">{{acc2.sp_classic}}</td><td data-col="premium">{{acc2.sp_premium}}</td><td data-col="elite">{{acc2.sp_elite}}</td><td data-col="private">{{acc2.sp_private}}</td></tr><tr><th scope="row"><svg class="ic" aria-hidden="true"><use href="#i-percent"/></svg>{{acc2.r_int}}</th><td data-col="classic">{{acc2.in_classic}}</td><td data-col="premium">{{acc2.in_premium}}</td><td data-col="elite">{{acc2.in_elite}}</td><td data-col="private">{{acc2.in_private}}</td></tr><tr><th scope="row"><svg class="ic" aria-hidden="true"><use href="#i-headphones"/></svg>{{acc2.r_sup}}</th><td data-col="classic">{{acc2.su_classic}}</td><td data-col="premium">{{acc2.su_premium}}</td><td data-col="elite">{{acc2.su_elite}}</td><td data-col="private">{{acc2.su_private}}</td></tr><tr><th scope="row"><svg class="ic" aria-hidden="true"><use href="#i-user"/></svg>{{acc2.r_mgr}}</th><td data-col="classic"><svg class="ic c-no" aria-hidden="true"><use href="#i-minus"/></svg></td><td data-col="premium"><svg class="ic c-no" aria-hidden="true"><use href="#i-minus"/></svg></td><td data-col="elite"><svg class="ic c-yes" aria-hidden="true"><use href="#i-check"/></svg></td><td data-col="private"><svg class="ic c-yes" aria-hidden="true"><use href="#i-check"/></svg></td></tr><tr><th scope="row"><svg class="ic" aria-hidden="true"><use href="#i-chart"/></svg>{{acc2.r_res}}</th><td data-col="classic">{{acc2.re_classic}}</td><td data-col="premium">{{acc2.re_premium}}</td><td data-col="elite">{{acc2.re_elite}}</td><td data-col="private">{{acc2.re_private}}</td></tr><tr><th scope="row"><svg class="ic" aria-hidden="true"><use href="#i-target"/></svg>{{acc2.r_fit}}</th><td data-col="classic"><span class="c-txt">{{acc2.fit_classic}}</span></td><td data-col="premium"><span class="c-txt">{{acc2.fit_premium}}</span></td><td data-col="elite"><span class="c-txt">{{acc2.fit_elite}}</span></td><td data-col="private"><span class="c-txt">{{acc2.fit_private}}</span></td></tr><tr><th scope="row"><svg class="ic" aria-hidden="true"><use href="#i-alert"/></svg>{{acc2.r_con}}</th><td data-col="classic"><span class="c-txt c-con">{{acc2.con_classic}}</span></td><td data-col="premium"><span class="c-txt c-con">{{acc2.con_premium}}</span></td><td data-col="elite"><span class="c-txt c-con">{{acc2.con_elite}}</span></td><td data-col="private"><span class="c-txt c-con">{{acc2.con_private}}</span></td></tr></tbody>
+          <tfoot><tr><th scope="row"><span class="sr-only">{{accounts.select}}</span></th><td data-col="classic"><a class="btn btn-dark btn-sm" href="#">{{accounts.select}}</a></td><td data-col="premium"><a class="btn btn-dark btn-sm" href="#">{{accounts.select}}</a></td><td data-col="elite"><a class="btn btn-orange btn-sm" href="#">{{accounts.select}}</a></td><td data-col="private"><a class="btn btn-dark btn-sm" href="#">{{accounts.select}}</a></td></tr></tfoot>
+        </table>
       </div>
     </div>
 

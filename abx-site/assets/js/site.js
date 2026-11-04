@@ -191,54 +191,53 @@
     }
   });
 
-  /* Interest calculator: balance on a log scale from €50k to €2M, rate by account tier */
-  $$('[data-calc]').forEach(box => {
-    const r = $('#calc-r', box), dep = $('#calc-dep', box), out = $('#calc-v', box), tier = $('#calc-tier', box), rate = $('#calc-rate', box);
-    const money = new Intl.NumberFormat(lang === 'cs' ? 'cs-CZ' : 'en-GB', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 });
-    const pct = new Intl.NumberFormat(lang === 'cs' ? 'cs-CZ' : 'en-GB', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-    const tiers = [[1e6, 'Exclusive', 5], [5e5, 'Private', 5], [25e4, 'Elite', 5], [1e5, 'Premium', 3.75], [5e4, 'Classic', 3.25]];
-    let shown = 0, raf = 0;
-    const tween = to => {
-      cancelAnimationFrame(raf);
-      if (reduce()) { shown = to; out.textContent = money.format(to); return; }
-      const from = shown, t0 = performance.now();
-      const step = now => { const t = Math.min(1, (now - t0) / 260); shown = from + (to - from) * (1 - Math.pow(1 - t, 3)); out.textContent = money.format(Math.round(shown)); if (t < 1) raf = requestAnimationFrame(step); };
-      raf = requestAnimationFrame(step);
+  /* Accounts (minimal page): card fan, tier switch and comparison columns stay in sync */
+  $$('[data-acc]').forEach(root => {
+    const order = ['classic', 'premium', 'elite', 'private'];
+    const cards = $$('.tcard', root), radios = $$('[data-pick]', root), cols = $$('[data-col]', root), stage = $('.acc-stage', root);
+    const set = (k, focus) => {
+      const ai = order.indexOf(k);
+      cards.forEach(c => {
+        const o = order.indexOf(c.dataset.card) - ai;
+        c.style.setProperty('--o', o); c.style.setProperty('--a', Math.abs(o));
+        c.classList.toggle('is-on', o === 0);
+        if (o) ['--rx', '--ry', '--sx'].forEach(v => c.style.removeProperty(v));
+      });
+      radios.forEach(r => { const on = r.dataset.pick === k; r.setAttribute('aria-checked', String(on)); r.tabIndex = on ? 0 : -1; if (on && focus) r.focus(); });
+      cols.forEach(c => c.classList.toggle('is-on', c.dataset.col === k));
+      root.dataset.active = k;
     };
-    const upd = () => {
-      const v = Number(r.value);
-      let d = 5e4 * Math.pow(40, v / 100);
-      d = d < 1e5 ? Math.round(d / 1e3) * 1e3 : d < 1e6 ? Math.round(d / 5e3) * 5e3 : Math.round(d / 25e3) * 25e3;
-      const [, name, pr] = tiers.find(([min]) => d >= min);
-      r.style.setProperty('--p', v + '%');
-      dep.textContent = money.format(d);
-      tier.textContent = name; rate.textContent = pct.format(pr) + ' %';
-      r.setAttribute('aria-valuetext', money.format(d));
-      tween(d * pr / 100);
-    };
-    r.addEventListener('input', upd); upd();
+    radios.forEach((r, i) => {
+      r.addEventListener('click', () => set(r.dataset.pick));
+      r.addEventListener('keydown', e => {
+        if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+        e.preventDefault(); set(order[(i + (e.key === 'ArrowRight' ? 1 : order.length - 1)) % order.length], true);
+      });
+    });
+    cards.forEach(c => c.addEventListener('click', () => set(c.dataset.card)));
+    $$('thead [data-col]', root).forEach(h => h.addEventListener('click', () => set(h.dataset.col)));
+    set(root.dataset.active || 'elite');
+    if (!reduce() && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+      stage.addEventListener('pointermove', e => {
+        const c = $('.tcard.is-on', stage); if (!c) return;
+        const b = stage.getBoundingClientRect(), x = (e.clientX - b.left) / b.width - 0.5, y = (e.clientY - b.top) / b.height - 0.5;
+        stage.classList.add('is-tilting');
+        c.style.setProperty('--ry', (x * 16).toFixed(2) + 'deg'); c.style.setProperty('--rx', (-y * 12).toFixed(2) + 'deg'); c.style.setProperty('--sx', (50 + x * 80).toFixed(1) + '%');
+      });
+      stage.addEventListener('pointerleave', () => { stage.classList.remove('is-tilting'); cards.forEach(c => ['--rx', '--ry', '--sx'].forEach(v => c.style.removeProperty(v))); });
+    }
   });
 
-  /* Account card follows the pointer a little */
-  $$('.plans-stage, .ex-head').forEach(stage => {
+  /* Exclusive card tilt */
+  $$('.ex-head').forEach(stage => {
     if (reduce() || !window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
-    const card = () => stage.classList.contains('plans-stage') ? $('[data-plate="' + stage.closest('[data-plans]').dataset.active + '"]', stage) : $('.plate-ex', stage);
+    const c = $('.plate-ex', stage); if (!c) return;
     stage.addEventListener('pointermove', e => {
-      const c = card(); if (!c) return;
       const b = stage.getBoundingClientRect(), x = (e.clientX - b.left) / b.width - 0.5, y = (e.clientY - b.top) / b.height - 0.5;
       stage.classList.add('is-tilting');
       c.style.setProperty('--ry', (x * 14).toFixed(2) + 'deg'); c.style.setProperty('--rx', (-y * 12).toFixed(2) + 'deg'); c.style.setProperty('--sx', (50 + x * 80).toFixed(1) + '%');
     });
-    stage.addEventListener('pointerleave', () => { stage.classList.remove('is-tilting'); $$('.plate', stage).forEach(c => { c.style.removeProperty('--rx'); c.style.removeProperty('--ry'); c.style.removeProperty('--sx'); }); });
-  });
-
-  $$('[data-plans]').forEach(box => {
-    $$('[data-tier]', box).forEach(row => {
-      const pick = () => { box.dataset.active = row.dataset.tier; };
-      row.addEventListener('mouseenter', pick);
-      row.addEventListener('click', pick);
-      row.addEventListener('focusin', pick);
-    });
+    stage.addEventListener('pointerleave', () => { stage.classList.remove('is-tilting'); ['--rx', '--ry', '--sx'].forEach(v => c.style.removeProperty(v)); });
   });
 
   /* Markets review switch: ?markets=a|b|c keeps the chosen layout in the link */

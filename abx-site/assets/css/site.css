@@ -237,21 +237,23 @@ p,h1,h2,h3{overflow-wrap:break-word}
 .sl-hot::after{display:none}
 .sl-hot b{color:var(--on-orange)} .sl-hot span{color:rgba(17,17,16,.7)}
 
-/* A · photo cards: the render fills the card, live figures sit in the blank display */
-.mka-photo{background:#0e0e0c}
+/* A · photo cards: the render fills the card, live figures sit in the blank display.
+   Each card sets --bg (the render's own background) and the display box (--wx, --wy, --ww, --wh in % of the square). */
+.mka-photo{background:var(--bg,#0e0e0c)}
 .mka-photo .mka-art{position:absolute;inset:0;height:auto}
 .mka-photo .mka-body{position:relative;z-index:2}
-@media (hover:hover) and (pointer:fine){.mka-photo:hover{background:#0e0e0c}}
-.fx-sq{position:absolute;left:0;top:0;width:100%;aspect-ratio:1;container-type:inline-size;-webkit-mask:linear-gradient(#000 78%,transparent);mask:linear-gradient(#000 78%,transparent)}
-.fx-sq img{display:block;width:100%;height:100%}
-.fx-needle{position:absolute;inset:0;width:100%;height:100%}
-.fx-n{transform:rotate(var(--a,26deg));transition:transform 900ms var(--ease);filter:drop-shadow(4px 8px 6px rgba(0,0,0,.55))}
-.fx-n polygon{fill:var(--orange)}
-.fx-cap{fill:#121211;stroke:#4a4945;stroke-width:3}
-.fx-win{position:absolute;left:40.8%;top:50.7%;width:36.4%;height:11.2%;display:flex;flex-direction:column;justify-content:center;gap:.8cqw;padding:0 2.8cqw;color:var(--fg)}
-.fx-top{display:flex;justify-content:space-between;gap:4px;white-space:nowrap;font:400 max(11px,2.4cqw)/1 var(--f-mono);color:var(--fg-2)}
-.fx-top i{font-style:normal}
-.fx-win b{font:500 6.4cqw/1 var(--f-mono);letter-spacing:-.02em}
+@media (hover:hover) and (pointer:fine){.mka-photo:hover{background:var(--bg,#0e0e0c)}}
+.ph-sq{position:absolute;left:0;top:0;width:100%;aspect-ratio:1;container-type:inline-size;-webkit-mask:linear-gradient(#000 var(--fade,78%),transparent);mask:linear-gradient(#000 var(--fade,78%),transparent)}
+.ph-sq img{display:block;width:100%;height:100%}
+.mka-photo .mka-body::before{content:"";position:absolute;inset:-48px -28px -28px;z-index:-1;background:linear-gradient(180deg,transparent,var(--bg,#0e0e0c) 48px);pointer-events:none}
+.ph-needle{position:absolute;inset:0;width:100%;height:100%}
+.ph-n{transform:rotate(var(--a,26deg));transition:transform 900ms var(--ease);filter:drop-shadow(4px 8px 6px rgba(0,0,0,.55))}
+.ph-n polygon{fill:var(--orange)}
+.ph-cap{fill:#121211;stroke:#4a4945;stroke-width:3}
+.ph-win{position:absolute;left:var(--wx);top:var(--wy);width:var(--ww);height:var(--wh);display:flex;flex-direction:column;justify-content:center;gap:.8cqw;padding:0 2.8cqw;color:var(--fg)}
+.ph-top{display:flex;justify-content:space-between;gap:4px;white-space:nowrap;font:400 max(11px,2.4cqw)/1 var(--f-mono);color:var(--fg-2)}
+.ph-top i{font-style:normal}
+.ph-win b{font:500 var(--px,6.4cqw)/1 var(--f-mono);letter-spacing:-.02em}
 
 /* B · Live preview: the instrument widget rises from the card's bottom edge */
 .mkb{display:flex;flex-direction:column;height:440px}

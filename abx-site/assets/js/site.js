@@ -129,19 +129,21 @@
 
 
 
-  /* Forex card: live rate in the gauge display; the needle follows the change vs the open */
-  $$('[data-fx]').forEach(win => {
-    const card = win.closest('.fx-sq'), rateEl = $('[data-fx-rate]', win), chgEl = $('[data-fx-chg]', win), needle = $('[data-fx-needle]', card);
-    const open = 1.08280; let rate = 1.08412;
+  /* Photo cards: live price in the render's blank display; an optional needle follows the change vs the open */
+  $$('[data-live]').forEach(win => {
+    const sq = win.closest('.ph-sq'), pxEl = $('[data-live-px]', win), chgEl = $('[data-live-chg]', win), needle = $('[data-live-needle]', sq);
+    const open = Number(win.dataset.open), dec = Number(win.dataset.dec || 2), vol = Number(win.dataset.vol || 0.0004);
+    const fmt = new Intl.NumberFormat('en-US', { minimumFractionDigits: dec, maximumFractionDigits: dec });
+    let px = Number(win.dataset.price);
     const draw = () => {
-      const pct = (rate - open) / open * 100;
-      rateEl.textContent = rate.toFixed(4);
+      const pct = (px - open) / open * 100;
+      pxEl.textContent = fmt.format(px);
       chgEl.textContent = (pct >= 0 ? '▲ ' : '▼ ') + Math.abs(pct).toFixed(2) + '%';
       chgEl.className = pct >= 0 ? 'up' : 'dn';
-      needle.style.setProperty('--a', Math.max(-120, Math.min(120, pct * 220)).toFixed(1) + 'deg');
+      if (needle) needle.style.setProperty('--a', Math.max(-120, Math.min(120, pct * 220)).toFixed(1) + 'deg');
     };
     draw();
-    if (!reduce()) setInterval(() => { if (document.hidden) return; rate += (Math.random() - 0.48) * 0.0004; draw(); }, 2200);
+    if (!reduce()) setInterval(() => { if (document.hidden) return; px *= 1 + (Math.random() - 0.5) * vol; draw(); }, 2200 + Math.random() * 600);
   });
 
   /* Markets review switch: ?markets=a|b|c keeps the chosen layout in the link */

@@ -240,6 +240,17 @@
     stage.addEventListener('pointerleave', () => { stage.classList.remove('is-tilting'); ['--rx', '--ry', '--sx'].forEach(v => c.style.removeProperty(v)); });
   });
 
+  /* Accounts layout switch (minimal page): Plasma columns or card fan + comparison */
+  $$('[data-accv-root]').forEach(root => {
+    const btns = $$('[data-accv]');
+    const set = v => { root.dataset.v = v; btns.forEach(b => { const on = b.dataset.accv === v; b.setAttribute('aria-checked', String(on)); b.tabIndex = on ? 0 : -1; }); };
+    btns.forEach((b, i) => {
+      b.addEventListener('click', () => set(b.dataset.accv));
+      b.addEventListener('keydown', e => { if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') { const n = btns[(i + 1) % btns.length]; n.focus(); set(n.dataset.accv); } });
+    });
+    set('a');
+  });
+
   /* Markets review switch: ?markets=a|b|c keeps the chosen layout in the link */
   const mkRoot = $('[data-mk-root]');
   if (mkRoot) {

@@ -245,12 +245,36 @@
 <section class="sec" id="security" aria-labelledby="security-title">
   <div class="wrap">
     <h2 class="h2 center-h rv" id="security-title">{{security.h_1}} <span class="dim">{{security.h_2}}</span></h2>
-    <ul class="safe">
-      <li class="rv" style="--d:0"><svg class="render" viewBox="0 0 200 220" aria-hidden="true"><use href="#r-shield"/></svg><b>{{security.c1_t}}</b><span>{{security.c1_d}}</span></li>
-      <li class="rv" style="--d:1"><svg class="render" viewBox="0 0 200 220" aria-hidden="true"><use href="#r-coin"/></svg><b>{{security.c2_t}}</b><span>{{security.c2_d}}</span></li>
-      <li class="rv" style="--d:2"><svg class="render" viewBox="0 0 200 220" aria-hidden="true"><use href="#r-badge"/></svg><b>{{security.c3_t}}</b><span>{{security.c3_d}}</span></li>
-    </ul>
-    <p class="regs" data-placeholder="cysec-licence"><span>{{security.reg}}</span><b>CySEC</b> {{security.reg1_d}} <b>MiFID II</b> {{security.reg2_d}}</p>
+    <div class="sbento">
+      <article class="sb sb-sec rv">
+        <div class="sb-txt"><h3>{{security.c3_t}}</h3><p>{{security.c3_d}}</p></div>
+        <div class="sb-phone" aria-hidden="true">
+          <div class="phone"><div class="phone-screen">
+            <span class="ph-island"></span>
+            <p class="sp-h">{{sec2.acc}}</p>
+            <div class="pcard tc-elite sp-card"><span class="tc-top"><b>ABX</b><span>Elite</span></span><span class="tc-ramp">///</span></div>
+            <div class="sp-row"><span><i class="dot"></i>{{sec2.avail}}<b>€8,423.96</b></span><span>{{sec2.limit}}<b>€10,000</b></span></div>
+          </div></div>
+          <div class="ctl-bar"><span><svg class="ic" aria-hidden="true"><use href="#i-eye"/></svg>{{sec2.c_show}}</span><span><svg class="ic" aria-hidden="true"><use href="#i-snow"/></svg>{{sec2.c_freeze}}</span><span><svg class="ic" aria-hidden="true"><use href="#i-key"/></svg>2FA</span></div>
+        </div>
+      </article>
+      <article class="sb sb-prot rv" style="--d:1">
+        <div class="sb-txt"><h3>{{security.c1_t}}</h3><p>{{security.c1_d}}</p></div>
+        <svg class="sb-render" viewBox="0 0 200 220" aria-hidden="true"><use href="#r-shield"/></svg>
+      </article>
+      <article class="sb sb-seg rv" style="--d:2">
+        <div class="sb-txt"><h3>{{security.c2_t}}</h3><p>{{security.c2_d}}</p></div>
+        <svg class="sb-render" viewBox="0 0 200 220" aria-hidden="true"><use href="#r-coin"/></svg>
+      </article>
+      <article class="sb sb-reg rv">
+        <div class="sb-txt"><h3>{{sec2.reg_t}}</h3><p>{{sec2.reg_d}}</p></div>
+        <div class="sb-plate" aria-hidden="true" data-placeholder="cysec-licence"><span class="pl-screw"></span><span class="pl-screw"></span><span class="pl-screw"></span><span class="pl-screw"></span><b>CySEC</b><span>{{security.reg1_d}}</span><i>MiFID II</i></div>
+      </article>
+      <article class="sb sb-sup rv" style="--d:1">
+        <div class="sb-txt"><h3>{{sec2.sup_t}}</h3><p>{{sec2.sup_d}}</p></div>
+        <svg class="sb-gears" viewBox="0 0 520 280" aria-hidden="true"><g class="g1" style="transform-origin:160px 150px"><path d="M261.2,142.6 L277.9,145.1 L277.9,154.9 L261.2,157.4 L259.7,169.0 L275.2,175.7 L272.6,185.3 L255.8,183.4 L251.4,194.2 L264.6,204.7 L259.6,213.2 L243.9,207.0 L236.8,216.3 L246.9,229.9 L239.9,236.9 L226.3,226.8 L217.0,233.9 L223.2,249.6 L214.7,254.6 L204.2,241.4 L193.4,245.8 L195.3,262.6 L185.7,265.2 L179.0,249.7 L167.4,251.2 L164.9,267.9 L155.1,267.9 L152.6,251.2 L141.0,249.7 L134.3,265.2 L124.7,262.6 L126.6,245.8 L115.8,241.4 L105.3,254.6 L96.8,249.6 L103.0,233.9 L93.7,226.8 L80.1,236.9 L73.1,229.9 L83.2,216.3 L76.1,207.0 L60.4,213.2 L55.4,204.7 L68.6,194.2 L64.2,183.4 L47.4,185.3 L44.8,175.7 L60.3,169.0 L58.8,157.4 L42.1,154.9 L42.1,145.1 L58.8,142.6 L60.3,131.0 L44.8,124.3 L47.4,114.7 L64.2,116.6 L68.6,105.8 L55.4,95.3 L60.4,86.8 L76.1,93.0 L83.2,83.7 L73.1,70.1 L80.1,63.1 L93.7,73.2 L103.0,66.1 L96.8,50.4 L105.3,45.4 L115.8,58.6 L126.6,54.2 L124.7,37.4 L134.3,34.8 L141.0,50.3 L152.6,48.8 L155.1,32.1 L164.9,32.1 L167.4,48.8 L179.0,50.3 L185.7,34.8 L195.3,37.4 L193.4,54.2 L204.2,58.6 L214.7,45.4 L223.2,50.4 L217.0,66.1 L226.3,73.2 L239.9,63.1 L246.9,70.1 L236.8,83.7 L243.9,93.0 L259.6,86.8 L264.6,95.3 L251.4,105.8 L255.8,116.6 L272.6,114.7 L275.2,124.3 L259.7,131.0Z" fill="url(#g-steel)" stroke="#55544f" stroke-width="1.5"/><circle cx="160" cy="150" r="85.0" fill="none" stroke="#000" stroke-opacity=".35" stroke-width="3"/><circle cx="219.0" cy="150.0" r="14.2" fill="#171716"/><circle cx="189.5" cy="201.1" r="14.2" fill="#171716"/><circle cx="130.5" cy="201.1" r="14.2" fill="#171716"/><circle cx="101.0" cy="150.0" r="14.2" fill="#171716"/><circle cx="130.5" cy="98.9" r="14.2" fill="#171716"/><circle cx="189.5" cy="98.9" r="14.2" fill="#171716"/><circle cx="160" cy="150" r="26.0" fill="#0c0c0b" stroke="#4a4945" stroke-width="2"/></g><g class="g2" style="transform-origin:372px 138px"><path d="M461.1,130.5 L475.9,133.0 L475.9,143.0 L461.1,145.5 L459.4,157.1 L472.7,163.9 L469.8,173.4 L455.0,171.4 L449.9,182.0 L460.6,192.4 L455.0,200.6 L441.4,194.4 L433.4,203.0 L440.7,216.1 L432.9,222.3 L421.7,212.3 L411.5,218.2 L414.6,232.9 L405.3,236.5 L397.6,223.7 L386.1,226.3 L384.7,241.2 L374.8,242.0 L371.2,227.4 L359.5,226.6 L353.7,240.4 L344.0,238.2 L344.9,223.2 L333.9,218.9 L324.4,230.5 L315.7,225.5 L321.0,211.4 L311.8,204.1 L299.2,212.3 L292.5,205.0 L301.6,193.1 L294.9,183.4 L280.6,187.6 L276.2,178.6 L288.5,169.9 L285.0,158.7 L270.0,158.4 L268.5,148.6 L282.8,143.9 L282.8,132.1 L268.5,127.4 L270.0,117.6 L285.0,117.3 L288.5,106.1 L276.2,97.4 L280.6,88.4 L294.9,92.6 L301.6,82.9 L292.5,71.0 L299.2,63.7 L311.8,71.9 L321.0,64.6 L315.7,50.5 L324.4,45.5 L333.9,57.1 L344.9,52.8 L344.0,37.8 L353.7,35.6 L359.5,49.4 L371.2,48.6 L374.8,34.0 L384.7,34.8 L386.1,49.7 L397.6,52.3 L405.3,39.5 L414.6,43.1 L411.5,57.8 L421.7,63.7 L432.9,53.7 L440.7,59.9 L433.4,73.0 L441.4,81.6 L455.0,75.4 L460.6,83.6 L449.9,94.0 L455.0,104.6 L469.8,102.6 L472.7,112.1 L459.4,118.9Z" fill="url(#g-steel)" stroke="#55544f" stroke-width="1.5"/><circle cx="372" cy="138" r="74.9" fill="none" stroke="#000" stroke-opacity=".35" stroke-width="3"/><circle cx="424.0" cy="138.0" r="12.5" fill="#171716"/><circle cx="398.0" cy="183.0" r="12.5" fill="#171716"/><circle cx="346.0" cy="183.0" r="12.5" fill="#171716"/><circle cx="320.0" cy="138.0" r="12.5" fill="#171716"/><circle cx="346.0" cy="93.0" r="12.5" fill="#171716"/><circle cx="398.0" cy="93.0" r="12.5" fill="#171716"/><circle cx="372" cy="138" r="22.9" fill="#0c0c0b" stroke="#4a4945" stroke-width="2"/></g></svg>
+      </article>
+    </div>
   </div>
 </section>
 
@@ -261,6 +285,50 @@
       <h2 class="h2 center-h rv" id="accounts-title">{{accounts.h_1}} <span class="dim">{{accounts.h_2}}</span></h2>
       <p class="sub center-p rv">{{accounts.lead}}</p>
     </div>
+    <div class="accv-sw" role="radiogroup" aria-label="{{mk.switch}}">
+      <button type="button" role="radio" aria-checked="true" data-accv="a">{{acc3.va}}</button>
+      <button type="button" role="radio" aria-checked="false" data-accv="b">{{acc3.vb}}</button>
+    </div>
+    <div data-accv-root data-v="a">
+    <ul class="ptiers accv-a rv" data-placeholder="account-features">
+        <li class="pt">
+          <div class="pt-media" aria-hidden="true"><div class="pcard tc-classic"><span class="tc-top"><b>ABX</b><span>Classic</span></span><span class="tc-chip"></span></div></div>
+          <div class="pt-body">
+            <h3 class="pt-name">Classic</h3>
+            <p class="pt-fit">{{acc2.fit_classic}}</p>
+            <dl class="pt-stats"><div><dt>{{accounts.from}}</dt><dd>€50k</dd></div><div><dt>{{acc2.r_spread}}</dt><dd>{{acc2.sp_classic}}</dd></div><div><dt>{{acc3.int}}</dt><dd>{{acc3.in_classic}}</dd></div></dl>
+            <a class="btn btn-dark pt-cta" href="#">{{accounts.select}} Classic</a>
+          </div>
+        </li>
+        <li class="pt">
+          <div class="pt-media" aria-hidden="true"><div class="pcard tc-premium"><span class="tc-top"><b>ABX</b><span>Premium</span></span><span class="tc-chip"></span></div></div>
+          <div class="pt-body">
+            <h3 class="pt-name">Premium</h3>
+            <p class="pt-fit">{{acc2.fit_premium}}</p>
+            <dl class="pt-stats"><div><dt>{{accounts.from}}</dt><dd>€100k</dd></div><div><dt>{{acc2.r_spread}}</dt><dd>{{acc2.sp_premium}}</dd></div><div><dt>{{acc3.int}}</dt><dd>{{acc3.in_premium}}</dd></div></dl>
+            <a class="btn btn-dark pt-cta" href="#">{{accounts.select}} Premium</a>
+          </div>
+        </li>
+        <li class="pt pt-pop">
+          <div class="pt-media" aria-hidden="true"><div class="pcard tc-elite"><span class="tc-top"><b>ABX</b><span>Elite</span></span><span class="tc-chip"></span><span class="tc-ramp">///</span></div></div>
+          <div class="pt-body">
+            <h3 class="pt-name">Elite <span class="badge">{{accounts.popular}}</span></h3>
+            <p class="pt-fit">{{acc2.fit_elite}}</p>
+            <dl class="pt-stats"><div><dt>{{accounts.from}}</dt><dd>€250k</dd></div><div><dt>{{acc2.r_spread}}</dt><dd>{{acc2.sp_elite}}</dd></div><div><dt>{{acc3.int}}</dt><dd>{{acc3.in_elite}}</dd></div></dl>
+            <a class="btn btn-orange pt-cta" href="#">{{accounts.select}} Elite</a>
+          </div>
+        </li>
+        <li class="pt">
+          <div class="pt-media" aria-hidden="true"><div class="pcard tc-private"><span class="tc-top"><b>ABX</b><span>Private</span></span><span class="tc-chip"></span></div></div>
+          <div class="pt-body">
+            <h3 class="pt-name">Private</h3>
+            <p class="pt-fit">{{acc2.fit_private}}</p>
+            <dl class="pt-stats"><div><dt>{{accounts.from}}</dt><dd>€500k</dd></div><div><dt>{{acc2.r_spread}}</dt><dd>{{acc2.sp_private}}</dd></div><div><dt>{{acc3.int}}</dt><dd>{{acc3.in_private}}</dd></div></dl>
+            <a class="btn btn-dark pt-cta" href="#">{{accounts.select}} Private</a>
+          </div>
+        </li>
+    </ul>
+    <div class="accv-b">
     <div class="acc rv" data-acc data-active="elite">
       <div class="acc-stage" aria-hidden="true"><div class="tcard tc-classic" data-card="classic"><span class="tc-top"><b>ABX</b><span>Classic</span></span><span class="tc-chip"></span><span class="tc-bot"><span class="tc-name">Classic</span><span class="tc-min">{{accounts.from}} €50k</span></span></div><div class="tcard tc-premium" data-card="premium"><span class="tc-top"><b>ABX</b><span>Premium</span></span><span class="tc-chip"></span><span class="tc-bot"><span class="tc-name">Premium</span><span class="tc-min">{{accounts.from}} €100k</span></span></div><div class="tcard tc-elite" data-card="elite"><span class="tc-top"><b>ABX</b><span>Elite</span></span><span class="tc-chip"></span><span class="tc-ramp">///</span><span class="tc-bot"><span class="tc-name">Elite</span><span class="tc-min">{{accounts.from}} €250k</span></span></div><div class="tcard tc-private" data-card="private"><span class="tc-top"><b>ABX</b><span>Private</span></span><span class="tc-chip"></span><span class="tc-bot"><span class="tc-name">Private</span><span class="tc-min">{{accounts.from}} €500k</span></span></div></div>
       <div class="acc-pick" role="radiogroup" aria-label="{{accounts.label}}"><button type="button" role="radio" aria-checked="false" data-pick="classic">Classic</button><button type="button" role="radio" aria-checked="false" data-pick="premium">Premium</button><button type="button" role="radio" aria-checked="true" data-pick="elite">Elite</button><button type="button" role="radio" aria-checked="false" data-pick="private">Private</button></div>
@@ -274,6 +342,8 @@
       </div>
     </div>
 
+    </div>
+    </div>
     <article class="ex rv" data-ex>
       <div class="ex-head">
         <div class="plate plate-ex" aria-hidden="true"><span>ABX</span><span class="plate-t">Exclusive</span><span class="plate-r">///</span></div>

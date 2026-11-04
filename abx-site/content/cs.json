@@ -252,5 +252,21 @@
   "acc2.con_classic": "Širší spready při častém obchodování",
   "acc2.con_premium": "Bez osobního manažera",
   "acc2.con_elite": "Vyšší minimální vklad",
-  "acc2.con_private": "Vyplatí se od 500 000 €"
+  "acc2.con_private": "Vyplatí se od 500 000 €",
+  "sec2.acc": "Účet",
+  "sec2.avail": "Disponibilní",
+  "sec2.limit": "Denní limit",
+  "sec2.c_show": "Zobrazit",
+  "sec2.c_freeze": "Zmrazit",
+  "sec2.reg_t": "Regulace v EU",
+  "sec2.reg_d": "Licence CySEC a pravidla MiFID II platná v celé Evropské unii.",
+  "sec2.sup_t": "Podpora 24/5",
+  "sec2.sup_d": "Náš tým pomáhá s účtem, vklady i obchody ve vašem jazyce.",
+  "acc3.int": "Úrok",
+  "acc3.in_classic": "3,25 %",
+  "acc3.in_premium": "3,75 %",
+  "acc3.in_elite": "5 %",
+  "acc3.in_private": "5 %",
+  "acc3.va": "Sloupce",
+  "acc3.vb": "Porovnání"
 }

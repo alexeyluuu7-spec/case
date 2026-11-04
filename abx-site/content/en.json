@@ -252,5 +252,21 @@
   "acc2.con_classic": "Wider spreads if you trade often",
   "acc2.con_premium": "No dedicated manager",
   "acc2.con_elite": "Higher minimum deposit",
-  "acc2.con_private": "Pays off from €500,000"
+  "acc2.con_private": "Pays off from €500,000",
+  "sec2.acc": "Account",
+  "sec2.avail": "Available",
+  "sec2.limit": "Daily limit",
+  "sec2.c_show": "Reveal",
+  "sec2.c_freeze": "Freeze",
+  "sec2.reg_t": "Regulated in the EU",
+  "sec2.reg_d": "A CySEC licence and MiFID II rules that apply across the European Union.",
+  "sec2.sup_t": "Support 24/5",
+  "sec2.sup_d": "Our team helps with your account, deposits and trades in your language.",
+  "acc3.int": "Interest",
+  "acc3.in_classic": "3.25%",
+  "acc3.in_premium": "3.75%",
+  "acc3.in_elite": "5%",
+  "acc3.in_private": "5%",
+  "acc3.va": "Columns",
+  "acc3.vb": "Compare"
 }

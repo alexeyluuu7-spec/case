@@ -13,6 +13,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap">
+<link rel="preload" as="image" type="image/webp" fetchpriority="high" imagesrcset="{{=base}}assets/img/photos/track-1000.webp 1000w, {{=base}}assets/img/photos/track-2000.webp 2000w" imagesizes="100vw">
 <link rel="stylesheet" href="{{=base}}assets/css/minimal.css">
 <script>document.documentElement.classList.add('js')</script>
 </head>
@@ -53,8 +54,7 @@
 <!-- 01 · Hero: full-bleed scene, headline bottom-left, promo card bottom-right -->
 <section class="hero" id="top" aria-labelledby="hero-title">
   <div class="hero-media" aria-hidden="true">
-    <svg class="hero-car" viewBox="0 0 1000 260"><use href="#r-car"/></svg>
-    <canvas class="hero-fx"></canvas>
+    <img class="hero-photo" src="{{=base}}assets/img/photos/track-2000.webp" srcset="{{=base}}assets/img/photos/track-1000.webp 1000w, {{=base}}assets/img/photos/track-2000.webp 2000w" sizes="100vw" width="2000" height="1126" alt="" fetchpriority="high" decoding="async">
     <div class="hero-scrim"></div>
   </div>
   <div class="wrap hero-body">
@@ -67,7 +67,7 @@
       </div>
     </div>
     <a class="promo" href="#markets">
-      <span class="promo-art" aria-hidden="true"><span class="promo-ramp">///</span></span>
+      <span class="promo-art" aria-hidden="true"></span>
       <span class="promo-txt"><span class="promo-tag">{{hero.tag}}</span><b>{{hero.eyebrow}}</b></span>
     </a>
   </div>
@@ -379,8 +379,8 @@
 <!-- 08 · Getting started (traderise "Find your market fit"): four cards -->
 <section class="sec" aria-labelledby="steps-title">
   <div class="wrap">
-    <h2 class="h2 center-h rv" id="steps-title">{{steps.h_1}} <span class="dim">{{steps.h_2}}</span></h2>
-    <p class="sub center-p">{{steps.lead}}</p>
+    <div class="steps-hero rv"><h2 class="h2 center-h" id="steps-title">{{steps.h_1}} <span class="dim">{{steps.h_2}}</span></h2>
+    <p class="sub center-p">{{steps.lead}}</p></div>
     <ol class="steps">
       <li class="rv" style="--d:0"><span class="step-n">01</span><b>{{steps.s1_t}}</b><span>{{steps.s1_d}}</span></li>
       <li class="rv" style="--d:1"><span class="step-n">02</span><b>{{steps.s2_t}}</b><span>{{steps.s2_d}}</span></li>
@@ -418,7 +418,6 @@
         <p class="sub">{{final.sub}}</p>
         <a class="btn btn-orange btn-lg" href="#accounts">{{final.cta}}<svg class="ic" aria-hidden="true"><use href="#i-arrow"/></svg></a>
       </div>
-      <svg class="final-car" viewBox="0 0 1000 260" aria-hidden="true"><use href="#r-car"/><text x="575" y="182" text-anchor="middle" font-family="Geist, sans-serif" font-weight="600" font-size="34" fill="#FF711D">ABX</text></svg>
     </div>
   </div>
 </section>

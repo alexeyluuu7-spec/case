@@ -514,6 +514,29 @@ p{text-wrap:pretty}
 .pt-terms .ic{width:14px;height:14px}
 .pt-terms:hover{color:var(--fg)}
 
+
+/* ---------- Photography (client renders) ---------- */
+.hero-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:62% 50%}
+.hero-scrim{background:linear-gradient(90deg,rgba(10,10,9,.9) 0%,rgba(10,10,9,.55) 34%,rgba(10,10,9,0) 60%),linear-gradient(180deg,rgba(10,10,9,.55) 0%,rgba(10,10,9,0) 20%,rgba(10,10,9,0) 62%,rgba(10,10,9,.9) 100%)!important}
+.promo-art{background:url("../img/photos/cockpit-1000.webp") 72% 40%/cover no-repeat}
+.steps-hero{display:flex;flex-direction:column;align-items:center;justify-content:flex-start;min-height:clamp(520px,54vw,780px);padding:clamp(48px,5vw,72px) 24px 0;border-radius:var(--r-panel);
+  background:linear-gradient(180deg,rgba(14,14,13,.2),rgba(14,14,13,0) 40%,rgba(14,14,13,.6)),url("../img/photos/profile-2000.webp") 50% 100%/100% auto no-repeat #000}
+.steps-hero .h2{margin:0 auto}
+.steps-hero+.steps{margin-top:16px}
+.ex{background:linear-gradient(90deg,rgba(14,14,13,.92) 0%,rgba(14,14,13,.72) 45%,rgba(14,14,13,.35) 100%),url("../img/photos/silhouette-2000.webp") 50% 60%/cover no-repeat var(--panel)!important}
+.final{min-height:clamp(440px,40vw,580px);background:linear-gradient(90deg,rgba(14,14,13,0) 40%,rgba(14,14,13,.6) 62%),url("../img/photos/halo-2000.webp") 0% 50%/cover no-repeat #000!important}
+.final-text{grid-column:2}
+@media (max-width:1100px){
+  .final{grid-template-columns:1fr;align-items:end;padding-top:clamp(260px,52vw,420px);background:linear-gradient(180deg,rgba(14,14,13,0) 30%,rgba(14,14,13,.92) 70%),url("../img/photos/halo-1000.webp") 20% 0%/cover no-repeat #000!important}
+  .final-text{grid-column:1}
+}
+@media (max-width:680px){
+  .hero-photo{position:absolute;inset:auto 0 auto 0;top:60px;height:62vw;object-position:68% 50%}
+  .hero-scrim{background:linear-gradient(180deg,rgba(10,10,9,.4) 0%,rgba(10,10,9,0) 14%,rgba(10,10,9,0) 32%,rgba(10,10,9,.96) 52%,#0a0a09 100%)!important}
+  .steps-hero{min-height:480px;background-image:linear-gradient(180deg,rgba(14,14,13,.2),rgba(14,14,13,0) 40%,rgba(14,14,13,.6)),url("../img/photos/profile-1000.webp");background-size:cover,170% auto;background-position:0 0,54% 100%}
+  .ex{background:linear-gradient(180deg,rgba(14,14,13,.7),rgba(14,14,13,.92)),url("../img/photos/silhouette-1000.webp") 70% 0%/cover no-repeat var(--panel)!important}
+}
+
 /* Responsive */
 @media (max-width:1100px){
   .nav-links{display:none}

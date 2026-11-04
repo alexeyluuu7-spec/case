@@ -896,6 +896,12 @@ p{text-wrap:pretty}
 }
 @media (prefers-reduced-motion:reduce){.hero[data-v="c"] .hero-tk{animation:none}}
 
+
+/* Racing double chevron in CTAs: second chevron pulls ahead on hover */
+.btn .ic-chev{width:18px;height:18px;overflow:visible;margin-right:-3px}
+.btn-lg .ic-chev{width:20px;height:20px}
+@media (hover:hover) and (pointer:fine){.btn:hover .ic-chev{--chev-a:2px;--chev-b:4px}}
+
 /* Responsive */
 @media (max-width:1100px){
   .nav-links{display:none}

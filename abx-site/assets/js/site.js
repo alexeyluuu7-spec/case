@@ -146,6 +146,23 @@
     if (!reduce()) setInterval(() => { if (document.hidden) return; px *= 1 + (Math.random() - 0.5) * vol; draw(); }, 2200 + Math.random() * 600);
   });
 
+  /* Account tier toggle (minimal page): tabs pattern with arrow keys */
+  $$('[data-tiers]').forEach(list => {
+    const tabs = $$('[role="tab"]', list);
+    const pick = t => tabs.forEach(x => {
+      const on = x === t;
+      x.setAttribute('aria-selected', String(on)); x.tabIndex = on ? 0 : -1;
+      document.getElementById(x.getAttribute('aria-controls')).hidden = !on;
+    });
+    tabs.forEach((t, i) => {
+      t.addEventListener('click', () => pick(t));
+      t.addEventListener('keydown', e => {
+        if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+        const n = tabs[(i + (e.key === 'ArrowRight' ? 1 : tabs.length - 1)) % tabs.length]; n.focus(); pick(n);
+      });
+    });
+  });
+
   /* Markets review switch: ?markets=a|b|c keeps the chosen layout in the link */
   const mkRoot = $('[data-mk-root]');
   if (mkRoot) {

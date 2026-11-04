@@ -215,5 +215,11 @@
   "min.mk_all": "Prozkoumat všechny trhy",
   "min.avail": "Dostupné trhy",
   "min.prev": "Předchozí",
-  "min.next": "Další"
+  "min.next": "Další",
+  "calc.t": "Kolik vydělá váš zůstatek",
+  "calc.dep": "Nevyužitý zůstatek",
+  "calc.year": "Úrok za rok",
+  "calc.tier": "Účet",
+  "calc.rate": "sazba",
+  "calc.note": "Orientační výpočet. Sazby jsou proměnlivé."
 }

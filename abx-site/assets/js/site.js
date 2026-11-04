@@ -40,6 +40,7 @@
       entries.forEach(e => {
         if (!e.isIntersecting) return;
         e.target.classList.add('is-in');
+        if (e.target.hasAttribute('data-countup')) $$('[data-count]', e.target).forEach(countUp);
         io.unobserve(e.target);
       });
     }, { rootMargin: '0px 0px -8% 0px', threshold: 0.12 });
@@ -173,14 +174,64 @@
     track.addEventListener('scroll', sync, { passive: true }); window.addEventListener('resize', sync); sync();
   });
 
-  /* Minimal page: platform feature list switches the phone screen; account rows switch the card */
+  /* Minimal page: platform feature list switches the phone screen and advances on its own */
   $$('[data-feat]').forEach(box => {
     const items = $$('.feat-item', box), panes = $$('[data-pane]', box);
-    items.forEach((it, i) => $('button', it).addEventListener('click', () => {
+    let cur = 0;
+    const show = i => {
+      cur = i;
       items.forEach((x, j) => { const on = j === i; x.classList.toggle('is-open', on); $('button', x).setAttribute('aria-expanded', String(on)); $('p', x).hidden = !on; });
       panes.forEach(p => p.classList.toggle('is-on', p.dataset.pane === String(i + 1)));
-    }));
+    };
+    items.forEach((it, i) => $('button', it).addEventListener('click', () => { box.classList.remove('is-auto'); show(i); }));
+    if (!reduce() && 'IntersectionObserver' in window) {
+      const io = new IntersectionObserver(([en]) => { if (en.isIntersecting) { io.disconnect(); box.classList.add('is-auto'); } }, { threshold: 0.4 });
+      io.observe(box);
+      box.addEventListener('animationend', e => { if (e.animationName === 'feat-fill' && box.classList.contains('is-auto')) show((cur + 1) % items.length); });
+    }
   });
+
+  /* Interest calculator: balance on a log scale from €50k to €2M, rate by account tier */
+  $$('[data-calc]').forEach(box => {
+    const r = $('#calc-r', box), dep = $('#calc-dep', box), out = $('#calc-v', box), tier = $('#calc-tier', box), rate = $('#calc-rate', box);
+    const money = new Intl.NumberFormat(lang === 'cs' ? 'cs-CZ' : 'en-GB', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 });
+    const pct = new Intl.NumberFormat(lang === 'cs' ? 'cs-CZ' : 'en-GB', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    const tiers = [[1e6, 'Exclusive', 5], [5e5, 'Private', 5], [25e4, 'Elite', 5], [1e5, 'Premium', 3.75], [5e4, 'Classic', 3.25]];
+    let shown = 0, raf = 0;
+    const tween = to => {
+      cancelAnimationFrame(raf);
+      if (reduce()) { shown = to; out.textContent = money.format(to); return; }
+      const from = shown, t0 = performance.now();
+      const step = now => { const t = Math.min(1, (now - t0) / 260); shown = from + (to - from) * (1 - Math.pow(1 - t, 3)); out.textContent = money.format(Math.round(shown)); if (t < 1) raf = requestAnimationFrame(step); };
+      raf = requestAnimationFrame(step);
+    };
+    const upd = () => {
+      const v = Number(r.value);
+      let d = 5e4 * Math.pow(40, v / 100);
+      d = d < 1e5 ? Math.round(d / 1e3) * 1e3 : d < 1e6 ? Math.round(d / 5e3) * 5e3 : Math.round(d / 25e3) * 25e3;
+      const [, name, pr] = tiers.find(([min]) => d >= min);
+      r.style.setProperty('--p', v + '%');
+      dep.textContent = money.format(d);
+      tier.textContent = name; rate.textContent = pct.format(pr) + ' %';
+      r.setAttribute('aria-valuetext', money.format(d));
+      tween(d * pr / 100);
+    };
+    r.addEventListener('input', upd); upd();
+  });
+
+  /* Account card follows the pointer a little */
+  $$('.plans-stage, .ex-head').forEach(stage => {
+    if (reduce() || !window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+    const card = () => stage.classList.contains('plans-stage') ? $('[data-plate="' + stage.closest('[data-plans]').dataset.active + '"]', stage) : $('.plate-ex', stage);
+    stage.addEventListener('pointermove', e => {
+      const c = card(); if (!c) return;
+      const b = stage.getBoundingClientRect(), x = (e.clientX - b.left) / b.width - 0.5, y = (e.clientY - b.top) / b.height - 0.5;
+      stage.classList.add('is-tilting');
+      c.style.setProperty('--ry', (x * 14).toFixed(2) + 'deg'); c.style.setProperty('--rx', (-y * 12).toFixed(2) + 'deg'); c.style.setProperty('--sx', (50 + x * 80).toFixed(1) + '%');
+    });
+    stage.addEventListener('pointerleave', () => { stage.classList.remove('is-tilting'); $$('.plate', stage).forEach(c => { c.style.removeProperty('--rx'); c.style.removeProperty('--ry'); c.style.removeProperty('--sx'); }); });
+  });
+
   $$('[data-plans]').forEach(box => {
     $$('[data-tier]', box).forEach(row => {
       const pick = () => { box.dataset.active = row.dataset.tier; };

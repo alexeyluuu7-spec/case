@@ -215,5 +215,11 @@
   "min.mk_all": "Browse all markets",
   "min.avail": "Available markets",
   "min.prev": "Previous",
-  "min.next": "Next"
+  "min.next": "Next",
+  "calc.t": "What your balance earns",
+  "calc.dep": "Uninvested balance",
+  "calc.year": "Interest per year",
+  "calc.tier": "Account",
+  "calc.rate": "rate",
+  "calc.note": "Indicative only. Rates are variable."
 }

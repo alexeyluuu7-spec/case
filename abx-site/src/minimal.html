@@ -77,12 +77,38 @@
 <!-- 02 · Trust strip (traderise): figures with dividers, partners -->
 <section class="trust" aria-label="{{trust.label}}">
   <div class="wrap">
+    <div data-vroot data-v="b">
+    <div class="v-a">
     <dl class="figs rv" data-countup data-placeholder="trust-numbers">
       <div><dt>{{trust.n1_l}}</dt><dd data-count="21500" data-suffix="+">{{trust.n1}}</dd><svg class="ic fig-ic" aria-hidden="true"><use href="#i-users"/></svg></div>
       <div><dt>{{trust.n2_l}}</dt><dd data-count="133" data-suffix="+">{{trust.n2}}</dd><svg class="ic fig-ic" aria-hidden="true"><use href="#i-globe"/></svg></div>
       <div><dt>{{trust.n3_l}}</dt><dd class="hot" data-count="20" data-prefix="€" data-suffix="k">{{trust.n3}}</dd><svg class="ic fig-ic" aria-hidden="true"><use href="#i-shield"/></svg></div>
       <div><dt>{{trust.n4_l}}</dt><dd data-count="15" data-suffix="+">{{trust.n4}}</dd><svg class="ic fig-ic" aria-hidden="true"><use href="#i-clock"/></svg></div>
     </dl>
+    </div>
+    <div class="v-b">
+    <ul class="tfx rv" data-countup data-placeholder="trust-numbers">
+      <li class="tf"><div class="tf-t"><b data-count="21500" data-suffix="+">{{trust.n1}}</b><span>{{trust.n1_l}}</span></div><div class="tf-ava" aria-hidden="true"><i style="--h:24">JN</i><i style="--h:200">AK</i><i style="--h:340">PV</i><i style="--h:140">LM</i><i style="--h:30">TS</i><em>+21k</em></div></li>
+      <li class="tf"><div class="tf-t"><b data-count="133" data-suffix="+">{{trust.n2}}</b><span>{{trust.n2_l}}</span></div><div class="tf-cc" aria-hidden="true"><i class="on">CZ</i><i>SK</i><i>DE</i><i>AT</i><i>PL</i><i>HU</i><i>GB</i><i>FR</i><i>IT</i><i>ES</i><i>NL</i><i>CH</i><i>SE</i><i>AE</i><i>SG</i><i>CY</i></div></li>
+      <li class="tf tf-hot"><div class="tf-t"><b data-count="20" data-prefix="€" data-suffix="k">{{trust.n3}}</b><span>{{trust.n3_l}}</span></div>
+        <div class="tf-ring" aria-hidden="true"><svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="50" pathLength="100"/><circle class="arc" cx="60" cy="60" r="50" pathLength="100"/></svg><svg class="ic"><use href="#i-shield"/></svg></div></li>
+      <li class="tf"><div class="tf-t"><b data-count="15" data-suffix="+">{{trust.n4}}</b><span>{{trust.n4_l}}</span></div><div class="tf-yr" aria-hidden="true"><i class="on">2010</i><i>2014</i><i>2018</i><i>2022</i><i>2025</i></div></li>
+    </ul>
+    </div>
+    <div class="v-c">
+    <div class="tbig rv" data-placeholder="milestones">
+      <div class="tbig-num" aria-hidden="true"><span>15</span><em>+</em></div>
+      <p class="tbig-l">{{trust.n4_l}}</p>
+      <ol class="tbig-y"><li><b>2010</b><span>{{tr.y1}}</span></li><li><b>2014</b><span>{{tr.y2}}</span></li><li><b>2018</b><span>{{tr.y3}}</span></li><li><b>2022</b><span>{{tr.y4}}</span></li><li class="on"><b>2025</b><span>{{tr.y5}}</span></li></ol>
+      <dl class="tbig-f" data-placeholder="trust-numbers">
+        <div><dt>{{trust.n1_l}}</dt><dd>{{trust.n1}}</dd></div>
+        <div><dt>{{trust.n2_l}}</dt><dd>{{trust.n2}}</dd></div>
+        <div><dt>{{trust.n3_l}}</dt><dd class="hot">{{trust.n3}}</dd></div>
+      </dl>
+    </div>
+    </div>
+    <div class="vsw" role="radiogroup" aria-label="{{min.variant}}"><button type="button" role="radio" data-vbtn="a">{{min.v_a}}</button><button type="button" role="radio" data-vbtn="b">{{min.v_b}}</button><button type="button" role="radio" data-vbtn="c">{{min.v_c}}</button></div>
+    </div>
     <div class="plogos rv" role="img" aria-label="{{trust.partners}}: Visa, Mastercard, J.P. Morgan, UBS, TradingView, CySEC" data-placeholder="partner-logos"><div class="plogos-track"><ul><li class="pl-visa">VISA</li><li>mastercard</li><li class="pl-serif">J.P.Morgan</li><li class="pl-serif">UBS</li><li>TradingView</li><li class="pl-mono">CySEC</li></ul><ul><li class="pl-visa">VISA</li><li>mastercard</li><li class="pl-serif">J.P.Morgan</li><li class="pl-serif">UBS</li><li>TradingView</li><li class="pl-mono">CySEC</li></ul></div></div>
   </div>
 </section>

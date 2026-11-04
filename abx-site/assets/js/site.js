@@ -128,6 +128,79 @@
   });
 
 
+
+  /* Markets review switch: ?markets=a|b|c keeps the chosen layout in the link */
+  const mkRoot = $('[data-mk-root]');
+  if (mkRoot) {
+    const btns = $$('[data-mk]');
+    const set = (v, write) => {
+      mkRoot.dataset.variant = v;
+      btns.forEach(b => { const on = b.dataset.mk === v; b.setAttribute('aria-checked', String(on)); b.tabIndex = on ? 0 : -1; });
+      if (write) { const u = new URL(location.href); u.searchParams.set('markets', v); history.replaceState(null, '', u); }
+    };
+    btns.forEach((b, i) => {
+      b.addEventListener('click', () => set(b.dataset.mk, true));
+      b.addEventListener('keydown', e => {
+        if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+        const n = btns[(i + (e.key === 'ArrowRight' ? 1 : btns.length - 1)) % btns.length];
+        n.focus(); set(n.dataset.mk, true);
+      });
+    });
+    const q = new URLSearchParams(location.search).get('markets');
+    set(['a', 'b', 'c'].includes(q) ? q : 'a', false);
+  }
+
+  /* C · Expand: click, Enter or a short hover opens a market; geometry morphs via View Transitions */
+  const mkc = $('[data-mkc]');
+  if (mkc) {
+    const items = $$('.mkc-item', mkc);
+    items.forEach((it, i) => { it.style.viewTransitionName = 'mkc-' + i; });
+    let busy = false;
+    const open = item => {
+      if (item.classList.contains('is-open')) return;
+      const apply = () => items.forEach(it => {
+        const on = it === item;
+        it.classList.toggle('is-open', on);
+        $('.mkc-tab', it).setAttribute('aria-expanded', String(on));
+        $('.mkc-panel', it).hidden = !on;
+      });
+      if (document.startViewTransition && !reduce() && !busy && window.innerWidth > 1100) {
+        busy = true;
+        document.startViewTransition(apply).finished.finally(() => { busy = false; });
+      } else apply();
+    };
+    const fine = window.matchMedia('(hover: hover) and (pointer: fine)');
+    items.forEach(it => {
+      $('.mkc-tab', it).addEventListener('click', () => open(it));
+      let t;
+      it.addEventListener('mouseenter', () => { if (fine.matches && window.innerWidth > 1100) t = setTimeout(() => open(it), 160); });
+      it.addEventListener('mouseleave', () => clearTimeout(t));
+    });
+  }
+
+  /* B · Live preview charts: one accent per chart, neutral down candles */
+  $$('[data-wchart]').forEach(svg => {
+    const r = rng(Number(svg.dataset.seed) || 1), W = 320, H = 120;
+    for (let i = 1; i < 4; i++) svg.appendChild(el('line', { x1: 0, x2: W, y1: i * 30, y2: i * 30, stroke: 'rgba(237,237,234,.06)' }));
+    if (svg.dataset.wchart === 'line') {
+      let v = 0; const raw = [];
+      for (let i = 0; i <= 48; i++) { v += (r() - 0.44) * 9; raw.push(v); }
+      const lo = Math.min(...raw), hi = Math.max(...raw), pts = raw.map((n, i) => [i * W / 48, H - 12 - (n - lo) / (hi - lo || 1) * (H - 24)]);
+      svg.appendChild(el('path', { d: 'M' + pts.map(p => p.map(n => n.toFixed(1)).join(' ')).join(' L'), fill: 'none', stroke: '#FF711D', 'stroke-width': 1.75, 'stroke-linejoin': 'round', 'vector-effect': 'non-scaling-stroke' }));
+    } else {
+      let p = 0; const N = 28, step = W / N, bw = step * 0.56, ks = [];
+      for (let i = 0; i < N; i++) { const o = p, c = o + (r() - 0.42) * 12; ks.push({ o, c, h: Math.max(o, c) + r() * 6, l: Math.min(o, c) - r() * 6 }); p = c; }
+      const lo = Math.min(...ks.map(k => k.l)), hi = Math.max(...ks.map(k => k.h));
+      for (let i = 0; i < N; i++) {
+        const { o, c, h, l } = ks[i];
+        const y = v => H - 8 - (v - lo) / (hi - lo || 1) * (H - 16), up = c >= o, x = i * step + (step - bw) / 2;
+        const col = up ? '#FF711D' : '#5f5e59';
+        svg.appendChild(el('line', { x1: x + bw / 2, x2: x + bw / 2, y1: y(h), y2: y(l), stroke: col, 'stroke-width': 1, 'vector-effect': 'non-scaling-stroke' }));
+        svg.appendChild(el('rect', { x, y: y(Math.max(o, c)), width: bw, height: Math.max(1.5, Math.abs(y(o) - y(c))), fill: col }));
+      }
+    }
+  });
+
   /* Markets timing tower: tab filter, re-numbered positions, leader highlight */
   $$('[data-tower]').forEach(tower => {
     const tabs = $$('[role="tab"]', tower), rows = $$('tbody tr', tower);

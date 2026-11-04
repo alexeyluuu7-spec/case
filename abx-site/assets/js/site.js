@@ -129,6 +129,21 @@
 
 
 
+  /* Forex card: live rate in the gauge display; the needle follows the change vs the open */
+  $$('[data-fx]').forEach(win => {
+    const card = win.closest('.fx-sq'), rateEl = $('[data-fx-rate]', win), chgEl = $('[data-fx-chg]', win), needle = $('[data-fx-needle]', card);
+    const open = 1.08280; let rate = 1.08412;
+    const draw = () => {
+      const pct = (rate - open) / open * 100;
+      rateEl.textContent = rate.toFixed(4);
+      chgEl.textContent = (pct >= 0 ? '▲ ' : '▼ ') + Math.abs(pct).toFixed(2) + '%';
+      chgEl.className = pct >= 0 ? 'up' : 'dn';
+      needle.style.setProperty('--a', Math.max(-120, Math.min(120, pct * 220)).toFixed(1) + 'deg');
+    };
+    draw();
+    if (!reduce()) setInterval(() => { if (document.hidden) return; rate += (Math.random() - 0.48) * 0.0004; draw(); }, 2200);
+  });
+
   /* Markets review switch: ?markets=a|b|c keeps the chosen layout in the link */
   const mkRoot = $('[data-mk-root]');
   if (mkRoot) {

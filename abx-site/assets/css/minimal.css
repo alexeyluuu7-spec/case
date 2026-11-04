@@ -693,6 +693,80 @@ p{text-wrap:pretty}
 }
 @media (prefers-reduced-motion:reduce){.tf-ring .arc{stroke-dashoffset:22;transition:none}}
 
+/* ---------- 08 Steps: variant B (step list + phone, olymptrade "your start") ---------- */
+.sfeat{margin-top:16px}
+.sfeat .feat-text{justify-content:center}
+.sf-k{font-size:32px;font-weight:500;letter-spacing:-.03em;padding-left:20px}
+.sfeat .feat-list{margin-top:32px;padding-top:0}
+.sf-n{display:inline-block;width:40px;font:500 14px var(--f-mono);color:var(--muted)}
+.sfeat .feat-item.is-open .sf-n{color:var(--orange)}
+.sfeat .feat-item p{padding-left:60px}
+.sf-stage{position:relative;isolation:isolate}
+.sf-bars{position:absolute;inset:0;z-index:-1;display:flex;align-items:flex-end;justify-content:center;gap:18px;padding:0 24px}
+.sf-bars i{flex:1;max-width:72px;border-radius:14px 14px 0 0;background:linear-gradient(180deg,#363632,rgba(42,42,39,.15));transform:skewY(-8deg)}
+.sf-bars i:nth-child(1){height:34%}.sf-bars i:nth-child(2){height:52%}.sf-bars i:nth-child(3){height:40%}
+.sf-bars i:nth-child(4){height:70%}.sf-bars i:nth-child(5){height:58%}.sf-bars i:nth-child(6){height:86%}
+.sf-field{display:flex;flex-direction:column;gap:2px;margin-top:10px;padding:10px 14px;border-radius:14px;background:var(--panel-2);font-size:14px}
+.sf-field small{font-size:11px;color:var(--muted)}
+.sf-pass{position:relative}
+.sf-pass i{position:absolute;right:14px;top:50%;width:6px;height:6px;border-radius:50%;background:var(--up)}
+.sf-btn{display:flex;align-items:center;justify-content:center;height:44px;margin-top:18px;border-radius:999px;background:var(--orange);color:var(--on-orange);font-size:14px;font-weight:600}
+.sf-id{position:relative;display:flex;gap:12px;margin-top:14px;padding:16px;aspect-ratio:1.586;border-radius:14px;overflow:hidden;
+  background:linear-gradient(150deg,#3a3a36,#22221f);box-shadow:0 0 0 2px var(--orange)}
+.sf-id-ph{width:32%;border-radius:8px;background:linear-gradient(180deg,#5a5a55,#3a3a36)}
+.sf-id-l{flex:1;display:flex;flex-direction:column;gap:8px;padding-top:6px}
+.sf-id-l i{height:8px;border-radius:4px;background:rgba(255,255,255,.18)}
+.sf-id-l i:nth-child(2){width:70%}.sf-id-l i:nth-child(3){width:45%}
+.sf-scan{position:absolute;left:0;right:0;top:0;height:2px;background:var(--orange);box-shadow:0 0 12px var(--orange);animation:scan 2.4s var(--ease) infinite alternate}
+@keyframes scan{to{top:calc(100% - 2px)}}
+.sf-ok{display:flex;align-items:center;gap:8px;margin-top:18px;font-size:15px;font-weight:500}
+.sf-ok .ic{width:18px;height:18px;padding:3px;border-radius:50%;background:var(--up);color:#06150d}
+.sf-note{margin-top:6px;font-size:13px;color:var(--fg-2)}
+.sf-amt{margin-top:18px;text-align:center;font-size:40px;font-weight:500;letter-spacing:-.04em}
+.sf-amt small{font-size:20px;color:var(--fg-2)}
+.sf-chips{display:flex;justify-content:center;gap:6px;margin-top:12px}
+.sf-chips i{padding:6px 10px;border-radius:999px;background:var(--panel-2);font-size:12px;font-style:normal;color:var(--fg-2)}
+.sf-chips i.on{background:var(--fg);color:var(--bg)}
+.sf-keys{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:16px}
+.sf-keys i{display:grid;place-items:center;height:38px;border-radius:12px;background:var(--panel-2);font:500 15px var(--f-mono);font-style:normal}
+.sf-px{margin-top:6px;font:500 28px var(--f-mono);letter-spacing:-.03em}
+.sf-px i{font-size:13px;font-style:normal;margin-left:6px}
+.sf-ch{width:100%;height:110px;margin-top:10px}
+.sf-ch path{fill:none;stroke:var(--orange);stroke-width:2;vector-effect:non-scaling-stroke}
+.sf-ticket{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
+.sf-ticket span{display:flex;flex-direction:column;gap:2px;padding:10px 12px;border-radius:12px;background:var(--panel-2);font:500 14px var(--f-mono)}
+.sf-ticket small{font:400 11px var(--f);color:var(--muted)}
+.sf-bs{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.sf-bs span{display:grid;place-items:center;height:44px;border-radius:14px;font-size:14px;font-weight:600}
+.sf-sell{background:rgba(229,72,77,.16);color:#ff8a8d}
+.sf-buy{background:var(--orange);color:var(--on-orange)}
+
+/* ---------- 08 Steps: variant C (progression track) ---------- */
+.pg{position:relative;margin-top:16px;padding:48px clamp(24px,4vw,48px) 40px;border-radius:var(--r-panel);background:var(--panel)}
+.pg-track{position:absolute;left:calc(clamp(24px,4vw,48px) + 28px);right:calc(clamp(24px,4vw,48px) + 28px);top:76px;height:4px;border-radius:4px;background:var(--raised);overflow:hidden}
+.pg-track i{position:absolute;inset:0;background:linear-gradient(90deg,#ff9a55,var(--orange));transform-origin:0 50%;transform:scaleX(0);transition:transform 2400ms var(--ease) 300ms}
+.pg.is-in .pg-track i{transform:scaleX(.84)}
+.pg-list{position:relative;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px}
+.pg-list li{display:flex;flex-direction:column;gap:6px}
+.pg-node{display:grid;place-items:center;width:60px;height:60px;margin-bottom:20px;border-radius:50%;background:var(--panel-2);box-shadow:0 0 0 6px var(--panel);color:var(--fg-2);
+  transition:background-color 400ms var(--ease),color 400ms var(--ease);transition-delay:calc(var(--i) * 550ms)}
+.pg-node .ic{width:24px;height:24px}
+.pg.is-in .pg-list li:not(:last-child) .pg-node{background:var(--orange);color:var(--on-orange)}
+.pg.is-in .pg-list li:last-child .pg-node{background:var(--fg);color:var(--bg)}
+.pg-list .step-n{font:500 13px var(--f-mono);color:var(--muted)}
+.pg-list b{font-size:20px;font-weight:600;letter-spacing:-.02em}
+.pg-list li>span:last-child{font-size:15px;color:var(--fg-2)}
+@media (max-width:680px){
+  .pg-track{left:auto;right:auto;top:48px;bottom:48px;width:4px;height:auto;margin-left:28px}
+  .pg-track i{transform-origin:50% 0;transform:scaleY(0)}
+  .pg.is-in .pg-track i{transform:scaleY(.84)}
+  .pg-list{grid-template-columns:1fr;gap:28px}
+  .pg-list li{display:grid;grid-template-columns:60px 1fr;column-gap:20px}
+  .pg-node{grid-row:span 3;margin:0}
+  .sfeat .feat-item p{padding-left:20px}
+}
+@media (prefers-reduced-motion:reduce){.sf-scan{animation:none}.pg-track i,.pg-node{transition:none}}
+
 /* Responsive */
 @media (max-width:1100px){
   .nav-links{display:none}

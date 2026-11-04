@@ -299,5 +299,22 @@
   "tr.y2": "CySEC licence",
   "tr.y3": "100+ instruments",
   "tr.y4": "Mobile app",
-  "tr.y5": "21,500+ clients"
+  "tr.y5": "21,500+ clients",
+  "stp.kicker": "How to start",
+  "stp.p1_h": "New account",
+  "stp.p1_mail": "Email",
+  "stp.p1_tel": "Phone",
+  "stp.p1_pass": "Password",
+  "stp.p1_btn": "Continue",
+  "stp.p2_h": "Identity check",
+  "stp.p2_ok": "Document verified",
+  "stp.p2_note": "Now a quick selfie.",
+  "stp.p3_h": "Deposit",
+  "stp.p3_card": "Card",
+  "stp.p3_bank": "Transfer",
+  "stp.p3_wallet": "E-wallet",
+  "stp.p3_btn": "Deposit €1,000",
+  "stp.p4_vol": "Volume",
+  "stp.p4_sell": "Sell",
+  "stp.p4_buy": "Buy"
 }

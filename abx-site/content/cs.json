@@ -299,5 +299,22 @@
   "tr.y2": "Licence CySEC",
   "tr.y3": "100+ nástrojů",
   "tr.y4": "Mobilní aplikace",
-  "tr.y5": "21 500+ klientů"
+  "tr.y5": "21 500+ klientů",
+  "stp.kicker": "Jak začít",
+  "stp.p1_h": "Nový účet",
+  "stp.p1_mail": "E-mail",
+  "stp.p1_tel": "Telefon",
+  "stp.p1_pass": "Heslo",
+  "stp.p1_btn": "Pokračovat",
+  "stp.p2_h": "Ověření identity",
+  "stp.p2_ok": "Doklad ověřen",
+  "stp.p2_note": "Teď ještě krátké selfie.",
+  "stp.p3_h": "Vklad",
+  "stp.p3_card": "Karta",
+  "stp.p3_bank": "Převod",
+  "stp.p3_wallet": "E-peněženka",
+  "stp.p3_btn": "Vložit € 1 000",
+  "stp.p4_vol": "Objem",
+  "stp.p4_sell": "Prodat",
+  "stp.p4_buy": "Koupit"
 }

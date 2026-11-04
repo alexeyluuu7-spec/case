@@ -211,5 +211,9 @@
   "mk.va": "Gallery",
   "mk.vb": "Live preview",
   "mk.vc": "Expand",
-  "min.review": "Full version"
+  "min.review": "Full version",
+  "min.mk_all": "Browse all markets",
+  "min.avail": "Available markets",
+  "min.prev": "Previous",
+  "min.next": "Next"
 }

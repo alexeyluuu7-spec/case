@@ -149,10 +149,8 @@
 <p class="risk wrap" data-placeholder="cfd-percent">CFD jsou složité nástroje s vysokým rizikem rychlé ztráty peněz kvůli pákovému efektu. XX % účtů retailových investorů při obchodování s CFD u tohoto poskytovatele přichází o peníze.</p>
 
 <!-- 02 · Trust: four quiet figures -->
-<section class="sec" aria-labelledby="trust-title">
+<section class="sec sec-trust" aria-label="Důvěra">
   <div class="wrap center">
-    <p class="kicker">Důvěra</p>
-    <h2 class="h2" id="trust-title">Důvěřují nám obchodníci ze 133 zemí</h2>
     <dl class="figs" data-placeholder="trust-numbers">
       <div><dt>obchodníků po celém světě</dt><dd>21 500+</dd></div>
       <div><dt>zemí</dt><dd>133+</dd></div>
@@ -165,37 +163,84 @@
   </div>
 </section>
 
-<!-- 03 · Markets: one phone, the six markets around it -->
+<!-- 03 · Markets: tabs + live list (traderise), one quiet horizon glow (capital.com), then six market cards in a slider -->
 <section class="sec" id="markets" aria-labelledby="markets-title">
-  <div class="wrap center">
-    <p class="kicker">Trhy</p>
-    <h2 class="h2" id="markets-title">Všechny trhy. Jeden účet</h2>
-    <a class="btn btn-orange" href="#accounts">Otevřít účet</a>
-    <div class="orbit">
-      <ul class="orbit-side">
-        <li><span class="o-k">AAPL · 228.35</span><b>Akcie</b><span class="o-d">Vlastněte podíly ve firmách, které hýbou světem, od Tesly po Nvidii</span></li>
-        <li><span class="o-k">SPY · 591.20</span><b>ETF</b><span class="o-d">Celé indexy a sektory v jedné pozici, například S&amp;P 500 nebo zlato</span></li>
-        <li><span class="o-k">XAU · 2,684.35</span><b>Komodity</b><span class="o-d">Zlato, stříbro, ropa a plyn pro zajištění, spekulaci i diverzifikaci</span></li>
-      </ul>
-      <div class="phone" aria-hidden="true">
-        <div class="phone-screen">
-          <span class="ph-island"></span>
-          <span class="ph-label">Sledované</span>
-          <ul class="ph-list">
-            <li><b>AAPL</b><span>228.35</span><i class="up">+0.86%</i></li>
-            <li><b>SPY</b><span>591.20</span><i class="up">+0.46%</i></li>
-            <li><b>XAU</b><span>2,684.35</span><i class="up">+0.74%</i></li>
-            <li><b>EUR/USD</b><span>1.0841</span><i class="up">+0.12%</i></li>
-            <li><b>US500</b><span>5,932.4</span><i class="up">+0.48%</i></li>
-            <li><b>NVDA</b><span>138.62</span><i class="dn">−1.12%</i></li>
-            <li class="pre"><b>SpaceX</b><span>Pre-IPO</span><i></i></li>
-          </ul>
+  <div class="wrap">
+    <div class="mk-panel">
+      <div class="center">
+        <h2 class="h2" id="markets-title">Všechny trhy <span class="dim">Jeden účet</span></h2>
+        <p class="sub">Akcie, ETF, komodity, forex a indexy, a k tomu přístup k pre-IPO společnostem, o kterých mluví celý svět.</p>
+      </div>
+      <div class="mlist" data-tower>
+        <div class="seg" role="tablist" aria-label="Ceny na trzích">
+          <button role="tab" aria-selected="true" data-filter="pop">Populární</button>
+          <button role="tab" aria-selected="false" data-filter="stocks">Akcie</button>
+          <button role="tab" aria-selected="false" data-filter="etf">ETF</button>
+          <button role="tab" aria-selected="false" data-filter="comm">Komodity</button>
+          <button role="tab" aria-selected="false" data-filter="fx">Forex</button>
+          <button role="tab" aria-selected="false" data-filter="idx">Indexy</button>
+        </div>
+        <table class="mtable" aria-label="Ceny na trzích" data-placeholder="indicative-prices">
+          <thead class="sr-only"><tr><th scope="col">Nástroj</th><th scope="col">7D</th><th scope="col">Koupit</th><th scope="col">Změna</th><th scope="col"></th></tr></thead>
+          <tbody>
+          <tr data-cat="stocks pop"><td><span class="sym"><i class="logo-dot">T</i><span><b>Tesla</b><small>TSLA</small></span></span></td><td class="c-spark"><svg data-spark-row="11" viewBox="0 0 100 28" preserveAspectRatio="none"></svg></td><td class="c-px">342.18</td><td class="c-chg up">+2.41%</td><td class="c-act"><a class="btn btn-ghost btn-sm" href="#accounts">Koupit</a></td></tr>
+          <tr data-cat="comm pop"><td><span class="sym"><i class="logo-dot">Au</i><span><b>Gold</b><small>XAU/USD</small></span></span></td><td class="c-spark"><svg data-spark-row="5" viewBox="0 0 100 28" preserveAspectRatio="none"></svg></td><td class="c-px">2,684.35</td><td class="c-chg up">+0.74%</td><td class="c-act"><a class="btn btn-ghost btn-sm" href="#accounts">Koupit</a></td></tr>
+          <tr data-cat="fx pop"><td><span class="sym"><i class="logo-dot">€</i><span><b>Euro · US dollar</b><small>EUR/USD</small></span></span></td><td class="c-spark"><svg data-spark-row="3" viewBox="0 0 100 28" preserveAspectRatio="none"></svg></td><td class="c-px">1.08412</td><td class="c-chg up">+0.12%</td><td class="c-act"><a class="btn btn-ghost btn-sm" href="#accounts">Koupit</a></td></tr>
+          <tr data-cat="idx pop"><td><span class="sym"><i class="logo-dot">US</i><span><b>US 500</b><small>US500</small></span></span></td><td class="c-spark"><svg data-spark-row="7" viewBox="0 0 100 28" preserveAspectRatio="none"></svg></td><td class="c-px">5,932.4</td><td class="c-chg up">+0.48%</td><td class="c-act"><a class="btn btn-ghost btn-sm" href="#accounts">Koupit</a></td></tr>
+          <tr data-cat="etf pop"><td><span class="sym"><i class="logo-dot">S</i><span><b>SPDR S&amp;P 500 ETF</b><small>SPY</small></span></span></td><td class="c-spark"><svg data-spark-row="41" viewBox="0 0 100 28" preserveAspectRatio="none"></svg></td><td class="c-px">591.20</td><td class="c-chg up">+0.46%</td><td class="c-act"><a class="btn btn-ghost btn-sm" href="#accounts">Koupit</a></td></tr>
+          <tr data-cat="stocks pop"><td><span class="sym"><i class="logo-dot">N</i><span><b>Nvidia</b><small>NVDA</small></span></span></td><td class="c-spark"><svg data-spark-row="19" data-down viewBox="0 0 100 28" preserveAspectRatio="none"></svg></td><td class="c-px">138.62</td><td class="c-chg dn">−1.12%</td><td class="c-act"><a class="btn btn-ghost btn-sm" href="#accounts">Koupit</a></td></tr>
+          <tr data-cat="stocks"><td><span class="sym"><i class="logo-dot">A</i><span><b>Apple</b><small>AAPL</small></span></span></td><td class="c-spark"><svg data-spark-row="23" viewBox="0 0 100 28" preserveAspectRatio="none"></svg></td><td class="c-px">228.35</td><td class="c-chg up">+0.86%</td><td class="c-act"><a class="btn btn-ghost btn-sm" href="#accounts">Koupit</a></td></tr>
+          <tr data-cat="etf"><td><span class="sym"><i class="logo-dot">G</i><span><b>SPDR Gold Shares</b><small>GLD</small></span></span></td><td class="c-spark"><svg data-spark-row="43" viewBox="0 0 100 28" preserveAspectRatio="none"></svg></td><td class="c-px">247.80</td><td class="c-chg up">+0.70%</td><td class="c-act"><a class="btn btn-ghost btn-sm" href="#accounts">Koupit</a></td></tr>
+          <tr data-cat="etf"><td><span class="sym"><i class="logo-dot">V</i><span><b>Vanguard Total Market</b><small>VTI</small></span></span></td><td class="c-spark"><svg data-spark-row="47" viewBox="0 0 100 28" preserveAspectRatio="none"></svg></td><td class="c-px">296.40</td><td class="c-chg up">+0.39%</td><td class="c-act"><a class="btn btn-ghost btn-sm" href="#accounts">Koupit</a></td></tr>
+          <tr data-cat="comm"><td><span class="sym"><i class="logo-dot">Oil</i><span><b>Brent crude</b><small>BRENT</small></span></span></td><td class="c-spark"><svg data-spark-row="29" data-down viewBox="0 0 100 28" preserveAspectRatio="none"></svg></td><td class="c-px">73.05</td><td class="c-chg dn">−0.35%</td><td class="c-act"><a class="btn btn-ghost btn-sm" href="#accounts">Koupit</a></td></tr>
+          <tr data-cat="comm"><td><span class="sym"><i class="logo-dot">Ag</i><span><b>Silver</b><small>XAG/USD</small></span></span></td><td class="c-spark"><svg data-spark-row="53" viewBox="0 0 100 28" preserveAspectRatio="none"></svg></td><td class="c-px">31.42</td><td class="c-chg up">+1.10%</td><td class="c-act"><a class="btn btn-ghost btn-sm" href="#accounts">Koupit</a></td></tr>
+          <tr data-cat="fx"><td><span class="sym"><i class="logo-dot">£</i><span><b>Pound · US dollar</b><small>GBP/USD</small></span></span></td><td class="c-spark"><svg data-spark-row="37" data-down viewBox="0 0 100 28" preserveAspectRatio="none"></svg></td><td class="c-px">1.29519</td><td class="c-chg dn">−0.08%</td><td class="c-act"><a class="btn btn-ghost btn-sm" href="#accounts">Koupit</a></td></tr>
+          <tr data-cat="fx"><td><span class="sym"><i class="logo-dot">¥</i><span><b>US dollar · Yen</b><small>USD/JPY</small></span></span></td><td class="c-spark"><svg data-spark-row="59" viewBox="0 0 100 28" preserveAspectRatio="none"></svg></td><td class="c-px">152.31</td><td class="c-chg up">+0.21%</td><td class="c-act"><a class="btn btn-ghost btn-sm" href="#accounts">Koupit</a></td></tr>
+          <tr data-cat="idx"><td><span class="sym"><i class="logo-dot">DE</i><span><b>Germany 40</b><small>GER40</small></span></span></td><td class="c-spark"><svg data-spark-row="31" viewBox="0 0 100 28" preserveAspectRatio="none"></svg></td><td class="c-px">19,412.7</td><td class="c-chg up">+0.21%</td><td class="c-act"><a class="btn btn-ghost btn-sm" href="#accounts">Koupit</a></td></tr>
+          <tr data-cat="idx"><td><span class="sym"><i class="logo-dot">JP</i><span><b>Japan 225</b><small>JP225</small></span></span></td><td class="c-spark"><svg data-spark-row="61" data-down viewBox="0 0 100 28" preserveAspectRatio="none"></svg></td><td class="c-px">39,280</td><td class="c-chg dn">−0.30%</td><td class="c-act"><a class="btn btn-ghost btn-sm" href="#accounts">Koupit</a></td></tr>
+          </tbody>
+        </table>
+        <p class="mnote">Orientační ceny. Živé kotace najdete na platformě.</p>
+      </div>
+      <div class="center"><a class="btn btn-orange" href="#markets-all">Prozkoumat všechny trhy</a></div>
+    </div>
+
+    <div class="slider" id="markets-all" data-slider>
+      <div class="slider-head">
+        <h2 class="h3">Dostupné trhy</h2>
+        <div class="slider-nav">
+          <button class="snav" type="button" aria-label="Předchozí" data-slide="-1"><svg class="ic" aria-hidden="true" style="transform:scaleX(-1)"><use href="#i-chevron"/></svg></button>
+          <button class="snav" type="button" aria-label="Další" data-slide="1"><svg class="ic" aria-hidden="true"><use href="#i-chevron"/></svg></button>
         </div>
       </div>
-      <ul class="orbit-side">
-        <li><span class="o-k">EUR/USD · 1.0841</span><b>Forex</b><span class="o-d">Hlavní i vedlejší měnové páry, od EUR/USD po USD/JPY</span></li>
-        <li><span class="o-k">US500 · 5,932.4</span><b>Indexy</b><span class="o-d">Obchodujte celé ekonomiky přes US 500, Germany 40 nebo Japan 225</span></li>
-        <li><span class="o-k o-hot">SpaceX · Stripe</span><b>Pre-IPO</b><span class="o-d">Firmy ještě před vstupem na burzu, jako první SpaceX a Stripe</span></li>
+      <ul class="slider-track" role="list">
+        <li><a class="mcard mka-comm is-photo" href="#" style="--bg:#0c0a08">
+          <div class="mcard-art" aria-hidden="true"><div class="ph-sq">
+            <img src="../assets/img/markets/commodities-800.webp" srcset="../assets/img/markets/commodities-800.webp 800w, ../assets/img/markets/commodities-1254.webp 1254w" sizes="(max-width: 680px) 86vw, 400px" width="1254" height="1254" alt="" loading="lazy" decoding="async">
+            <div class="ph-win" style="--wx:47.8%;--wy:43.6%;--ww:42%;--wh:15.8%;--px:8cqw" data-live data-open="73.31" data-price="73.05" data-dec="2" data-vol="0.0012"><span class="ph-top">BRENT <i class="up" data-live-chg></i></span><b data-live-px></b></div>
+          </div></div>
+          <div class="mcard-body"><h3>Komodity</h3><p>Zlato, stříbro, ropa a plyn pro zajištění, spekulaci i diverzifikaci</p><span class="btn btn-light btn-sm">Prozkoumat</span></div>
+        </a></li>
+        <li><a class="mcard mka-stocks" href="#">
+          <div class="mcard-art" aria-hidden="true"><div class="slab sl-1"><b>Nvidia</b><span>NVDA · NASDAQ</span></div><div class="slab sl-2"><b>Apple</b><span>AAPL · NASDAQ</span></div><div class="slab sl-3"><b>Tesla</b><span>TSLA · NASDAQ</span></div></div>
+          <div class="mcard-body"><h3>Akcie</h3><p>Vlastněte podíly ve firmách, které hýbou světem, od Tesly po Nvidii</p><span class="btn btn-light btn-sm">Prozkoumat</span></div>
+        </a></li>
+        <li><a class="mcard mka-fx" href="#">
+          <div class="mcard-art" aria-hidden="true"><div class="slab sl-rate sl-1"><em>152.31</em><span>USD/JPY</span></div><div class="slab sl-rate sl-2"><em>1.2951</em><span>GBP/USD</span></div><div class="slab sl-rate sl-3"><em>1.0841</em><span>EUR/USD</span></div></div>
+          <div class="mcard-body"><h3>Forex</h3><p>Hlavní i vedlejší měnové páry, od EUR/USD po USD/JPY</p><span class="btn btn-light btn-sm">Prozkoumat</span></div>
+        </a></li>
+        <li><a class="mcard mka-etfs" href="#">
+          <div class="mcard-art" aria-hidden="true"><div class="slab sl-wide sl-1"><b>GLD</b><span>SPDR Gold Shares</span><em>247.80</em></div><div class="slab sl-wide sl-2"><b>SPY</b><span>SPDR S&amp;P 500</span><em>591.20</em></div></div>
+          <div class="mcard-body"><h3>ETF</h3><p>Celé indexy a sektory v jedné pozici, například S&amp;P 500 nebo zlato</p><span class="btn btn-light btn-sm">Prozkoumat</span></div>
+        </a></li>
+        <li><a class="mcard mka-idx" href="#">
+          <div class="mcard-art" aria-hidden="true"><div class="hang h-1"><i></i><div class="slab"><b>JP 225</b><span>39,280</span></div></div><div class="hang h-2"><i></i><div class="slab sl-hot"><b>US 500</b><span>5,932</span></div></div><div class="hang h-3"><i></i><div class="slab"><b>GER 40</b><span>19,412</span></div></div></div>
+          <div class="mcard-body"><h3>Indexy</h3><p>Obchodujte celé ekonomiky přes US 500, Germany 40 nebo Japan 225</p><span class="btn btn-light btn-sm">Prozkoumat</span></div>
+        </a></li>
+        <li><a class="mcard mka-pre" href="#">
+          <div class="mcard-art" aria-hidden="true"><div class="slab sl-seal sl-1"><b>Stripe</b><span>Pre-IPO</span></div><div class="slab sl-seal sl-2"><svg class="ic" aria-hidden="true"><use href="#i-lock"/></svg><b>SpaceX</b><span>Pre-IPO</span></div></div>
+          <div class="mcard-body"><h3>Pre-IPO</h3><p>Firmy ještě před vstupem na burzu, jako první SpaceX a Stripe</p><span class="btn btn-light btn-sm">Mám zájem</span></div>
+        </a></li>
       </ul>
     </div>
   </div>

@@ -211,5 +211,9 @@
   "mk.va": "Galerie",
   "mk.vb": "Živý náhled",
   "mk.vc": "Rozbalení",
-  "min.review": "Plná verze webu"
+  "min.review": "Plná verze webu",
+  "min.mk_all": "Prozkoumat všechny trhy",
+  "min.avail": "Dostupné trhy",
+  "min.prev": "Předchozí",
+  "min.next": "Další"
 }

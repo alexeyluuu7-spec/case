@@ -163,6 +163,16 @@
     });
   });
 
+  /* Card slider: arrows scroll by one card, disabled at the ends; swipe and trackpad scroll natively */
+  $$('[data-slider]').forEach(sl => {
+    const track = $('.slider-track', sl), prev = $('[data-slide="-1"]', sl), next = $('[data-slide="1"]', sl);
+    const step = () => { const li = track.firstElementChild; return li ? li.getBoundingClientRect().width + 16 : track.clientWidth; };
+    const sync = () => { prev.disabled = track.scrollLeft <= 4; next.disabled = track.scrollLeft + track.clientWidth >= track.scrollWidth - 4; };
+    prev.addEventListener('click', () => track.scrollBy({ left: -step(), behavior: reduce() ? 'auto' : 'smooth' }));
+    next.addEventListener('click', () => track.scrollBy({ left: step(), behavior: reduce() ? 'auto' : 'smooth' }));
+    track.addEventListener('scroll', sync, { passive: true }); window.addEventListener('resize', sync); sync();
+  });
+
   /* Markets review switch: ?markets=a|b|c keeps the chosen layout in the link */
   const mkRoot = $('[data-mk-root]');
   if (mkRoot) {
@@ -244,7 +254,7 @@
         const show = r.dataset.cat.split(' ').includes(f);
         r.hidden = !show;
         r.classList.toggle('lead', show && n === 0);
-        if (show) $('.c-pos b', r).textContent = 'P' + (++n);
+        const pos = $('.c-pos b', r); if (show) { n++; if (pos) pos.textContent = 'P' + n; }
       });
       tabs.forEach(t => t.setAttribute('aria-selected', String(t.dataset.filter === f)));
     };

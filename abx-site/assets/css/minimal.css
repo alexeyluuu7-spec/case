@@ -767,6 +767,30 @@ p{text-wrap:pretty}
 }
 @media (prefers-reduced-motion:reduce){.sf-scan{animation:none}.pg-track i,.pg-node{transition:none}}
 
+
+/* ---------- 03 Markets list: variant B (asset cards row, olymptrade-style) ---------- */
+.mlist[data-v="b"]{max-width:none}
+.mlist[data-v="b"] .mtable,.mlist[data-v="b"] .mtable tbody{display:block;width:100%}
+.mlist[data-v="b"] .mtable tbody{display:flex;gap:12px;margin-top:24px;padding:12px 4px 16px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;
+  -webkit-mask:linear-gradient(90deg,transparent,#000 4%,#000 96%,transparent);mask:linear-gradient(90deg,transparent,#000 4%,#000 96%,transparent)}
+.mlist[data-v="b"] .mtable tbody::-webkit-scrollbar{display:none}
+.mlist[data-v="b"] .mtable tr{flex:none;display:flex;flex-direction:column;align-items:center;width:200px;padding:24px 16px 16px;border-radius:24px;scroll-snap-align:center;
+  background:radial-gradient(120% 60% at 50% 0%,#2a2a27,rgba(42,42,39,0) 70%),linear-gradient(180deg,#1d1d1b,#141413);box-shadow:inset 0 1px 0 rgba(255,255,255,.07);transition:transform 300ms var(--ease)}
+.mlist[data-v="b"] .mtable tr[hidden]{display:none}
+@media (hover:hover) and (pointer:fine){.mlist[data-v="b"] .mtable tr:hover{transform:translateY(-6px)}}
+.mlist[data-v="b"] .mtable td{display:block;width:auto;height:auto;padding:0;background:none;border-radius:0!important;text-align:center}
+.mlist[data-v="b"] .sym{flex-direction:column;gap:10px;text-align:center}
+.mlist[data-v="b"] .logo-dot{width:48px;height:48px;border-radius:14px;background:linear-gradient(160deg,#ff8a3d,var(--orange));color:var(--on-orange);font-size:14px;font-weight:600}
+.mlist[data-v="b"] .sym b{font-size:14px;color:var(--fg-2)}
+.mlist[data-v="b"] .sym small{display:none}
+.mlist[data-v="b"] .c-px{order:2;margin-top:18px;font:500 22px var(--f-mono);letter-spacing:-.03em}
+.mlist[data-v="b"] .c-chg{display:block!important;order:3;margin-top:6px}
+.mlist[data-v="b"] .c-spark{display:block!important;order:4;margin-top:14px}
+.mlist[data-v="b"] .c-spark svg{width:160px;height:40px}
+.mlist[data-v="b"] .c-act{order:5;width:100%;margin-top:16px}
+.mlist[data-v="b"] .c-act .btn{width:100%}
+.mlist .vsw{margin-top:24px}
+
 /* Responsive */
 @media (max-width:1100px){
   .nav-links{display:none}

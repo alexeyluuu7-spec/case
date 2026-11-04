@@ -121,7 +121,7 @@
         <h2 class="h2" id="markets-title">{{markets.h_1}} <span class="dim">{{markets.h_2}}</span></h2>
         <p class="sub">{{markets.lead}}</p>
       </div>
-      <div class="mlist" data-tower>
+      <div class="mlist" data-tower data-vroot data-v="a">
         <div class="seg" role="tablist" aria-label="{{markets.table_aria}}">
           <button role="tab" aria-selected="true" data-filter="pop">{{markets.tab_all}}</button>
           <button role="tab" aria-selected="false" data-filter="stocks">{{markets.tab_stocks}}</button>
@@ -151,6 +151,7 @@
           </tbody>
         </table>
         <p class="mnote">{{markets.table_note}}</p>
+        <div class="vsw" role="radiogroup" aria-label="{{min.variant}}"><button type="button" role="radio" data-vbtn="a">{{min.v_a}}</button><button type="button" role="radio" data-vbtn="b">{{min.v_b}}</button></div>
       </div>
         <div class="watch">
           <p class="watch-t">{{min.watch_t}}</p>

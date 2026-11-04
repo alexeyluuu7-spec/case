@@ -240,6 +240,34 @@
     stage.addEventListener('pointerleave', () => { stage.classList.remove('is-tilting'); ['--rx', '--ry', '--sx'].forEach(v => c.style.removeProperty(v)); });
   });
 
+  /* Generic layout-variant switch: [data-vroot] > .vsw [data-vbtn] toggles > .v-a/.v-b/.v-c */
+  $$('[data-vroot]').forEach(root => {
+    const btns = $$(':scope > .vsw [data-vbtn]', root);
+    const set = v => { root.dataset.v = v; btns.forEach(b => { const on = b.dataset.vbtn === v; b.setAttribute('aria-checked', String(on)); b.tabIndex = on ? 0 : -1; }); };
+    btns.forEach((b, i) => {
+      b.addEventListener('click', () => set(b.dataset.vbtn));
+      b.addEventListener('keydown', e => {
+        const d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0; if (!d) return;
+        e.preventDefault(); const n = btns[(i + d + btns.length) % btns.length]; n.focus(); set(n.dataset.vbtn);
+      });
+    });
+    set(root.dataset.v || 'a');
+  });
+
+  /* Split-flap counter: rolls 0 -> target when the card is revealed */
+  $$('[data-flip]').forEach(card => {
+    const el = card.querySelector('[data-flip-to]'); if (!el) return;
+    const to = parseInt(el.dataset.flipTo, 10);
+    if (reduce() || !('IntersectionObserver' in window)) { el.textContent = to; return; }
+    el.textContent = 0;
+    const io = new IntersectionObserver(es => es.forEach(e => {
+      if (!e.isIntersecting) return; io.disconnect();
+      let n = 0; const tick = () => { n++; el.textContent = n; el.classList.remove('is-flip'); void el.offsetWidth; el.classList.add('is-flip'); if (n < to) setTimeout(tick, 180); };
+      setTimeout(tick, 400);
+    }), { threshold: .4 });
+    io.observe(card);
+  });
+
   /* Accounts layout switch (minimal page): Plasma columns or card fan + comparison */
   $$('[data-accv-root]').forEach(root => {
     const btns = $$('[data-accv]');

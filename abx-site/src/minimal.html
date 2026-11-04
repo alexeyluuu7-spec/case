@@ -183,12 +183,55 @@
 <section class="sec" aria-labelledby="why-title">
   <div class="wrap">
     <h2 class="h2 center-h rv" id="why-title">{{why.h_1}} <span class="dim">{{why.h_2}}</span></h2>
+    <div data-vroot data-v="b">
+    <div class="vsw" role="radiogroup" aria-label="{{min.variant}}"><button type="button" role="radio" data-vbtn="a">{{min.v_a}}</button><button type="button" role="radio" data-vbtn="b">{{min.v_b}}</button></div>
+    <div class="v-a">
     <ul class="why">
       <li class="why-hot rv" style="--d:0"><p class="why-n" data-placeholder="bonus">{{why.c1_n}}<small>{{why.c1_u}}</small></p><div><b>{{why.c1_t}}</b><span>{{why.c1_d}}</span></div><a class="link" href="#">{{why.c1_link}}</a></li>
       <li class="rv" style="--d:1"><p class="why-n" data-placeholder="spreads">{{why.c2_n}}<small>{{why.c2_u}}</small></p><div><b>{{why.c2_t}}</b><span>{{why.c2_d}}</span></div></li>
       <li class="rv" style="--d:2"><p class="why-n">{{why.c3_n}}</p><div><b>{{why.c3_t}}</b><span>{{why.c3_d}}</span></div></li>
       <li class="rv" style="--d:3"><p class="why-n">{{why.c4_n}}</p><div><b>{{why.c4_t}}</b><span>{{why.c4_d}}</span></div></li>
     </ul>
+    </div>
+    <div class="v-b">
+    <ul class="wb">
+      <li class="wb-c wb-bonus rv" style="--d:0" data-flip>
+        <h3><b>{{why.c1_t}}</b> <span>{{why.c1_d}}</span></h3>
+        <a class="link wb-link" href="#">{{why.c1_link}}</a>
+        <div class="flip" data-placeholder="bonus" aria-label="{{why.c1_n}} {{why.c1_u}}" role="img">
+          <span class="flip-t" aria-hidden="true"><b data-flip-to="{{wb.flip_n}}">0</b></span><span class="flip-t" aria-hidden="true"><b>%</b></span>
+          <span class="flip-u" aria-hidden="true">{{why.c1_u}}</span>
+        </div>
+      </li>
+      <li class="wb-c wb-spread rv" style="--d:1">
+        <h3><b>{{why.c2_t}}</b> <span>{{why.c2_d}}</span></h3>
+        <div class="spr" data-placeholder="spreads" aria-hidden="true">
+          <svg viewBox="0 0 560 220" preserveAspectRatio="none"><defs><linearGradient id="spr-f" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#FF711D" stop-opacity=".22"/><stop offset="1" stop-color="#FF711D" stop-opacity="0"/></linearGradient></defs>
+            <path class="spr-grid" d="M0 55H560M0 110H560M0 165H560"/>
+            <path class="spr-area" d="M0 150 40 138 80 156 120 120 160 132 200 96 240 112 280 70 320 92 360 60 400 84 440 48 480 66 520 36 560 44V220H0Z" fill="url(#spr-f)"/>
+            <path class="spr-ask" d="M0 150 40 138 80 156 120 120 160 132 200 96 240 112 280 70 320 92 360 60 400 84 440 48 480 66 520 36 560 44"/>
+            <path class="spr-bid" d="M0 150 40 138 80 156 120 120 160 132 200 96 240 112 280 70 320 92 360 60 400 84 440 48 480 66 520 36 560 44"/>
+          </svg>
+          <span class="spr-pill"><i></i>{{why.c2_n}} {{why.c2_u}}</span>
+          <span class="spr-lbl spr-lbl-a">Ask 1,08412</span><span class="spr-lbl spr-lbl-b">Bid 1,08412</span>
+        </div>
+      </li>
+      <li class="wb-c wb-inst rv" style="--d:2">
+        <h3><b>{{why.c3_n}} {{why.c3_t}}</b> <span>{{why.c3_d}}</span></h3>
+        <div class="tgrid" aria-hidden="true"><div class="tgrid-in"><div class="wb-row"><span><b>EUR/USD</b><i>{{wb.k_Forex}}</i></span><span><b>XAU</b><i>{{wb.k_Gold}}</i></span><span><b>US500</b><i>{{wb.k_Index}}</i></span><span><b>NVDA</b><i>{{wb.k_Stock}}</i></span><span><b>BRENT</b><i>{{wb.k_Oil}}</i></span><span><b>BTC</b><i>{{wb.k_Crypto}}</i></span><span><b>EUR/USD</b><i>{{wb.k_Forex}}</i></span><span><b>XAU</b><i>{{wb.k_Gold}}</i></span><span><b>US500</b><i>{{wb.k_Index}}</i></span><span><b>NVDA</b><i>{{wb.k_Stock}}</i></span><span><b>BRENT</b><i>{{wb.k_Oil}}</i></span><span><b>BTC</b><i>{{wb.k_Crypto}}</i></span></div><div class="wb-row"><span><b>GER40</b><i>{{wb.k_Index}}</i></span><span><b>AAPL</b><i>{{wb.k_Stock}}</i></span><span class="on"><b>GBP/USD</b><i>{{wb.k_Forex}}</i></span><span><b>XAG</b><i>{{wb.k_Silver}}</i></span><span><b>VWCE</b><i>{{wb.k_ETF}}</i></span><span><b>TSLA</b><i>{{wb.k_Stock}}</i></span><span><b>GER40</b><i>{{wb.k_Index}}</i></span><span><b>AAPL</b><i>{{wb.k_Stock}}</i></span><span><b>GBP/USD</b><i>{{wb.k_Forex}}</i></span><span><b>XAG</b><i>{{wb.k_Silver}}</i></span><span><b>VWCE</b><i>{{wb.k_ETF}}</i></span><span><b>TSLA</b><i>{{wb.k_Stock}}</i></span></div><div class="wb-row"><span><b>USD/JPY</b><i>{{wb.k_Forex}}</i></span><span><b>NAS100</b><i>{{wb.k_Index}}</i></span><span><b>NATGAS</b><i>{{wb.k_Gas}}</i></span><span><b>MSFT</b><i>{{wb.k_Stock}}</i></span><span><b>SPY</b><i>{{wb.k_ETF}}</i></span><span><b>ETH</b><i>{{wb.k_Crypto}}</i></span><span><b>USD/JPY</b><i>{{wb.k_Forex}}</i></span><span><b>NAS100</b><i>{{wb.k_Index}}</i></span><span><b>NATGAS</b><i>{{wb.k_Gas}}</i></span><span><b>MSFT</b><i>{{wb.k_Stock}}</i></span><span><b>SPY</b><i>{{wb.k_ETF}}</i></span><span><b>ETH</b><i>{{wb.k_Crypto}}</i></span></div></div></div>
+      </li>
+      <li class="wb-c wb-mgr rv" style="--d:3">
+        <h3><b>{{why.c4_t}}</b> <span>{{why.c4_d}}</span></h3>
+        <div class="chat" aria-hidden="true">
+          <p class="msg msg-in"><span class="ava">{{wb.m_ini}}</span><span><small>{{wb.m_name}}</small>{{wb.m_1}}</span></p>
+          <p class="msg msg-out"><span>{{wb.m_2}}</span></p>
+          <p class="msg msg-in"><span class="ava">{{wb.m_ini}}</span><span>{{wb.m_3}}</span></p>
+          <p class="msg msg-typing"><span class="ava">{{wb.m_ini}}</span><span><i></i><i></i><i></i></span></p>
+        </div>
+      </li>
+    </ul>
+    </div>
+    </div>
     <p class="fine" data-placeholder="bonus-terms">{{why.disclaimer}}</p>
   </div>
 </section>

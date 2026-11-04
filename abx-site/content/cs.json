@@ -316,5 +316,11 @@
   "stp.p3_btn": "Vložit € 1 000",
   "stp.p4_vol": "Objem",
   "stp.p4_sell": "Prodat",
-  "stp.p4_buy": "Koupit"
+  "stp.p4_buy": "Koupit",
+  "tk.sub": "Index · CFD",
+  "tk.amt": "Částka",
+  "tk.lev": "Páka",
+  "fd.mob": "Mobil",
+  "fd.web": "Počítač a web",
+  "fd.bal": "Zůstatek"
 }

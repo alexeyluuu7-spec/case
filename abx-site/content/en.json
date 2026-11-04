@@ -316,5 +316,11 @@
   "stp.p3_btn": "Deposit €1,000",
   "stp.p4_vol": "Volume",
   "stp.p4_sell": "Sell",
-  "stp.p4_buy": "Buy"
+  "stp.p4_buy": "Buy",
+  "tk.sub": "Index · CFD",
+  "tk.amt": "Amount",
+  "tk.lev": "Leverage",
+  "fd.mob": "Mobile",
+  "fd.web": "Desktop and web",
+  "fd.bal": "Balance"
 }

@@ -326,5 +326,13 @@
   "mk6.va": "Slider",
   "mk6.vb": "Bento",
   "mk6.vc": "Pruhy",
-  "mk6.vd": "Rejstřík"
+  "mk6.vd": "Rejstřík",
+  "fee.live": "Hlavní pár",
+  "fee.note": "Nákupní i prodejní cena jsou stejné. Neplatíte nic navíc.",
+  "fee.r_h": "Vyúčtování obchodu",
+  "fee.r1": "Spread EUR/USD",
+  "fee.r1_v": "0,0 pipu",
+  "fee.r2": "Vklad",
+  "fee.r4": "Skryté poplatky",
+  "fee.r_t": "Celkem navíc"
 }

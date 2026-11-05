@@ -326,5 +326,13 @@
   "mk6.va": "Slider",
   "mk6.vb": "Bento",
   "mk6.vc": "Strips",
-  "mk6.vd": "Index"
+  "mk6.vd": "Index",
+  "fee.live": "Major pair",
+  "fee.note": "The buy and sell price are the same. You pay nothing extra.",
+  "fee.r_h": "Trade statement",
+  "fee.r1": "EUR/USD spread",
+  "fee.r1_v": "0.0 pips",
+  "fee.r2": "Deposit",
+  "fee.r4": "Hidden fees",
+  "fee.r_t": "Total extra"
 }
